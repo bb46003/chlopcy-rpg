@@ -28,7 +28,8 @@
       
       
       "socket": true,
-      "manifest":"C:/Users/bb46003/AppData/Local/FoundryVTT/Data/systems/chłopcy/system.json"
+      "manifest":"https://raw.githubusercontent.com/bb46003/chlopcy-rpg/refs/heads/main/system.json",
+      "download":"https://github.com/bb46003/chlopcy-rpg/archive/refs/heads/main.zip"
       
 }
 
