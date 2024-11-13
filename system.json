@@ -1,0 +1,34 @@
+{
+    "id": "chlopcy",
+    "title": "Chłopcy RPG",
+    "description": "Stół do systemu Chłopcy RPG na podstawie serii książek Jakuba Ćwieka \"Chłopcy\"",
+    "version": "0.1",
+    "compatibility": {
+      "minimum": "12",
+      "verified": "12"
+    },
+    "authors": [
+        {
+          "name": "Bartek",
+          "flags": {}
+        }
+    ],
+    "esmodules": [
+        "module/chlopcy.mjs"
+      ],
+      "styles": ["css/chlopcy.css"],
+      "languages": [
+        {
+          "lang": "pl",
+          "name": "Polski",
+          "path": "lang/pl.json"
+        }
+   
+      ],
+      
+      
+      "socket": true,
+      "manifest":"C:/Users/bb46003/AppData/Local/FoundryVTT/Data/systems/chłopcy/system.json"
+      
+}
+

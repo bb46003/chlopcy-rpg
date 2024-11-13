@@ -1,0 +1,70 @@
+<section class="cechy-i-tagi">
+    <div class="manin">
+        <div class="lewa">
+            <div class="rzuty-label">
+                {{#if(eq system.pod_wplywem_puylku false)}}
+                    <label class="KB">{{localize ("chlopcy.KB")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K20")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K12")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K10")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K8")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K6")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K4")}}</label>
+                {{/if}}
+                {{#if(eq system.pod_wplywem_puylku true)}}
+                    <label class="KB">{{localize ("chlopcy.KB_z_pyłkiem")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K10")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K8")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K6")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K4")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K3")}}</label>
+                    <label class="KM">{{localize ("chlopcy.KM.K2")}}</label>
+                {{/if}}
+            </div>
+            <div class="cechy">
+                <div class="cechy-label">
+                    <label class="cecha">{{localize ("chlopcy.brutal")}}</label>
+                    <label class="cecha">{{localize ("chlopcy.spryciarz")}}</label>
+                    <label class="cecha">{{localize ("chlopcy.fachura")}}</label>
+                    <label class="cecha">{{localize ("chlopcy.bajerant")}}</label>
+                    <label class="cecha">{{localize ("chlopcy.orient")}}</label>
+                    <label class="cecha">{{localize ("chlopcy.bajker")}}</label>
+                    <label class="cecha">{{localize ("chlopcy.farciarz")}}</label>
+                </div>
+                <div class="cechy-boxy">
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.brutal cecha="brutal"}}
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.spryciarz cecha="spryciarz"}}
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.fachura cecha="fachura"}}
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.bajerant cecha="bajerant"}}
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.orient cecha="orient"}}
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.bajker cecha="bajker"}}
+                    {{> "systems/chlopcy/templates/actor/tab/cechy-check-box.hbs" wartosc = system.cechy.farciarz cecha="farciarz"}}
+                </div>
+            </div>
+        </div>
+        <div class="prawa">
+            <div class="label-tagi">
+                <div class="tagi">{{localize("chlopcy.tagi")}}</div>
+                <div class="label-poziom-tagu">{{localize ("chlopcy.przerzut_KB")}}</div>
+                <div class="label-poziom-tagu">{{localize ("chlopcy.przerzut_KM")}}</div>
+                <div class="label-poziom-tagu">{{localize ("chlopcy.dodatkowa_KM")}}</div>
+                <div class="label-poziom-tagu">{{localize ("chlopcy.plus_minus_1")}}</div>
+                <div class="label-poziom-tagu">{{localize ("chlopcy.dodatkowy_bonus")}}</div>
+            </div>
+            <div class="nazwy-tagow">
+                <input type="text" class="tag-input" name="system.tagi.brutal.opis" value="{{system.tagi.brutal.opis}}" placeholder="{{localize "chlopcy.tagi.brutal"}}">
+                <input type="text" class="tag-input" name="system.tagi.spryciarz.opis" value="{{system.tagi.spryciarz.opis}}" placeholder="{{localize "chlopcy.tagi.spryciarz"}}">
+                <input type="text" class="tag-input" name="system.tagi.fachura.opis" value="{{system.tagi.fachura.opis}}" placeholder="{{localize "chlopcy.tagi.fachura"}}">
+                <input type="text" class="tag-input" name="system.tagi.bajerant.opis" value="{{system.tagi.bajerant.opis}}" placeholder="{{localize "chlopcy.tagi.bajerant"}}">
+                <input type="text" class="tag-input" name="system.tagi.orient.opis" value="{{system.tagi.orient.opis}}" placeholder="{{localize "chlopcy.tagi.orient"}}">
+                <input type="text" class="tag-input" name="system.tagi.bajker.opis" value="{{system.tagi.bajker.opis}}" placeholder="{{localize "chlopcy.tagi.bajker"}}">
+                <input type="text" class="tag-input" name="system.tagi.farciarz.opis" value="{{system.tagi.brutal.opis}}" placeholder="{{localize "chlopcy.tagi.farciarz"}}">
+            </div>
+            <div class="tagi-boxy">
+
+            </div>
+        </div>
+        
+    </div>
+
+</section>

@@ -1,0 +1,98 @@
+{
+    "Actor": {
+      "types": ["dzieciak","przeciwnicy"],
+       "dzieciak":{
+        "cechy":{
+            "brutal": 0,
+            "spryciarz": 0,
+            "fachura": 0,
+            "bajerant": 0,
+            "orient": 0,
+            "bajker": 0,
+            "farciarz": 0,
+            "twardziel": {
+                "aktualne": 0,
+                "max": 0
+            }
+        },
+        "bangarang":{
+            "brawura": 0,
+            "dowcip": 0,
+            "finezja": 0
+        },
+        "wiek":0,
+        "zdrowie":{
+            "aktualne": 0,
+            "max": 9
+        },
+        "stan":1,
+        "tagi":{
+            "brutal": {
+                "opis": "",
+                "wartosc":0
+            },
+            "spryciarz":{
+                "opis": "",
+                "wartosc":0
+            },
+            "fachura": {
+                "opis": "",
+                "wartosc":0
+            },
+            "bajerant": {
+                "opis": "",
+                "wartosc":0
+            },
+            "orient": {
+                "opis": "",
+                "wartosc":0
+            },
+            "bajker": {
+                "opis": "",
+                "wartosc":0
+            },
+            "farciarz": {
+                "opis": "",
+                "wartosc":0
+            },
+            "noweSzlidy1":{
+                "opis": "",
+                "wartosc":0
+            },
+            "noweSzlidy2":{
+                "opis": "",
+                "wartosc":0
+            }, 
+            "noweSzlidy3":{
+                "opis": "",
+                "wartosc":0
+            }             
+        },
+        "xp": 0,
+        "pyłek": 0,
+        "sprzet_osobisty":"",
+        "skawy": 0,
+        "wiezi":{
+            "postac1":{
+                "imie":"",
+                "wartosc":""
+            }
+        }, 
+        "opis_postaci":"",
+        "szczesliwe_mysli":"",
+        "pod_wplywem_puylku": false
+
+
+       },
+      
+        "przeciwnicy":{}
+  
+    },    
+    "Item": {
+        "types":["naszywki_przody", "naszywki_plecy"],
+        "naszywki_przody":{
+            "efekt":""
+        }
+
+    }
+}

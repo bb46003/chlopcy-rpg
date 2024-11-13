@@ -1,0 +1,95 @@
+ <section class="main-sheet">
+    <section class="title-section">
+        <div class="top-section">
+            <div class="podstawowe-dane">
+                <div class="ksywka">
+                    <label class="top-section-label">{{localize "chlopcy.ksywka"}}</label>
+                    <input type="text" name="name" value="{{actor.name}}">
+                </div>
+                <div class="wiek row">
+                    <label class="top-section-label">{{localize "chlopcy.wiek"}}</label>
+                    <input class="wiek" type="number" name="system.wiek" value="{{system.wiek}}">
+                </div>
+                <div class="zdrowie row">
+                    <label class="top-section-label">{{localize "chlopcy.zdrowie"}}</label>
+                    <div class="zdrowie-wartości">
+                        <input class="zdrowie" type="number" name="system.zdrowie.akualne" value="{{system.zdrowie.akualne}}">
+                        <p>/</p>
+                        <input class="zdrowie" type="number" name="system.zdrowie.max" value="{{system.zdrowie.max}}" disabled>
+                    </div>
+                </div>
+                <div class="twardziel row">
+                    <label class="top-section-label">{{localize "chlopcy.trwardziel"}}</label>
+                    <div class="twardziel-wartości">
+                        <input class="twardziel" type="number" name="system.twardziel.akualne" value="{{system.twardziel.akualne}}">
+                        <p>/</p>
+                        <input class="twardziel" type="number" name="system.twardziel.max" value="{{system.twardziel.max}}" >
+                    </div>
+                </div>
+                <div class="stan row">
+                    <div class="trzezwy">
+                        <label class="top-section-label">{{localize "chlopcy.trzezwy"}}</label>
+                        <input type="checkbox" class="stan" name="system.stan" value= 1>
+                    </div>
+                    <div class="upojony">
+                        <label class="top-section-label">{{localize "chlopcy.upojony"}}</label>
+                        <input type="checkbox" class="stan" name="system.stan" value= 2>
+                    </div>
+                    <div class="zgon">
+                        <label class="top-section-label">{{localize "chlopcy.zgon"}}</label>
+                        <input type="checkbox" class="stan" name="system.stan" value= 3>
+                    </div>
+                </div>
+            </div>
+            <div class="obrazek">
+                <label class="top-section-label">{{localize "chlopcy.portrecik"}}</label>
+                <img class="borderless" src="{{actor.img}}" data-edit="img">
+            </div>
+            <div class="inne-dane">
+                <div class="bangarang-dane">
+                    <div class="brawura">
+                        <label class="top-section-label brawura">{{localize "chlopcy.bangarang.brawura"}}</label>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=1 {{#if (gte system.bangarang.brawura 1)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=2 {{#if (gte system.bangarang.brawura 2)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=3 {{#if (gte system.bangarang.brawura 3)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=4 {{#if (gte system.bangarang.brawura 4)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=5 {{#if (gte system.bangarang.brawura 5)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=6 {{#if (gte system.bangarang.brawura 6)}}chceked{{/if}}>
+                    </div>
+                    <div class="dowcip">
+                        <label class="top-section-label dowcip">{{localize "chlopcy.bangarang.dowcip"}}</label>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=1 {{#if (gte system.bangarang.dowcip 1)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=2 {{#if (gte system.bangarang.dowcip 2)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=3 {{#if (gte system.bangarang.dowcip 3)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=4 {{#if (gte system.bangarang.dowcip 4)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=5 {{#if (gte system.bangarang.dowcip 5)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=6 {{#if (gte system.bangarang.dowcip 6)}}chceked{{/if}}>
+                    </div>
+                    <div class="finezja">
+                        <label class="top-section-label brawura">{{localize "chlopcy.bangarang.finezja"}}</label>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=1 {{#if (gte system.bangarang.finezja 1)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=2 {{#if (gte system.bangarang.finezja 2)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=3 {{#if (gte system.bangarang.finezja 3)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=4 {{#if (gte system.bangarang.finezja 4)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=5 {{#if (gte system.bangarang.finezja 5)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=6 {{#if (gte system.bangarang.finezja 6)}}chceked{{/if}}>
+                    </div>
+                </div>
+                <div class="xp">
+                    <label class="top-section-label rozwoj">{{localize "chlopcy.rozwoj"}}</label>
+                    <input class="xp" type="checkbox" name="system.xp" value=1 {{#if (gte system.xp 1)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=2 {{#if (gte system.xp 2)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=3 {{#if (gte system.xp 3)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=4 {{#if (gte system.xp 4)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=5 {{#if (gte system.xp 5)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=6 {{#if (gte system.xp 6)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=7 {{#if (gte system.xp 7)}}chceked{{/if}}>
+                    <input class="xp" type="checkbox" name="system.xp" value=8 {{#if (gte system.xp 8)}}chceked{{/if}}>
+                </div>
+            </div>
+        </div>
+        <div class="cechy">
+             {{> "systems/chlopcy/templates/actor/tab/cechy.hbs"}}
+        </div>
+    </section>
+ </section>
