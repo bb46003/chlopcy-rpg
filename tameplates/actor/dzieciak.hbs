@@ -1,3 +1,4 @@
+<form class="{{cssClass}}" autocomplete="off">
  <section class="main-sheet">
     <section class="title-section">
         <div class="top-section">
@@ -15,15 +16,15 @@
                     <div class="zdrowie-wartości">
                         <input class="zdrowie" type="number" name="system.zdrowie.akualne" value="{{system.zdrowie.akualne}}">
                         <p>/</p>
-                        <input class="zdrowie" type="number" name="system.zdrowie.max" value="{{system.zdrowie.max}}" disabled>
+                        <input class="zdrowie" type="number" name="system.zdrowie.max" value="{{system.zdrowie.max}}">
                     </div>
                 </div>
                 <div class="twardziel row">
                     <label class="top-section-label">{{localize "chlopcy.trwardziel"}}</label>
                     <div class="twardziel-wartości">
-                        <input class="twardziel" type="number" name="system.twardziel.akualne" value="{{system.twardziel.akualne}}">
-                        <p>/</p>
-                        <input class="twardziel" type="number" name="system.twardziel.max" value="{{system.twardziel.max}}" >
+                    <input class="twardziel" type="number" name="system.twardziel.aktualne" value="{{system.twardziel.aktualne}}">
+                    <p>/</p>
+                    <input class="twardziel" type="number" name="system.twardziel.max" value="{{system.twardziel.max}}">        
                     </div>
                 </div>
                 <div class="stan row">
@@ -89,7 +90,17 @@
             </div>
         </div>
         <div class="cechy">
-             {{> "systems/chlopcy/templates/actor/tab/cechy.hbs"}}
+             {{> "systems/chlopcy/tameplates/actor/tab/cechy.hbs"}}
+        </div>
+        <div class="pylek">
+            {{> "systems/chlopcy/tameplates/actor/tab/pylek.hbs"}}
+        </div>
+        <div class="eq-i-nowe-szlify">
+            {{> "systems/chlopcy/tameplates/actor/tab/sprzet-osobisy.hbs"}}
+            {{> "systems/chlopcy/tameplates/actor/tab/sakwy.hbs"}}
+            {{> "systems/chlopcy/tameplates/actor/tab/nowe-szlify.hbs"}}
+
         </div>
     </section>
  </section>
+</form> 
