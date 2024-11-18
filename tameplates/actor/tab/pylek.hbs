@@ -1,25 +1,38 @@
 <div class="pyłek-label">
-    <label>{{localize "chlopcy.pylek"}}</label>
-    <input type="checkbox" name="system.pod_wplywem_pylku" {{#if system.pod_wplywem_pylku}}checked{{/if}}>
+    
+    <input type="checkbox" class="użycuie-pylku" name="system.pod_wplywem_pylku" id="uzycie_pylku"{{#if system.pod_wplywem_pylku}}checked{{/if}}>
+    {{#if system.pod_wplywem_pylku}}
+     <label for="uzycie_pylku" class="pod_wplywem_pylku" data-tooltip="{{localize "chlopcy.koniec_dzialania_pylku"}}">{{localize "chlopcy.pod_wpływem_pylku"}}</label>
+    {{else}}
+    <label for="uzycie_pylku" data-tooltip="{{localize "chlopcy.uzyj_pylku"}}">{{localize "chlopcy.pylek"}}</label>
+    {{/if}}
 </div>
+<div class="kostki-pulku">
 <div class="przytkanie">
     <div class="kostki">
-        <input type="checkbox" name="system.pylek" value=1 {{#if (gte system.pylek 1)}}checked{{/if}} placeholder="1">
-        <input type="checkbox" name="system.pylek" value=2 {{#if (gte system.pylek 2)}}checked{{/if}} placeholder="2">
+                    <input type="checkbox" class="kostki-pyłek jeden" name="system.pylek.1" id="jeden"  {{#if system.pylek.[1]}}checked{{/if}} >
+                    <label class="inside" for="jeden" id="1">1</label>        
+                    <input type="checkbox" class="kostki-pyłek dwa" id="dwa" name="system.pylek.2"  {{#if system.pylek.[2]}}checked{{/if}} >
+                     <label class="inside" for="dwa" id="2">2</label> 
     </div>
         <label div="efekt-pyłku">{{localize "chlopcy.przytkanie"}}</label>
 </div>
 <div class="krwawienie">
     <div class="kostki">
-        <input type="checkbox" name="system.pylek" value=3 {{#if (gte system.pylek 3)}}checked{{/if}} placeholder="3">
-        <input type="checkbox" name="system.pylek" value=4 {{#if (gte system.pylek 4)}}checked{{/if}} placeholder="4">
+        <input type="checkbox" class="kostki-pyłek trzy" id="trzy" name="system.pylek.3"  {{#if system.pylek.[3]}}checked{{/if}} >
+         <label class="inside" for="trzy" id="3">3</label> 
+        <input type="checkbox" class="kostki-pyłek cztery" id="cztery" name="system.pylek.4"  {{#if system.pylek.[4]}}checked{{/if}} >
+         <label class="inside" for="cztery" id="4">4</label> 
     </div>
         <label div="efekt-pyłku">{{localize "chlopcy.przytkanie"}}</label>
 </div>
 <div class="odciecie">
     <div class="kostki">
-        <input type="checkbox" name="system.pylek" value=5 {{#if (gte system.pylek 5)}}checked{{/if}} placeholder="5">
-        <input type="checkbox" name="system.pylek" value=6 {{#if (gte system.pylek 6)}}checked{{/if}} placeholder="6">
+        <input type="checkbox" class="kostki-pyłek pięć" id="pięć" name="system.pylek.5"  {{#if system.pylek.[5]}}checked{{/if}} >
+         <label class="inside" for="pięć" id="5">5</label> 
+        <input type="checkbox" class="kostki-pyłek sześć" id="sześć" name="system.pylek.6" {{#if system.pylek.[6]}}checked{{/if}} >
+         <label class="inside" for="sześć" id="6">6</label> 
     </div>
         <label div="efekt-pyłku">{{localize "chlopcy.przytkanie"}}</label>
+</div>
 </div>

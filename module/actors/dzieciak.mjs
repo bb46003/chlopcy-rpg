@@ -5,6 +5,13 @@ export class dzieciak extends ActorSheet {
           template: "systems/chlopcy/tameplates/actor/dzieciak.hbs",
           width: 800,
           height: 960,
+          tabs: [
+            {
+              navSelector: ".sheet-tabs",
+              contentSelector: ".sheet-body",
+              initial: "glowna",
+            },
+          ],
           
         });
       }
@@ -50,4 +57,33 @@ export class dzieciak extends ActorSheet {
     
         return context
       }
-}
+
+      async activateListeners(html) {
+        super.activateListeners(html);
+
+        html.on("change", ".kostki-pyłek", (ev) =>this.dawkiPylku(ev));
+      }
+
+      async dawkiPylku(ev){
+        ev.preventDefault(); 
+       
+        const id = Number(ev.target.labels[0].id);
+        const val = ev.target.checked;
+        let updateData = {};
+        if (val){
+        for(let i=1; i<=id; i++){
+          updateData[`system.pylek.${i}`]= val
+         
+        }
+      }
+        else{
+          for(let i=id; i<=6; i++){
+          updateData[`system.pylek.${i}`]=val
+          }
+        
+
+        }
+        this.actor.update(updateData)
+        
+      }
+    }

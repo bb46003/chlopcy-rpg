@@ -4,9 +4,10 @@
         <div class="top-section">
             <div class="podstawowe-dane">
                 <div class="ksywka">
-                    <label class="top-section-label">{{localize "chlopcy.ksywka"}}</label>
+                    <label class="top-section-label-center">{{localize "chlopcy.ksywka"}}</label>
                     <input type="text" name="name" value="{{actor.name}}">
                 </div>
+                <div class="dane">
                 <div class="wiek row">
                     <label class="top-section-label">{{localize "chlopcy.wiek"}}</label>
                     <input class="wiek" type="number" name="system.wiek" value="{{system.wiek}}">
@@ -28,52 +29,62 @@
                     </div>
                 </div>
                 <div class="stan row">
+                    <label class="stany-label">{{localize "chlopcy.stan.etykieta"}}</label>
                     <div class="trzezwy">
-                        <label class="top-section-label">{{localize "chlopcy.trzezwy"}}</label>
+                        <label class="top-section-label stany">{{localize "chlopcy.stan.trzezwy"}}</label>
                         <input type="checkbox" class="stan" name="system.stan" value= 1>
                     </div>
                     <div class="upojony">
-                        <label class="top-section-label">{{localize "chlopcy.upojony"}}</label>
+                        <label class="top-section-label stany">{{localize "chlopcy.stan.upojony"}}</label>
                         <input type="checkbox" class="stan" name="system.stan" value= 2>
                     </div>
                     <div class="zgon">
-                        <label class="top-section-label">{{localize "chlopcy.zgon"}}</label>
+                        <label class="top-section-label stany">{{localize "chlopcy.stan.zgon"}}</label>
                         <input type="checkbox" class="stan" name="system.stan" value= 3>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="obrazek">
-                <label class="top-section-label">{{localize "chlopcy.portrecik"}}</label>
+                <label class="top-section-label-center">{{localize "chlopcy.portrecik"}}</label>
                 <img class="borderless" src="{{actor.img}}" data-edit="img">
             </div>
             <div class="inne-dane">
+                <label class="top-section-label-center">{{localize "chlopcy.bangarang.etykieta"}}</label>
                 <div class="bangarang-dane">
+                    
                     <div class="brawura">
-                        <label class="top-section-label brawura">{{localize "chlopcy.bangarang.brawura"}}</label>
+                        <label class="top-section-label-bangarang">{{localize "chlopcy.bangarang.brawura"}}</label>
+                        <div class="bangarang-check-box">
                         <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=1 {{#if (gte system.bangarang.brawura 1)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=2 {{#if (gte system.bangarang.brawura 2)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=3 {{#if (gte system.bangarang.brawura 3)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=4 {{#if (gte system.bangarang.brawura 4)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=5 {{#if (gte system.bangarang.brawura 5)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=6 {{#if (gte system.bangarang.brawura 6)}}chceked{{/if}}>
+                        </div>
                     </div>
                     <div class="dowcip">
-                        <label class="top-section-label dowcip">{{localize "chlopcy.bangarang.dowcip"}}</label>
+                        <label class="top-section-label-bangarang">{{localize "chlopcy.bangarang.dowcip"}}</label>
+                        <div class="bangarang-check-box">
                         <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=1 {{#if (gte system.bangarang.dowcip 1)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=2 {{#if (gte system.bangarang.dowcip 2)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=3 {{#if (gte system.bangarang.dowcip 3)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=4 {{#if (gte system.bangarang.dowcip 4)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=5 {{#if (gte system.bangarang.dowcip 5)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=6 {{#if (gte system.bangarang.dowcip 6)}}chceked{{/if}}>
+                        </div>
                     </div>
                     <div class="finezja">
-                        <label class="top-section-label brawura">{{localize "chlopcy.bangarang.finezja"}}</label>
+                        <label class="top-section-label-bangarang">{{localize "chlopcy.bangarang.finezja"}}</label>
+                        <div class="bangarang-check-box">                  
                         <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=1 {{#if (gte system.bangarang.finezja 1)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=2 {{#if (gte system.bangarang.finezja 2)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=3 {{#if (gte system.bangarang.finezja 3)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=4 {{#if (gte system.bangarang.finezja 4)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=5 {{#if (gte system.bangarang.finezja 5)}}chceked{{/if}}>
                         <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=6 {{#if (gte system.bangarang.finezja 6)}}chceked{{/if}}>
+                        </div>
                     </div>
                 </div>
                 <div class="xp">
@@ -89,18 +100,27 @@
                 </div>
             </div>
         </div>
-        <div class="cechy">
-             {{> "systems/chlopcy/tameplates/actor/tab/cechy.hbs"}}
-        </div>
-        <div class="pylek">
-            {{> "systems/chlopcy/tameplates/actor/tab/pylek.hbs"}}
-        </div>
-        <div class="eq-i-nowe-szlify">
-            {{> "systems/chlopcy/tameplates/actor/tab/sprzet-osobisy.hbs"}}
-            {{> "systems/chlopcy/tameplates/actor/tab/sakwy.hbs"}}
-            {{> "systems/chlopcy/tameplates/actor/tab/nowe-szlify.hbs"}}
+     
 
-        </div>
     </section>
+</section>
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="glowna" data-tab="glowna">{{localize "chlopcy.glowna"}}</a>
+      <a class="kurta-i-wspomnienia" data-tab="kurta-i-wspomnienia">{{localize "chlopcy.kurta-i-wspomnienia"}}</a>    
+    </nav>
+<section class="sheet-body">
+<section class="bottom-section">
+   
+         <div class="tab glowna flexcol" data-group="primary" data-tab="glowna">
+            {{> "systems/chlopcy/tameplates/actor/section/glowna.hbs"}}
+ 
+        </div>
+         <div class="tab kurta-i-wspomnienia flexcol" data-group="primary" data-tab="kurta-i-wspomnienia">
+            {{> "systems/chlopcy/tameplates/actor/section/kurta-i-wspomnienia.hbs"}}
+        </div>
+        
+
  </section>
+ </section>
+ 
 </form> 

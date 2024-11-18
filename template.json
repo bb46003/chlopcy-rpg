@@ -11,8 +11,8 @@
             "bajker": 0,
             "farciarz": 0,
             "twardziel": {
-                "aktualne": 0,
-                "max": 0
+                "aktualne": 3,
+                "max": 3
             }
         },
         "bangarang":{
@@ -22,7 +22,7 @@
         },
         "wiek":0,
         "zdrowie":{
-            "aktualne": 0,
+            "aktualne": 9,
             "max": 9
         },
         "stan":1,
@@ -55,21 +55,28 @@
                 "opis": "",
                 "wartosc":0
             },
-            "noweSzlidy1":{
+            "noweSzlify1":{
                 "opis": "",
                 "wartosc":0
             },
-            "noweSzlidy2":{
+            "noweSzlify2":{
                 "opis": "",
                 "wartosc":0
             }, 
-            "noweSzlidy3":{
+            "noweSzlify3":{
                 "opis": "",
                 "wartosc":0
             }             
         },
         "xp": 0,
-        "pyłek": 0,
+        "pylek": {
+            "1":false,
+            "2":false,
+            "3":false,
+            "4":false,
+            "5":false,
+            "6":false
+        },
         "sprzet_osobisty":"",
         "skawy": 0,
         "wiezi":{

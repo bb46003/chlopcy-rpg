@@ -1,0 +1,234 @@
+.finezja, .dowcip, .brawura {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.bangarang-check-box {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 5px;
+    height: 60px;
+    align-items: center;
+}
+.xp,
+.top-section{
+    display: flex;
+}
+.top-section {
+    column-gap: 15px;
+}
+.bangarang-dane {
+    border: dashed;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+}
+input.bangarang {
+    margin: 5px 0px;
+}
+
+.finezja, .dowcip, .brawura {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+label.top-section-label.stany {
+    writing-mode: vertical-rl;
+}
+.trzezwy, .upojony, .zgon {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+
+.cechy {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.manin {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 40px; 
+    
+}
+
+.checha-chcek-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+.dane {
+    display: grid;
+    row-gap: 10px;
+    margin-top: 10px;
+}
+.zdrowie.row, .twardziel.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.zdrowie-wartości, .twardziel-wartości, .wiek.row{
+    display: flex;
+    justify-content: flex-end;
+}
+input.zdrowie, input.twardziel, input.wiek{
+  
+    max-width: 40%;
+
+}
+label.top-section-label {
+    margin-left: auto;
+    margin-right: 5px;
+}
+.top-section-label-center{
+    margin: auto;
+}
+.ksywka, .inne-dane{
+    display: grid;
+}
+.obrazek{
+    display: grid;
+    grid-template-rows: 0.2fr 2fr;
+}
+.sheet img[data-edit] {
+    cursor: pointer;
+    height: 100%;
+}
+.stan.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    margin-left: auto;
+}
+.tagi-dane {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.rzuty-label{
+    height: 30%;
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    /*justify-content: space-evenly;*/
+
+}
+
+.cechy-label,.nazwy-tagow {
+    min-height: 30%;
+    display: grid;
+    justify-items: start;
+    align-items: center;
+}
+input[type="checkbox"].cecha-wartosc {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+}
+label.tagi {
+    margin-right: auto;
+    margin-left: auto;
+}
+label.label-poziom-tagu {
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    white-space: nowrap;
+}
+.label-tagi {
+    height: 30%;
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    column-gap: 23px;
+    justify-content: flex-end;
+}
+label.KM-20 {
+    margin-left: 10px;
+}
+label.KM-12 {
+    margin-left: 22px;
+}
+label.KM-10 {
+    margin-left: 26px;
+}
+label.KM-8 {
+    margin-left: 26px;
+}
+label.KM-6 {
+    margin-left: 35px;
+}
+label.KM-4 {
+    margin-left: 35px;
+}
+label.KB {
+    margin-left: 25px;
+}
+label.KM-pk10 {
+    margin-left: 8px;
+}
+label.KM-pk8 {
+    margin-left: 26px;
+}
+label.KM-pk6 {
+    margin-left: 35px;
+}
+label.KM-pk4 {
+    margin-left: 35px;
+}
+
+label.KM-pk3 {
+    margin-left: 35px;
+}
+label.KM-pk2 {
+    margin-left: 35px;
+}
+label.KB-2k10 {
+    margin-left: 20px;
+}
+select.tag-input-bajker {
+    width: 100%;
+}
+.pylek {
+    display: flex;
+    flex-direction: column;
+}
+.kostki {
+    display: flex;
+    justify-content: space-between;
+}
+
+  input[type="checkbox"].kostki-pyłek,input[type="checkbox"].użycuie-pylku {
+    display: none;
+ 
+}
+label.inside {
+    display: inline-block;
+    border: dashed;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    font-size: xx-large;
+    padding-top: 5px;
+   
+}
+input[type="checkbox"].kostki-pyłek:checked + label.inside {
+    background-color: lightgreen; /* Change this to the color you want */
+}
+.krwawienie {
+    margin-left: 6px;
+}
+.odciecie {
+         margin-right: auto;
+        margin-left: 5px;
+
+}
+.pyłek-label {
+  margin:auto
+}
+.kostki-pulku {
+    display: flex;
+    margin: auto;
+}
