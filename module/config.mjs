@@ -2,7 +2,7 @@ export const CHLOPCYCONFIG = {};
 
 CHLOPCYCONFIG.bajker = {
     chopper: "chlopcy.chopper",
-    scigacz : "chlopcy.scigacz",
+    ścigacz : "chlopcy.scigacz",
     turystyk : "chlopcy.turystyk",
     cross : "chlopcy.cross",
     cruiser : "chlopcy.cruiser",

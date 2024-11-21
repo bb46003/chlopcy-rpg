@@ -111,10 +111,24 @@ label.top-section-label {
 .rzuty-label{
     height: 30%;
     margin-top: auto;
-    display: flex;
-    align-items: flex-end;
-    /*justify-content: space-evenly;*/
-
+    display: grid;
+    align-items: end;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    column-width: 20px;
+    margin-left: 35px;
+    column-gap: 7px;
+}
+.rzuty-label-pod-wpływem{
+    height: 30%;
+    margin-top: auto;
+    display: grid;
+    align-items: end;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    column-width: 20px;
+    margin-left: 24px;
+    column-gap: 10px;
 }
 
 .cechy-label,.nazwy-tagow {
@@ -136,58 +150,19 @@ label.label-poziom-tagu {
     writing-mode: vertical-rl;
     rotate: 180deg;
     white-space: nowrap;
+    margin-right: 2px;
+
 }
-.label-tagi {
+.label-tagi, .sakwy-label {
     height: 30%;
     margin-top: auto;
     display: flex;
     align-items: flex-end;
     column-gap: 23px;
     justify-content: flex-end;
-}
-label.KM-20 {
-    margin-left: 10px;
-}
-label.KM-12 {
-    margin-left: 22px;
-}
-label.KM-10 {
-    margin-left: 26px;
-}
-label.KM-8 {
-    margin-left: 26px;
-}
-label.KM-6 {
-    margin-left: 35px;
-}
-label.KM-4 {
-    margin-left: 35px;
-}
-label.KB {
-    margin-left: 25px;
-}
-label.KM-pk10 {
-    margin-left: 8px;
-}
-label.KM-pk8 {
-    margin-left: 26px;
-}
-label.KM-pk6 {
-    margin-left: 35px;
-}
-label.KM-pk4 {
-    margin-left: 35px;
+    margin-right: 6px;
 }
 
-label.KM-pk3 {
-    margin-left: 35px;
-}
-label.KM-pk2 {
-    margin-left: 35px;
-}
-label.KB-2k10 {
-    margin-left: 20px;
-}
 select.tag-input-bajker {
     width: 100%;
 }
@@ -198,6 +173,7 @@ select.tag-input-bajker {
 .kostki {
     display: flex;
     justify-content: space-between;
+    margin-left: -5px;
 }
 
   input[type="checkbox"].kostki-pyłek,input[type="checkbox"].użycuie-pylku {
@@ -212,7 +188,7 @@ label.inside {
     text-align: center;
     font-size: xx-large;
     padding-top: 5px;
-   
+    margin-left: 5px;
 }
 input[type="checkbox"].kostki-pyłek:checked + label.inside {
     background-color: lightgreen; /* Change this to the color you want */
@@ -231,4 +207,53 @@ input[type="checkbox"].kostki-pyłek:checked + label.inside {
 .kostki-pulku {
     display: flex;
     margin: auto;
+}
+.eq-i-nowe-szlify {
+    display: flex;
+    /* flex-wrap: nowrap; */
+    justify-content: space-between;
+    margin-top: 20px;
+}
+input.skawy-checkbo {
+
+    flex: 0 0 100%;
+    appearance: none;
+    width: 40px;
+    height: 100px;
+    border: 2px dashed #000;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.editor .editor-content {
+    width: 100%;
+    height: 100%;
+    min-height: 10rem;
+    flex: 1;
+  }
+
+  textarea.sprzet-osobisty-textarea {
+    height: 108px;
+    resize: none;
+}
+
+.sakwy-label, .sprzet_osobisty-label {
+    height: 30%;
+
+    display: flex;
+    column-gap: 23px;
+    justify-content: center;
+    align-items: flex-end;
+}
+.wiezi {
+    display: flex;
+
+    justify-content: center;
+}
+.wiezi-label {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

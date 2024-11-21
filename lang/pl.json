@@ -1,77 +1,78 @@
 {
-    "chlopcy":{
-        "ksywka":"Ksywka",
-        "wiek":"Wiek",
-        "zdrowie":"Zdrowie",
-        "trwardziel":"Twardziel",
-        "stan":{
-            "etykieta":"Stany",
-            "trzezwy":"W grze",
-            "upojony":"Przymulony",
-            "zgon":"Nietomny"
-        },
-        "portrecik":"Portrecik",
-        "bangarang":{
-            "etykieta":"Bangarang",
-            "brawura":"Brawura",
-            "dowcip":"Dowcip",
-            "finezja":"Finezja"
-        },
-        "rozwoj":"Rozwój",
-        "KB_z_pyłkiem":"KB:2K10",
-        "KB":"KB:K20",
-        "KM":{
-            "K20":"K20",
-            "K12":"K12",
-            "K10":"K10",
-            "K8":"K8",
-            "K6":"K6",
-            "K4":"K4",
-            "K3":"K3",
-            "K2":"K2"
-        },
-        "brutal":"Brutal",
-        "spryciarz":"Spryciarz",
-        "fachura":"Fachura",
-        "bajerant":"Bajerant",
-        "orient":"Orient",
-        "bajker":"Bajker",
-        "farciarz":"Farciarz",
-        "tagi":{
-            "etykieta":"Tagi",
-            "brutal":"Bysior, Zabijaka, Siepacz, Bez puddła lub inne pasujące i ustlona z Masta",
-            "spryciarz":"Jumacz, Włamywacz, Szpicel, Kanciarz, Kaskader, Naśladowca lub inne pasujące i ustlona z Masta",
-            "fachura":"Mechanior, Elektro, Złota Rączka, Robol/Majster, Operator lub inne pasujące i ustlona z Masta",
-            "bajerant":"Farmazon, Lowelas, Handlarz, Mindhacker lub inne pasujące i ustlona z Masta",
-            "orient":"Czujka, Komputerowiec, Studenciak, Preppers, Pigularz, Rozkminiacz lub inne pasujące i ustlona z Masta",
-            "bajker":"To pojazdy motocyklopodobne, którymi jeżdżą Dzieciaki",
-            "farciarz":"Hazardzista, Znalazca, Bezkarny lub inne pasujące i ustlona z Masta"
-
-        },
-        "chopper": "Chopper",
-        "scigacz":"Ścigacz",
-        "turystyk":"Turystyk",
-        "cross":"Cross",
-        "cruiser":"Cruiser",
-        "klasyk":"Klasyk",
-        "przerzut_KB":"Przerzut KB",
-        "przerzut_KM":"Przerzut M",
-        "dodatkowa_KM":"Dodatkowa KM",
-        "plus_minus_1":"+/- 1 do wyniku",
-        "dodatkowy_bonus": "Dodatkowy bonus",
-        "uzyj_pylku":"Kliknij aby użyć pyłku",
-        "koniec_dzialania_pylku":"Kliknij aby zakończyć działanie pyłtku",
-        "pylek": "Pyłek Wróżek",
-        "pod_wpływem_pylku":"Działasz pod wpływem Pyłku Wróżek"
-
-
-
-
-        
-        
-
-
-    }
-
-
+  "chlopcy": {
+    "ksywka": "Ksywka",
+    "wiek": "Wiek",
+    "zdrowie": "Zdrowie",
+    "trwardziel": "Twardziel",
+    "stan": {
+      "etykieta": "Stany",
+      "trzezwy": "W grze",
+      "upojony": "Przymulony",
+      "zgon": "Nietomny"
+    },
+    "portrecik": "Portrecik",
+    "bangarang": {
+      "etykieta": "Bangarang",
+      "brawura": "Brawura",
+      "dowcip": "Dowcip",
+      "finezja": "Finezja"
+    },
+    "rozwoj": "Rozwój",
+    "KB_z_pylkiem": "KB:2K10",
+    "KB": "KB:K20",
+    "KM": {
+      "K20": "K20",
+      "K12": "K12",
+      "K10": "K10",
+      "K8": "K8",
+      "K6": "K6",
+      "K4": "K4",
+      "K3": "K3",
+      "K2": "K2"
+    },
+    "brutal": "Brutal",
+    "spryciarz": "Spryciarz",
+    "fachura": "Fachura",
+    "bajerant": "Bajerant",
+    "orient": "Orient",
+    "bajker": "Bajker",
+    "farciarz": "Farciarz",
+    "tagi": {
+      "etykieta": "Tagi",
+      "brutal": "Bysior, Zabijaka, Siepacz, Bez puddła lub inne pasujące i ustlona z Masta",
+      "spryciarz": "Jumacz, Włamywacz, Szpicel, Kanciarz, Kaskader, Naśladowca lub inne pasujące i ustlona z Masta",
+      "fachura": "Mechanior, Elektro, Złota Rączka, Robol/Majster, Operator lub inne pasujące i ustlona z Masta",
+      "bajerant": "Farmazon, Lowelas, Handlarz, Mindhacker lub inne pasujące i ustlona z Masta",
+      "orient": "Czujka, Komputerowiec, Studenciak, Preppers, Pigularz, Rozkminiacz lub inne pasujące i ustlona z Masta",
+      "bajker": "To pojazdy motocyklopodobne, którymi jeżdżą Dzieciaki",
+      "farciarz": "Hazardzista, Znalazca, Bezkarny lub inne pasujące i ustlona z Masta",
+      "noweSzlify": "Wpisz nowy tag wykupiony za punkty rozwóju"
+    },
+    "chopper": "Chopper",
+    "scigacz": "Ścigacz",
+    "turystyk": "Turystyk",
+    "cross": "Cross",
+    "cruiser": "Cruiser",
+    "klasyk": "Klasyk",
+    "przerzut_KB": "Przerzut KB",
+    "przerzut_KM": "Przerzut M",
+    "dodatkowa_KM": "Dodatkowa KM",
+    "plus_minus_1": "+/- 1 do wyniku",
+    "dodatkowy_bonus": "Dodatkowy bonus",
+    "uzyj_pylku": "Kliknij aby użyć pyłku",
+    "koniec_dzialania_pylku": "Kliknij aby zakończyć działanie pyłtku",
+    "pylek": "Pyłek Wróżek",
+    "pod_wpływem_pylku": "Działasz pod wpływem Pyłku Wróżek",
+    "nowe_szlify": {
+      "etykieta": "Nowe szlify"
+    },
+    "sakwy": "Sakwy",
+    "przytkanie": "Przytkanie",
+    "krwawienie": "Krwawienie",
+    "odciecie": "Odciecie",
+    "sprzet_osobisty": "Sprzęt osobisty",
+    "wiezi": "Więzi",
+    "dodaj_wiezi": "Dodaj więzi",
+    "dodaj_wiez": "Kliknij aby wybrać postać z którą masz więzi"
+  }
 }

@@ -105,8 +105,9 @@
     </section>
 </section>
     <nav class="sheet-tabs tabs" data-group="primary">
-      <a class="glowna" data-tab="glowna">{{localize "chlopcy.glowna"}}</a>
-      <a class="kurta-i-wspomnienia" data-tab="kurta-i-wspomnienia">{{localize "chlopcy.kurta-i-wspomnienia"}}</a>    
+        <a class="glowna" data-tab="glowna">{{localize "chlopcy.glowna"}}</a>
+        <a class="kurta-i-wspomnienia" data-tab="kurta-i-wspomnienia">{{localize "chlopcy.kurta-i-wspomnienia"}}</a>
+        <a class="wiezi" data-tab="wiezi">{{localize "chlopcy.wiezi"}}</a>     
     </nav>
 <section class="sheet-body">
 <section class="bottom-section">
@@ -118,7 +119,10 @@
          <div class="tab kurta-i-wspomnienia flexcol" data-group="primary" data-tab="kurta-i-wspomnienia">
             {{> "systems/chlopcy/tameplates/actor/section/kurta-i-wspomnienia.hbs"}}
         </div>
-        
+         <div class="tab wiezi" data-group="primary" data-tab="wiezi">
+            {{> "systems/chlopcy/tameplates/actor/section/wiezi.hbs"}}
+            
+        </div>
 
  </section>
  </section>

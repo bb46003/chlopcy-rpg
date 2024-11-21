@@ -1,9 +1,10 @@
 
     <div class="manin">
         <div class="lewa">
-            <div class="rzuty-label">
+           
                 {{#if system.pod_wplywem_pylku}}
-                    <label class="KB-2k10">{{localize "chlopcy.KB_z_pyłkiem"}}</label>
+                  <div class="rzuty-label-pod-wpływem">
+                    <label class="KB-2k10">{{localize "chlopcy.KB_z_pylkiem"}}</label>
                     <label class="KM-pk10">{{localize "chlopcy.KM.K10"}}</label>
                     <label class="KM-pk8">{{localize "chlopcy.KM.K8"}}</label>
                     <label class="KM-pk6">{{localize "chlopcy.KM.K6"}}</label>
@@ -13,6 +14,7 @@
                     
              
                 {{else}}
+                  <div class="rzuty-label">
                     <label class="KB">{{localize "chlopcy.KB"}}</label>
                     <label class="KM-20">{{localize "chlopcy.KM.K20"}}</label>
                     <label class="KM-12">{{localize "chlopcy.KM.K12"}}</label>
@@ -56,26 +58,26 @@
           
         <div class="tagi-dane">
             <div class="nazwy-tagow">
-                <input type="text" class="tag-input" name="system.tagi.brutal.opis" value="{{system.tagi.brutal.opis}}" data-tooltip="{{localize "chlopcy.tagi.brutal"}}">
-                <input type="text" class="tag-input" name="system.tagi.spryciarz.opis" value="{{system.tagi.spryciarz.opis}}" data-tooltip="{{localize "chlopcy.tagi.spryciarz"}}">
-                <input type="text" class="tag-input" name="system.tagi.fachura.opis" value="{{system.tagi.fachura.opis}}" data-tooltip="{{localize "chlopcy.tagi.fachura"}}">
-                <input type="text" class="tag-input" name="system.tagi.bajerant.opis" value="{{system.tagi.bajerant.opis}}" data-tooltip="{{localize "chlopcy.tagi.bajerant"}}">
-                <input type="text" class="tag-input" name="system.tagi.orient.opis" value="{{system.tagi.orient.opis}}" data-tooltip="{{localize "chlopcy.tagi.orient"}}">
+                <input type="text" class="tag-input" name="system.tagi.brutal.opis" value="{{system.tagi.brutal.opis}}" {{#if (eq system.tagi.brutal.opis "")}} data-tooltip="{{localize "chlopcy.tagi.brutal"}}"{{/if}}>
+                <input type="text" class="tag-input" name="system.tagi.spryciarz.opis" value="{{system.tagi.spryciarz.opis}}" {{#if (eq system.tagi.spryciarz.opis "")}}data-tooltip="{{localize "chlopcy.tagi.spryciarz"}}"{{/if}}>
+                <input type="text" class="tag-input" name="system.tagi.fachura.opis" value="{{system.tagi.fachura.opis}}" {{#if (eq system.tagi.fachura.opis "")}}data-tooltip="{{localize "chlopcy.tagi.fachura"}}"{{/if}}>
+                <input type="text" class="tag-input" name="system.tagi.bajerant.opis" value="{{system.tagi.bajerant.opis}}" {{#if (eq system.tagi.bajerant.opis "")}}data-tooltip="{{localize "chlopcy.tagi.bajerant"}}"{{/if}}>
+                <input type="text" class="tag-input" name="system.tagi.orient.opis" value="{{system.tagi.orient.opis}}" {{#if (eq system.tagi.orient.opis "")}}data-tooltip="{{localize "chlopcy.tagi.orient"}}"{{/if}}>
                 <select name="system.tagi.bajker.opis"  class="tag-input-bajker">
                     <option value="" data-tooltip="{{localize "chlopcy.tagi.bajker"}}"></option>
                     {{selectOptions bajker selected=system.tagi.bajker.opis localize=true}}
 
                 </select>
-                <input type="text" class="tag-input" name="system.tagi.farciarz.opis" value="{{system.tagi.brutal.opis}}" data-tooltip="{{localize "chlopcy.tagi.farciarz"}}">
+                <input type="text" class="tag-input" name="system.tagi.farciarz.opis" value="{{system.tagi.farciarz.opis}}" {{#if (eq system.tagi.farciarz.opis "")}}data-tooltip="{{localize "chlopcy.tagi.farciarz"}}"{{/if}}>
             </div>
             <div class="tagi-boxy">
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.brutal cecha="brutal"}}
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.spryciarz cecha="spryciarz"}}
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.fachura cecha="fachura"}}
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.bajerant cecha="bajerant"}}
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.orient cecha="orient"}}
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.bajker cecha="bajker"}}
-                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.cechy.farciarz cecha="farciarz"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.brutal cecha="brutal"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.spryciarz cecha="spryciarz"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.fachura cecha="fachura"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.bajerant cecha="bajerant"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.orient cecha="orient"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.bajker cecha="bajker"}}
+                {{> "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs" wartosc = system.tagi.farciarz cecha="farciarz"}}
 
             </div>
             </div>

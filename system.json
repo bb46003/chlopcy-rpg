@@ -21,7 +21,8 @@
         {
           "lang": "pl",
           "name": "Polski",
-          "path": "lang/pl.json"
+          "path": "lang/pl.json",
+          "default": true
         }
    
       ],
