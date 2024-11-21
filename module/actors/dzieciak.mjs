@@ -62,6 +62,11 @@ export class dzieciak extends ActorSheet {
         super.activateListeners(html);
 
         html.on("change", ".kostki-pyłek", (ev) =>this.dawkiPylku(ev));
+        html.on("change", ".cecha-wartosc", (ev) =>this.wartoscTagu(ev));
+        html.on("change", ".stan", (ev) =>this.zmianaStanu(ev));
+        html.on("change", ".bangarang", (ev) =>this.zmianaBangarang(ev));
+        html.on("change", ".xp", (ev) =>this.zmianaXp(ev));
+        html.on("change", ".sakwy-checkbo", (ev) =>this.zmianaSakwy(ev));
       }
 
       async dawkiPylku(ev){
@@ -86,4 +91,62 @@ export class dzieciak extends ActorSheet {
         this.actor.update(updateData)
         
       }
+      async wartoscTagu(ev){
+        const target = ev.target.checked;
+        const tagName = ev.target.parentNode.attributes[1].nodeValue;
+        let value = this.actor[tagName];
+        if(target){
+         value = Number(ev.target.value);
+        }
+        else{
+          value = Number(ev.target.value)-1;
+        }
+       await this.actor.update({[`${tagName}`]:value})
+      }
+      async zmianaStanu(ev){
+        const target = ev.target.checked;
+        let  value = Number(ev.target.value);
+        if(target){
+          await this.actor.update({["system.stan"]:value})
+         }
+         else{
+           value = Number(ev.target.value)-1;
+           await this.actor.update({["system.stan"]:value})
+         }
+      }
+      async zmianaBangarang(ev){
+        const target = ev.target.checked;
+        let  value = Number(ev.target.value);
+        const ID = ev.target.id;
+        if(target){
+          await this.actor.update({[`system.bangarang.${ID}`]:value})
+         }
+         else{
+           value = Number(ev.target.value)-1;
+           await this.actor.update({[`system.bangarang.${ID}`]:value})
+         }
+      }
+      async zmianaXp(ev){
+        const target = ev.target.checked;
+        let  value = Number(ev.target.value);
+        if(target){
+          await this.actor.update({["system.xp"]:value})
+         }
+         else{
+           value = Number(ev.target.value)-1;
+           await this.actor.update({["system.xp"]:value})
+         }    
+      }
+      async zmianaSakwy(ev){
+        const target = ev.target.checked;
+        let  value = Number(ev.target.value);
+        if(target){
+          await this.actor.update({["system.sakwy"]:value})
+         }
+         else{
+           value = Number(ev.target.value)-1;
+           await this.actor.update({["system.sakwy"]:value})
+         }    
+      }
+
     }

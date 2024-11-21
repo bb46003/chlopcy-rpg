@@ -109,3 +109,27 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-11-20T23:01:38.091Z'
+  chlopcy.glowna:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 6iVdiPxCeTg2Tu09LyaZH
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-21T21:45:57.968Z'
+  chlopcy.kurta-i-wspomnienia:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: X_QBtFwyUz0lLYSyWJkBz
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-21T21:46:31.808Z'

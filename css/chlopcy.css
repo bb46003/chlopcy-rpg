@@ -214,7 +214,7 @@ input[type="checkbox"].kostki-pyłek:checked + label.inside {
     justify-content: space-between;
     margin-top: 20px;
 }
-input.skawy-checkbo {
+input.sakwy-checkbo {
 
     flex: 0 0 100%;
     appearance: none;
@@ -225,7 +225,10 @@ input.skawy-checkbo {
     background-color: #fff;
     cursor: pointer;
 }
-
+input.sakwy-checkbo:checked {
+    background-color: #4CAF50; /* Green background when checked */
+    border-color: #4CAF50;
+  }
 .editor .editor-content {
     width: 100%;
     height: 100%;

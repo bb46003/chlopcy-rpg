@@ -4,15 +4,15 @@
     </div>
     <div class="sakwy-check-box">
     {{#if (eq system.tagi.bajker.opis (lowercase (localize "chlopcy.scigacz")))}}
-        <input type="checkbox" class="skawy-checkbo" name="system.sakwy" value=1 {{#if (eq system.skawy 1)}}checked{{/if}}>
+        <input type="checkbox" class="sakwy-checkbo"  value=1 {{#if (eq system.sakwy 1)}}checked{{/if}}>
     {{else}}
         {{#if (eq system.tagi.bajker.opis (lowercase (localize "chlopcy.turystyk")))}}
-            <input type="checkbox" class="skawy-checkbo" name="system.sakwy" value="1" {{#if (eq system.skawy 1)}}checked{{/if}}>
-            <input type="checkbox" class="skawy-checkbo" name="system.sakwy" value="2" {{#if (eq system.skawy 2)}}checked{{/if}}>
-            <input type="checkbox" class="skawy-checkbo" name="system.sakwy" value="3" {{#if (eq system.skawy 3)}}checked{{/if}}>
+            <input type="checkbox" class="sakwy-checkbo"  value=1 {{#if (gte system.sakwy 1)}}checked{{/if}}>
+            <input type="checkbox" class="sakwy-checkbo"  value=2 {{#if (gte system.sakwy 2)}}checked{{/if}}>
+            <input type="checkbox" class="sakwy-checkbo"  value=3 {{#if (eq system.sakwy 3)}}checked{{/if}}>
         {{else}}
-        <input type="checkbox" class="skawy-checkbo" name="system.sakwy" value=1 {{#if (eq system.skawy 1)}}checked{{/if}}>
-        <input type="checkbox" class="skawy-checkbo" name="system.sakwy" value=2 {{#if (eq system.skawy 2)}}checked{{/if}}>
+        <input type="checkbox" class="sakwy-checkbo"  value=1 {{#if (gte system.sakwy 1)}}checked{{/if}}>
+        <input type="checkbox" class="sakwy-checkbo"  value=2 {{#if (gte system.sakwy 2)}}checked{{/if}}>
         {{/if}}
     {{/if}}
     </div>

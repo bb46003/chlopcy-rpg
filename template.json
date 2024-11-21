@@ -25,6 +25,11 @@
             "aktualne": 9,
             "max": 9
         },
+        "twardziel":{  
+            "aktualne": 3,
+            "max": 3
+        },
+
         "stan":1,
         "tagi":{
             "brutal": {
@@ -78,7 +83,7 @@
             "6":false
         },
         "sprzet_osobisty":"",
-        "skawy": 0,
+        "sakwy": 0,
         "wiezi":{
             "postac1":{
                 "imie":"",

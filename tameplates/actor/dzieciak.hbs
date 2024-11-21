@@ -15,7 +15,7 @@
                 <div class="zdrowie row">
                     <label class="top-section-label">{{localize "chlopcy.zdrowie"}}</label>
                     <div class="zdrowie-wartości">
-                        <input class="zdrowie" type="number" name="system.zdrowie.akualne" value="{{system.zdrowie.akualne}}">
+                        <input class="zdrowie" type="number" name="system.zdrowie.aktualne" value="{{system.zdrowie.aktualne}}">
                         <p>/</p>
                         <input class="zdrowie" type="number" name="system.zdrowie.max" value="{{system.zdrowie.max}}">
                     </div>
@@ -32,15 +32,15 @@
                     <label class="stany-label">{{localize "chlopcy.stan.etykieta"}}</label>
                     <div class="trzezwy">
                         <label class="top-section-label stany">{{localize "chlopcy.stan.trzezwy"}}</label>
-                        <input type="checkbox" class="stan" name="system.stan" value= 1>
+                        <input type="checkbox" class="stan"  value=1 {{#if (gte system.stan 1)}}checked{{/if}}>
                     </div>
                     <div class="upojony">
                         <label class="top-section-label stany">{{localize "chlopcy.stan.upojony"}}</label>
-                        <input type="checkbox" class="stan" name="system.stan" value= 2>
+                        <input type="checkbox" class="stan"  value= 2 {{#if (gte system.stan 2)}}checked{{/if}}>
                     </div>
                     <div class="zgon">
                         <label class="top-section-label stany">{{localize "chlopcy.stan.zgon"}}</label>
-                        <input type="checkbox" class="stan" name="system.stan" value= 3>
+                        <input type="checkbox" class="stan"  value= 3 {{#if (eq system.stan 3)}}checked{{/if}}>
                     </div>
                 </div>
                 </div>
@@ -56,47 +56,47 @@
                     <div class="brawura">
                         <label class="top-section-label-bangarang">{{localize "chlopcy.bangarang.brawura"}}</label>
                         <div class="bangarang-check-box">
-                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=1 {{#if (gte system.bangarang.brawura 1)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=2 {{#if (gte system.bangarang.brawura 2)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=3 {{#if (gte system.bangarang.brawura 3)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=4 {{#if (gte system.bangarang.brawura 4)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=5 {{#if (gte system.bangarang.brawura 5)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.brawura" value=6 {{#if (gte system.bangarang.brawura 6)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="brawura" value=1 {{#if (gte system.bangarang.brawura 1)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="brawura" value=2 {{#if (gte system.bangarang.brawura 2)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="brawura" value=3 {{#if (gte system.bangarang.brawura 3)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="brawura" value=4 {{#if (gte system.bangarang.brawura 4)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="brawura" value=5 {{#if (gte system.bangarang.brawura 5)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="brawura" value=6 {{#if (gte system.bangarang.brawura 6)}}checked{{/if}}>
                         </div>
                     </div>
                     <div class="dowcip">
                         <label class="top-section-label-bangarang">{{localize "chlopcy.bangarang.dowcip"}}</label>
                         <div class="bangarang-check-box">
-                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=1 {{#if (gte system.bangarang.dowcip 1)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=2 {{#if (gte system.bangarang.dowcip 2)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=3 {{#if (gte system.bangarang.dowcip 3)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=4 {{#if (gte system.bangarang.dowcip 4)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=5 {{#if (gte system.bangarang.dowcip 5)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.dowcip" value=6 {{#if (gte system.bangarang.dowcip 6)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="dowcip" value=1 {{#if (gte system.bangarang.dowcip 1)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="dowcip" value=2 {{#if (gte system.bangarang.dowcip 2)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="dowcip" value=3 {{#if (gte system.bangarang.dowcip 3)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="dowcip" value=4 {{#if (gte system.bangarang.dowcip 4)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="dowcip" value=5 {{#if (gte system.bangarang.dowcip 5)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="dowcip" value=6 {{#if (gte system.bangarang.dowcip 6)}}checked{{/if}}>
                         </div>
                     </div>
                     <div class="finezja">
                         <label class="top-section-label-bangarang">{{localize "chlopcy.bangarang.finezja"}}</label>
                         <div class="bangarang-check-box">                  
-                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=1 {{#if (gte system.bangarang.finezja 1)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=2 {{#if (gte system.bangarang.finezja 2)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=3 {{#if (gte system.bangarang.finezja 3)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=4 {{#if (gte system.bangarang.finezja 4)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=5 {{#if (gte system.bangarang.finezja 5)}}chceked{{/if}}>
-                        <input class="bangarang" type="checkbox" name="system.bangarang.finezja" value=6 {{#if (gte system.bangarang.finezja 6)}}chceked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="finezja" value=1 {{#if (gte system.bangarang.finezja 1)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="finezja" value=2 {{#if (gte system.bangarang.finezja 2)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="finezja" value=3 {{#if (gte system.bangarang.finezja 3)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="finezja" value=4 {{#if (gte system.bangarang.finezja 4)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="finezja" value=5 {{#if (gte system.bangarang.finezja 5)}}checked{{/if}}>
+                        <input class="bangarang" type="checkbox" id="finezja" value=6 {{#if (gte system.bangarang.finezja 6)}}checked{{/if}}>
                         </div>
                     </div>
                 </div>
                 <div class="xp">
-                    <label class="top-section-label rozwoj">{{localize "chlopcy.rozwoj"}}</label>
-                    <input class="xp" type="checkbox" name="system.xp" value=1 {{#if (gte system.xp 1)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=2 {{#if (gte system.xp 2)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=3 {{#if (gte system.xp 3)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=4 {{#if (gte system.xp 4)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=5 {{#if (gte system.xp 5)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=6 {{#if (gte system.xp 6)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=7 {{#if (gte system.xp 7)}}chceked{{/if}}>
-                    <input class="xp" type="checkbox" name="system.xp" value=8 {{#if (gte system.xp 8)}}chceked{{/if}}>
+                    <label class="top-section-label rozwoj" name="system.xp">{{localize "chlopcy.rozwoj"}}</label>
+                    <input class="xp" type="checkbox"  value=1 {{#if (gte system.xp 1)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=2 {{#if (gte system.xp 2)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=3 {{#if (gte system.xp 3)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=4 {{#if (gte system.xp 4)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=5 {{#if (gte system.xp 5)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=6 {{#if (gte system.xp 6)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=7 {{#if (gte system.xp 7)}}checked{{/if}}>
+                    <input class="xp" type="checkbox"  value=8 {{#if (gte system.xp 8)}}checked{{/if}}>
                 </div>
             </div>
         </div>
