@@ -1,0 +1,40 @@
+<div class="RDT">
+    <div class="wynik">
+        <h2>{{osiagi}}</h2>
+    </div>
+    {{#if (eq KM 0)}}
+    <div class="wyniki-KB">
+        <label class="label-KB">{{tekstKB}}</label>
+        <p class="rzut-kb">{{KB}}</p>
+    </div>
+    {{/if}}
+    {{#if (ne KM 0)}}
+        <div class="wyniki-KB">
+            <label class="label-KB">{{tekstKB}}</label>
+            <p class="rzut-kb">{{KB}}</p>
+        </div>
+        <div class="wyniki-KM">
+            <label class="label-KB">{{tekstKM}}</label>
+            <p class="rzut-kb">{{KM}}</p>
+    </div>
+    <div class="wyniki-RTD">
+            <label class="label-KB">{{localize "chlopcy.czat.wynik_RDT"}}</label>
+            <p class="rzut-kb">{{RDT}}</p>
+    </div>
+    {{/if}}
+    {{#if (eq KM 0)}}
+        {{#if (ne rollingData.stan 3)}}
+            <h3 class="KM-cechy">{{localize "chlopcy.czat.dostepne_KM"}} {{rollingData.cecha}}</h3>
+                <div class="modyfikatory-cechy">
+                    {{> "systems/chlopcy/tameplates/chat/partial/cecha-dice.hbs"}}
+                </div>
+                {{#if (and (ne rollingData.tag "") rollingData.wartoscTagu)}}
+                <h3 class="mod-tagu">{{localize "chlopcyczat.mod_tagu"}}{{rollingData.tag}}</h3>
+                <div class="mod-z-tagu">
+                    {{> "systems/chlopcy/tameplates/chat/partial/tag-mod.hbs"}}
+                </div>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+
+</div>

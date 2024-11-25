@@ -1,3 +1,5 @@
+import rzutDoTarczy from "../roll/rolling.mjs";
+
 export class dzieciak extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -67,6 +69,7 @@ export class dzieciak extends ActorSheet {
         html.on("change", ".bangarang", (ev) =>this.zmianaBangarang(ev));
         html.on("change", ".xp", (ev) =>this.zmianaXp(ev));
         html.on("change", ".sakwy-checkbo", (ev) =>this.zmianaSakwy(ev));
+        html.on("click", ".cecha", (ev) => this.rzut(ev));
       }
 
       async dawkiPylku(ev){
@@ -149,4 +152,9 @@ export class dzieciak extends ActorSheet {
          }    
       }
 
+      async rzut(ev){
+       const cecha = ev.target.innerHTML.toLowerCase()
+        const roll = new rzutDoTarczy(this.actor, cecha);
+        roll.preRollDialog()
+      }
     }

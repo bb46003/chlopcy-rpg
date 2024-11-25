@@ -109,27 +109,187 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-11-20T23:01:38.091Z'
-  chlopcy.glowna:
+  chlopcy.wybierz_tag:
     locales:
       pl:
         comments:
           - user:
               name: Unknown
               email: ''
-            id: 6iVdiPxCeTg2Tu09LyaZH
+            id: qm7ciLI4f-uDMIO9SCiOq
             comment: ''
             suggestion: ''
             type: approve
-            time: '2024-11-21T21:45:57.968Z'
-  chlopcy.kurta-i-wspomnienia:
+            time: '2024-11-24T12:46:43.767Z'
+          - user:
+              name: Unknown
+              email: ''
+            id: nYVLjFdlib1k6sbvL6nJ3
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-24T12:47:21.151Z'
+  chlopcy.bez_tagu:
     locales:
       pl:
         comments:
           - user:
               name: Unknown
               email: ''
-            id: X_QBtFwyUz0lLYSyWJkBz
+            id: L2Xs748Vgt66XbCbzAGdp
             comment: ''
             suggestion: ''
             type: approve
-            time: '2024-11-21T21:46:31.808Z'
+            time: '2024-11-24T15:31:59.152Z'
+  chlopcy.BANGARANG:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: GQxV1C99NdfYj1s-vPvUa
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T13:23:37.234Z'
+  chlopcy.rzut.BANGARANG:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: ntMms_au3ERW2ELVqx4FX
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T13:24:01.810Z'
+  chlopcy.rzut.dwa_osiagi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: XckxNdvVdkAD022SLimx_
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T13:25:54.004Z'
+  chlopcy.rzut.jeden_osiag:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: UUWtq_zjWzWFi4RGmD5ZA
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T13:27:10.469Z'
+  chlopcy.rzut.klopoty:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: dXd3LCesMM2kDD6Oh9wMW
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T13:59:56.177Z'
+  chlopcy.rzut.brak_osiagow:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: wh11k98muoX9HA3KpxCHH
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T14:01:07.808Z'
+  chlopcy.czat.wynik_KB:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 2q5VK8owNEYpiYbUT6qsC
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T14:31:32.636Z'
+  chlopcy.czat.dostepne_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: n0Vb2dmVoxfuyukpn-BUT
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T14:42:33.056Z'
+          - user:
+              name: Unknown
+              email: ''
+            id: MxFuzx1vDbdHCItraK7L8
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T14:58:32.124Z'
+  chlopcyczat.mod_tagu:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: bCe78Qseg8yjIeyTx-eR7
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T14:58:11.811Z'
+  chlopcy.czat.wynik_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: J5gbsQSOQlT6le5eKQOej
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T22:34:30.228Z'
+  chlopcy.czat.wynik_RDT:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 9kwuoH6HKhC8MyTzv048-
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T22:47:37.797Z'
+  chlopcy.dialog.wybierz_tag:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: CLxy7N4yazSVbERgfZQgZ
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-25T23:41:44.158Z'

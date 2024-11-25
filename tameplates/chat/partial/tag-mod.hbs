@@ -1,0 +1,20 @@
+<div class="tag-mods">
+   <div class="rectangles">
+  {{#if (gte rollingData.wartoscTagu 1)}}
+    <div class="rectangle">{{localize "chlopcy.przerzut_KB"}}</div>
+  {{/if}}
+  {{#if (gte rollingData.wartoscTagu 2)}}
+    <div class="rectangle">{{localize "chlopcy.przerzut_KM"}}</div>
+  {{/if}}
+  {{#if (gte rollingData.wartoscTagu 3)}}
+    <div class="rectangle">{{localize "chlopcy.dodatkowa_KM"}}</div>
+  {{/if}}
+  {{#if (gte rollingData.wartoscTagu 4)}}
+    <div class="rectangle">{{localize "chlopcy.plus_minus_1"}}</div>
+  {{/if}}
+  {{#if (gte rollingData.wartoscTagu 5)}}
+    <div class="rectangle">{{localize "chlopcy.dodatkowy_bonus"}}</div>
+  {{/if}}
+</div>
+
+</div>

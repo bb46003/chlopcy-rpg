@@ -9,7 +9,9 @@ export const preloadHandlebarsTemplates = async function () {
         "systems/chlopcy/tameplates/actor/tab/nowe-szlify.hbs",
         "systems/chlopcy/tameplates/actor/section/glowna.hbs",
         "systems/chlopcy/tameplates/actor/section/kurta-i-wspomnienia.hbs",
-        "systems/chlopcy/tameplates/actor/section/wiezi.hbs"
+        "systems/chlopcy/tameplates/actor/section/wiezi.hbs",
+        "systems/chlopcy/tameplates/chat/partial/cecha-dice.hbs",
+        "systems/chlopcy/tameplates/chat/partial/tag-mod.hbs"
 
 
 

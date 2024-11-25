@@ -260,3 +260,31 @@ input.sakwy-checkbo:checked {
     flex-direction: column;
     align-items: center;
 }
+.wyniki-KB, .wyniki-RTD, .wyniki-KM {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.tag-mods {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  .rectangle {
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    text-align: center;
+    font-size: 14px; 
+    font-weight: bold; 
+  }
+
+  .dodatkowe-osiagi, .nazwa, .wybor-tagow{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5px;
+    align-items: center;
+    margin-bottom: 5px;
+  }

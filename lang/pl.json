@@ -74,7 +74,29 @@
     "wiezi": "Więzi",
     "dodaj_wiezi": "Dodaj więzi",
     "dodaj_wiez": "Kliknij aby wybrać postać z którą masz więzi",
-    "glowna": "Główna",
-    "kurta-i-wspomnienia": "Kurtka i Wspomnienia"
+    "wybierz_tag": "Wybieranie tagu",
+    "bez_tagu": "Brak tagu",
+    "BANGARANG": "Wykanałeś/Wykonałaś BANGARANG!",
+    "rzut": {
+      "BANGARANG": "wykanałeś/Wykonałaś BANGARANG!",
+      "dwa_osiagi": "Zdobyłeś/Zdobyłaś 2 osiągi.",
+      "jeden_osiag": "Zdobyłeś/Zdobyłas 1 osiąg.",
+      "klopoty": "Wyrzuciłeś/Wyrzucilaś 20! Traz czeka Cię sukces z problemmami lub pech!",
+      "brak_osiagow": "Nie zdobyłeś/zdobyłaś żadnych osiągów."
+    },
+    "czat": {
+      "wynik_KB": "Wynik rzutu KB {kKB} to:",
+      "dostepne_KM": "Dostępne KM z cechy ",
+      "wynik_KM": "Wynik rzutu KM {kKM} to: ",
+      "wynik_RDT": "Wynik RDT to:"
+    },
+    "dialog": {
+      "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
+      "podaj_nazwę_używanego_przedmiotu": "Podaj nazwę używanego przedmiotu",
+      "wybierz_tag": "Wybierz używany tag do RDT"
+    }
+  },
+  "chlopcyczat": {
+    "mod_tagu": "Dostepne modyfikacje z Tagu "
   }
 }

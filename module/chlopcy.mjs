@@ -2,6 +2,7 @@ import { registerSheets } from "./setup/register-sheets.mjs";
 import { registerHandlebarsHelpers } from "./setup/handlebars.mjs";
 import { preloadHandlebarsTemplates } from "./setup/templates.mjs";
 import { CHLOPCYCONFIG } from "./config.mjs";
+import * as chlopcyChat from "./chat/roll-mod.mjs"
 
 Hooks.once("init", async function () {
     
@@ -12,3 +13,5 @@ Hooks.once("init", async function () {
     return preloadHandlebarsTemplates();
 
   });
+  
+Hooks.on("renderChatLog", chlopcyChat.addChatListeners);
