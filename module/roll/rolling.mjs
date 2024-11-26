@@ -30,12 +30,14 @@ export  default class rzutDoTarczy {
                     label: label,
                     callback: async () => {
                         const tagi = document.querySelector(".wybrany-tag")
+                        const przedmiot = document.querySelector(".nazwa-przedmiotu").value
+                        const dodatkoweOsiagi = Number(document.querySelector(".dodatkowe-osiagi-liczba").value)
                         let wybranyTag = null;
                         if(tagi !== null){
                             wybranyTag = tagi.querySelector("option:checked");
                         }
                         
-                        await this.prepareRollingData(actor, cecha, stan, wybranyTag);
+                        await this.prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsiagi);
                     }
                 },
                 cancel: {
@@ -48,7 +50,7 @@ export  default class rzutDoTarczy {
          
     }
         
-async prepareRollingData(actor, cecha, stan, wybranyTag){
+async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsiagi){
     const pyłek = actor.system.pod_wplywem_pylku;
     let KB = "";
     if(pyłek){
@@ -66,6 +68,7 @@ async prepareRollingData(actor, cecha, stan, wybranyTag){
    const nazwaCechy = game.i18n.localize(`chlopcy.${cecha}`);
    const wartoscCechy = actor.system.cechy[cecha].wartosc;
 
+
     const rollingData = {
         KB: KB,
         cecha: nazwaCechy,
@@ -73,7 +76,10 @@ async prepareRollingData(actor, cecha, stan, wybranyTag){
         stan: stan,
         tag: nazwaTagu,
         wartoscTagu: wartoscTagu,
-        actor: actor
+        actor: actor,
+        pylek: actor.system.pod_wplywem_pylku,
+        przedmiot: przedmiot,
+        dodatkoweOsiagi: dodatkoweOsiagi
     }
     this.roll(rollingData)
 }
@@ -81,6 +87,7 @@ async roll(rollingData){
     const RKB = await new Roll(rollingData.KB).evaluate();
     const wynikKB = RKB.total;
     let osiagi = ""
+    if(rollingData.przedmiot === ""){
     if(wynikKB === 10){
         osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
     }
@@ -96,9 +103,36 @@ async roll(rollingData){
     else{
         osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow")
     }
+    }
+    else{
+        if(wynikKB === 10){
+            osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
+        }
+        else if(wynikKB === 9 || wynikKB === 11) {
+            const iloscOsiagow = String(2 + rollingData.dodatkoweOsiagi);
+            osiagi = game.i18n.localize("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow})
+        }
+        else if (wynikKB === 8 || wynikKB === 12){
+            const iloscOsiagow = String(1 + rollingData.dodatkoweOsiagi);
+            if(iloscOsiagow == 2){
+                osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi") 
+            }
+            else{
+                osiagi = game.i18n.localize("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow}) 
+            }
+            
+        }
+        else if (wynikKB === 20){
+            osiagi = game.i18n.localize("chlopcy.rzut.klopoty")
+        }
+        else{
+            osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow")
+        }
+
+    }
     const kKB = rollingData.KB.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", {kKB: kKB });
-    console.log(kKB, tekstKB)
+    
     const actor = rollingData.actor;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",

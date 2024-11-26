@@ -2,6 +2,17 @@
     <div class="wynik">
         <h2>{{osiagi}}</h2>
     </div>
+    {{#if (ne rollingData.przedmiot "")}}
+        {{#if (range KB 8 12)}}
+            <div class="użyty_przedmiot">
+                <label class="przedmiot">{{rollingData.przedmiot}}{{localize "chlopcy.czat.zapewnia_dodatkowe_osiągi_w_liczbie"}} {{rollingData.dodatkoweOsiagi}}</label>
+            </div>
+        {{else}}
+            <div class="użyty_przedmiot">
+                <label class="przedmiot">{{localizeWithParams "chlopcy.czat.nie_zdobyto_osiagow_przedmiot_nie_pomogl" przedmiot=rollingData.przedmiot}}</label>
+            </div>
+        {{/if}}
+    {{/if}}
     {{#if (eq KM 0)}}
     <div class="wyniki-KB">
         <label class="label-KB">{{tekstKB}}</label>

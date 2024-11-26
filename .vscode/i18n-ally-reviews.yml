@@ -293,3 +293,39 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-11-25T23:41:44.158Z'
+  chlopcy.rzut.trzy_osiagi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: U0CGtpjy3AAEhKRzn9PEP
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-26T08:21:00.427Z'
+  chlopcy.czat.pech:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: YoBUiPLrVMUFgp0pLIetl
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-26T08:39:12.805Z'
+  chlopcy.czat.nie_zdobyto_osiagow_przedmiot_nie_pomogl:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: rvcy0U20bAaZGEU9CbPwr
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-26T13:59:05.338Z'

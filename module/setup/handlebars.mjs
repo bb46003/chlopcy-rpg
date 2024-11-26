@@ -12,8 +12,19 @@ export function registerHandlebarsHelpers() {
       or() {
         return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
       },
+      range:(v1, v2, v3)=> checkRange(v1, v2, v3)
     });
     Handlebars.registerHelper("lowercase", function (str) {
       return str.toLowerCase();
     });
 }
+function checkRange(v1, v2, v3){
+
+  const ouput = (v1 >= v2)&&(v1 <= v3)
+  console.log(ouput)
+  return ouput
+}
+
+Handlebars.registerHelper("localizeWithParams", function (key, options) {
+  return game.i18n.format(key, options.hash);
+});
