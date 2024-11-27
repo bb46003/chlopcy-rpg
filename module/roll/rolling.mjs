@@ -88,22 +88,22 @@ async roll(rollingData){
     const wynikKB = RKB.total;
     let osiagi = ""
     if(rollingData.przedmiot === ""){
-    if(wynikKB === 10){
-        osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
-    }
-    else if(wynikKB === 9 || wynikKB === 11) {
-        osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi")
-    }
-    else if (wynikKB === 8 || wynikKB === 12){
-        osiagi = game.i18n.localize("chlopcy.rzut.jeden_osiag")
-    }
-    else if (wynikKB === 20){
-        osiagi = game.i18n.localize("chlopcy.rzut.klopoty")
-    }
-    else{
-        osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow")
-    }
-    }
+        if(wynikKB === 10){
+            osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
+        }
+        else if(wynikKB === 9 || wynikKB === 11) {
+            osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi")
+        }
+        else if (wynikKB === 8 || wynikKB === 12){
+            osiagi = game.i18n.localize("chlopcy.rzut.jeden_osiag")
+        }
+        else if (wynikKB === 20){
+            osiagi = game.i18n.localize("chlopcy.rzut.klopoty")
+        }
+        else{
+            osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow")
+        }
+        }
     else{
         if(wynikKB === 10){
             osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
@@ -136,7 +136,7 @@ async roll(rollingData){
     const actor = rollingData.actor;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:wynikKB, tekstKB:tekstKB, KM:0},
+        {rollingData:rollingData, osiagi:osiagi, KB:wynikKB, RDT:wynikKB, tekstKB:tekstKB, KM:0},
       );
 
     const chatData = {

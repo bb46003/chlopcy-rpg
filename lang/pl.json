@@ -85,7 +85,8 @@
       "brak_osiagow": "Nie zdobyłeś/zdobyłaś żadnych osiągów.",
       "trzy_osiagi": "Zdobyłeś/Zdobyłaś 3 osiągi",
       "pech": "Nie zdobyłeś/zdobyłaś żadnych osiągów i masz Pecha!",
-      "wiele_osiagów": "Zdobyłeś/Zdobyłaś {iloscOsiagow} osiągów"
+      "wiele_osiagów": "Zdobyłeś/Zdobyłaś {iloscOsiagow} osiągów",
+      "masz_komplikacje": "Pojawiąją się komplikacje za 20 na KB."
     },
     "czat": {
       "wynik_KB": "Wynik rzutu KB {kKB} to:",

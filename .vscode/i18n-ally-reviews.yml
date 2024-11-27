@@ -329,3 +329,15 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-11-26T13:59:05.338Z'
+  chlopcy.rzut.masz_komplikacje:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: PjUPdUab84ZYBYrYm7TY0
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-11-27T11:01:12.754Z'
