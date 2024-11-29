@@ -21,12 +21,65 @@ export async function dodajKM(ev){
     const RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
     const rollingData = msg.system;
     const actor = msg.system.actor;
-    const rolls = msg.rolls.push(RKM)
+    rollingData.rolls.splice(1, 0, RKM);
+    const rolls =  msg.rolls;
     const kKM = KM.replace(/d/g, "k");
     const kKB = msg.rolls[0]._formula.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB });
     const tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM });
-    let osiagi = ""
+
+    const  osiagi = await sprawdzRDT(rollingData,RDT,KB)
+    const template = await renderTemplate(
+        "systems/chlopcy/tameplates/chat/rdt.hbs",
+        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:wynikRKM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM},
+      );
+
+      rollingData.KM = wynikRKM;
+
+      const chatData = {
+        user: game.user?._id,
+        speaker: ChatMessage.getSpeaker({ actor }),
+        rolls: rolls,
+        content: template,
+        system: rollingData
+    }
+    await RKM.toMessage(chatData);
+          
+        }
+export async function dzialanieTagow(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    const messageElement = ev.target.closest(".chat-message");
+    const messageId = messageElement.getAttribute("data-message-id");
+    const msg = game.messages.get(messageId);
+    const rollingData = msg.system;
+    const actor = msg.system.actor;
+    const id = Number(ev.target.id);
+
+    switch (id){
+
+        case 1:
+            przerzutKB(rollingData, msg, actor)
+            break;
+        case 2:
+            if(rollingData.KM === 0){
+                ui.notifications.warn(game.i18n.localize("chlopcy.ui.najpierw_użyjKM"))
+            }
+            else{
+                przerzutKM(rollingData, msg, actor)
+            }
+            break;
+
+
+
+            
+
+    }
+    
+}
+      
+ async function sprawdzRDT(rollingData,RDT,KB){
+    let osiagi = "";
     if(rollingData.przedmiot === ""){
         if(RDT === 10){
             osiagi = game.i18n.localize("chlopcy.rzut.trzy_osiagi");        
@@ -78,34 +131,100 @@ export async function dodajKM(ev){
         }
 
     }
-    const template = await renderTemplate(
-        "systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:wynikRKM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM},
-      );
+    return osiagi
+ }     
 
+ async function przerzutKB(rollingData, msg, actor) {
+    
+    const formulaKB = rollingData.rolls[0].formula;
+            const nowaKB =  await new Roll(formulaKB).evaluate();
+            rollingData.rolls[0]=nowaKB;
+            rollingData.KB = nowaKB.total;
+            let tekstKM ="";
+            const kKB = formulaKB.replace(/d/g, "k");
+            let RDT = nowaKB.total;
+            let osiagi =await sprawdzRDT(rollingData,RDT,nowaKB)
+            if(rollingData.KM !== 0){
+            const formulaKM = rollingData.rolls[1].formula;;
+            const kKM = formulaKM.replace(/d/g, "k");
+            const wynikRKM = rollingData.rolls[1].total
+            tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM });
+            const addResult = KB + wynikRKM;
+            const subResult = Math.abs(KB-wynikRKM); 
+            RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
+            osiagi =await sprawdzRDT(rollingData,RDT,nowaKB)
 
+            }
+           let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
+            msg.rolls[0] = nowaKB;
+            let rolls = msg.rolls;
+            if (rollingData.wartoscTagu !==5){
+                rollingData.tag = ""
+                rollingData.wartoscTagu = 0
+            }
+            if(rollingData.wartoscTagu !==5){
+                rollingData.wartoscTagu = 4
+            }
 
-      const chatData = {
-        user: game.user?._id,
-        speaker: ChatMessage.getSpeaker({ actor }),
-        roll: rolls,
-        content: template,
-        system: rollingData
-    }
-    await RKM.toMessage(chatData);
-          
-        }
-export async function dzialanieTagow(ev) {
-    ev.stopPropagation();
-    ev.preventDefault();
-    const messageElement = ev.target.closest(".chat-message");
-    const messageId = messageElement.getAttribute("data-message-id");
-    const msg = game.messages.get(messageId);
-    const rollingData = msg.system;
-    const actor = msg.system.actor;
-    const wartoscTagu = rollingData.wartoscTagu;
-}
-      
-     
+            const template = await renderTemplate(
+                "systems/chlopcy/tameplates/chat/rdt.hbs",
+                {rollingData:rollingData, osiagi:osiagi, KB:rollingData.KB, KM:rollingData.KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM},
+              );
+              const chatData = {
+                user: game.user?._id,
+                speaker: ChatMessage.getSpeaker({ actor }),
+                rolls: rolls,
+                content: template,
+                system: rollingData
+              }
+              await nowaKB.toMessage(chatData)
+        
+
+    
+ }
+ async function przerzutKM(rollingData, msg, actor) {
+    
+    const formulaKM = rollingData.rolls[1].formula;
+    const nowaKM =  await new Roll(formulaKM).evaluate();
+    const wynikRKM = nowaKM.total;
+    rollingData.KM = nowaKM.total;
+    rollingData.rolls[1] = nowaKM;
+    const KB = rollingData.rolls[0].total;
+    let tekstKM ="";
+    const kKB = rollingData.rolls[0].formula.replace(/d/g, "k");
+    tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { formulaKM });
+    const addResult = KB + wynikRKM;
+            const subResult = Math.abs(KB-wynikRKM); 
+            let RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
+            let osiagi =await sprawdzRDT(rollingData,RDT, KB)
+
+        
+            let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
+            msg.rolls[1] = nowaKM;
+            let rolls = msg.rolls;
+            if (rollingData.wartoscTagu !==5){
+                rollingData.tag = ""
+                rollingData.wartoscTagu = 0
+            }
+            if(rollingData.wartoscTagu !==5){
+                rollingData.wartoscTagu = 4
+            }
+
+            const template = await renderTemplate(
+                "systems/chlopcy/tameplates/chat/rdt.hbs",
+                {rollingData:rollingData, osiagi:osiagi, KB:rollingData.KB, KM:rollingData.KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM},
+              );
+              const chatData = {
+                user: game.user?._id,
+                speaker: ChatMessage.getSpeaker({ actor }),
+                rolls: rolls,
+                content: template,
+                system: rollingData
+              }
+              await nowaKM.toMessage(chatData)
+        
+
+    
+ }
   
 

@@ -33,19 +33,23 @@
             <p class="rzut-kb">{{RDT}}</p>
     </div>
     {{/if}}
-    {{#if (eq KM 0)}}
-        {{#if (ne rollingData.stan 3)}}
+
+        {{#if (eq KM 0)}}
+        
             <h3 class="KM-cechy">{{localize "chlopcy.czat.dostepne_KM"}} {{rollingData.cecha}}</h3>
                 <div class="modyfikatory-cechy">
                     {{> "systems/chlopcy/tameplates/chat/partial/cecha-dice.hbs"}}
                 </div>
-                {{#if (and (ne rollingData.tag "") rollingData.wartoscTagu)}}
+        {{/if}}
+
+            {{#if (and (ne rollingData.tag "") (ne rollingData.wartoscTagu 0))}}
                 <h3 class="mod-tagu">{{localize "chlopcyczat.mod_tagu"}}{{rollingData.tag}}</h3>
                 <div class="mod-z-tagu">
                     {{> "systems/chlopcy/tameplates/chat/partial/tag-mod.hbs"}}
                 </div>
             {{/if}}
-        {{/if}}
-    {{/if}}
+        
+
+
 
 </div>

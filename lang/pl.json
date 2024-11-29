@@ -100,6 +100,9 @@
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
       "podaj_nazwę_używanego_przedmiotu": "Podaj nazwę używanego przedmiotu",
       "wybierz_tag": "Wybierz używany tag do RDT"
+    },
+    "ui":{
+      "najpierw_użyjKM":"Najoier użyj dowolnej KM zanim ją przerzucisz!"
     }
   },
   "chlopcyczat": {

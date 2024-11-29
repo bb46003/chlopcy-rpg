@@ -79,7 +79,8 @@ async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsi
         actor: actor,
         pylek: actor.system.pod_wplywem_pylku,
         przedmiot: przedmiot,
-        dodatkoweOsiagi: dodatkoweOsiagi
+        dodatkoweOsiagi: dodatkoweOsiagi,
+        KM: 0,
     }
     this.roll(rollingData)
 }
@@ -132,7 +133,7 @@ async roll(rollingData){
     }
     const kKB = rollingData.KB.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", {kKB: kKB });
-    
+    rollingData.rolls = [RKB];
     const actor = rollingData.actor;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
