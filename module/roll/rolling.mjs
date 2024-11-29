@@ -19,7 +19,6 @@ export  default class rzutDoTarczy {
           label: tag.opis,
           value: tag.wartosc
         }));
-        console.log(cecha)
         const html = await renderTemplate( "systems/chlopcy/tameplates/dialog/pytanie-o-tag.hbs", {tagi:tagiNazwy, stan:stan})
         const label = game.i18n.localize("TABLE.Roll");          
         const preroll = new Dialog({
@@ -134,6 +133,7 @@ async roll(rollingData){
     const kKB = rollingData.KB.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", {kKB: kKB });
     rollingData.rolls = [RKB];
+    rollingData.KB = wynikKB;
     const actor = rollingData.actor;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
