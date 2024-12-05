@@ -170,9 +170,10 @@ async function przerzutKB(rollingData, msg, actor) {
     if(rollingData.wartoscTagu ===5){
         rollingData.wartoscTagu = 4
     }
-    const template = await renderTemplate("systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:rollingData.KB, KM:rollingData.KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM},
-    );
+    const template = await renderTemplate(
+        "systems/chlopcy/tameplates/chat/rdt.hbs",
+        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:nowyRDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:wynikDodatkowejRKM},
+      );
     const chatData = {
         user: game.user?._id,
         speaker: ChatMessage.getSpeaker({ actor }),
@@ -207,9 +208,12 @@ async function przerzutKM(rollingData, msg, actor) {
     if(rollingData.wartoscTagu ===5){
         rollingData.wartoscTagu = 4
     }
-    const template = await renderTemplate("systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:rollingData.KB, KM:rollingData.KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM},
-    );
+    const tesktDKM = "";
+    const wynikDodatkowejRKM = 0;
+    const template = await renderTemplate(
+        "systems/chlopcy/tameplates/chat/rdt.hbs",
+        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:nowyRDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:wynikDodatkowejRKM},
+      );
     const chatData = {
         user: game.user?._id,
         speaker: ChatMessage.getSpeaker({ actor }),
@@ -249,7 +253,8 @@ async function edektDodatkowejKM(rollingData, event, d) {
     const RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
     const dodatkowyRKM = await new Roll(nowaKM).evaluate();
     rollingData.rolls[2] = dodatkowyRKM;
-    const wynikDodatkowejRKM = dodatkowyRKM.total; 
+    const wynikDodatkowejRKM = dodatkowyRKM.total;
+    rollingData.DKM = wynikDodatkowejRKM;     
     const addNowaKM = RDT + wynikDodatkowejRKM;
     const subnowaKM = Math.abs(RDT-wynikDodatkowejRKM); 
     const nowyRDT = Math.abs(10 - addNowaKM) <= Math.abs(10 - subnowaKM) ? addNowaKM : subnowaKM;
