@@ -147,6 +147,7 @@ async function przerzutKB(rollingData, msg, actor) {
     const nowaKB =  await new Roll(formulaKB).evaluate();
     rollingData.rolls[0]=nowaKB;
     rollingData.KB = nowaKB.total;
+    rollingData.wykorzystsnytag = 1;
     let tekstKM ="";
     const kKB = formulaKB.replace(/d/g, "k");
     let RDT = nowaKB.total;
@@ -189,6 +190,7 @@ async function przerzutKM(rollingData, msg, actor) {
     const wynikRKM = nowaKM.total;
     rollingData.KM = nowaKM.total;
     rollingData.rolls[1] = nowaKM;
+    rollingData.wykorzystsnytag = 2;
     const KB = rollingData.rolls[0].total;
     let tekstKM ="";
     const kKB = rollingData.rolls[0].formula.replace(/d/g, "k");
@@ -221,7 +223,10 @@ async function przerzutKM(rollingData, msg, actor) {
 
 async function dodatkowaKM(rollingData, msg, actor) {
     const uzytaKM = rollingData.rolls[1].formula;
-    const html = await renderTemplate( "systems/chlopcy/tameplates/dialog/dodatkowaKM.hbs",{wartoscCechy:rollingData.wartoscCechy, uzytaKM:uzytaKM})
-    
+    const html = await renderTemplate( "systems/chlopcy/tameplates/dialog/dodatkowaKM.hbs",{rollingData:rollingData})
+    new Dialog({
+        title: game.i18n.localize("chlopcy.dialog.naglowek_dodatkowa_KM"),
+        content: html,
+    })
 } 
 

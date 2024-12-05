@@ -58,7 +58,7 @@
     "przerzut_KM": "Przerzut M",
     "dodatkowa_KM": "Dodatkowa KM",
     "plus_minus_1": "+/- 1 do wyniku",
-    "dodatkowy_bonus": "Dodatkowy bonus",
+    "dodatkowy_bonus": "Możesz użyć dwuch różnych efektów tagu",
     "uzyj_pylku": "Kliknij aby użyć pyłku",
     "koniec_dzialania_pylku": "Kliknij aby zakończyć działanie pyłtku",
     "pylek": "Pyłek Wróżek",
@@ -99,10 +99,12 @@
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
       "podaj_nazwę_używanego_przedmiotu": "Podaj nazwę używanego przedmiotu",
-      "wybierz_tag": "Wybierz używany tag do RDT"
+      "wybierz_tag": "Wybierz używany tag do RDT",
+      "dodatkowa_KM": "Możesz wybrać dodatkową Km z puli cechy",
+      "naglowek_dodatkowa_KM": "Dodatkowa KM z Tagu"
     },
-    "ui":{
-      "najpierw_użyjKM":"Najoier użyj dowolnej KM zanim ją przerzucisz!"
+    "ui": {
+      "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!"
     }
   },
   "chlopcyczat": {

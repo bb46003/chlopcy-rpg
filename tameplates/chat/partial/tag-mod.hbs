@@ -1,4 +1,7 @@
 <div class="tag-mods">
+    {{#if (gte rollingData.wartoscTagu 5)}}
+    <label class="dwa-tagi"id="5">{{localize "chlopcy.dodatkowy_bonus"}}</label>
+  {{/if}}
    <div class="rectangles">
   {{#if (gte rollingData.wartoscTagu 1)}}
     <div class="rectangle"id="1">{{localize "chlopcy.przerzut_KB"}}</div>
@@ -12,9 +15,7 @@
   {{#if (gte rollingData.wartoscTagu 4)}}
     <div class="rectangle"id="4">{{localize "chlopcy.plus_minus_1"}}</div>
   {{/if}}
-  {{#if (gte rollingData.wartoscTagu 5)}}
-    <div class="rectangle"id="5">{{localize "chlopcy.dodatkowy_bonus"}}</div>
-  {{/if}}
+
 </div>
 
 </div>
