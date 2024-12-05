@@ -21,7 +21,6 @@ export async function dodajKM(ev){
     const rollingData = msg.system;
     rollingData.rolls[1] = RKM; 
     const actor = msg.system.actor;
-    rollingData.rolls.splice(1, 0, RKM);
     const rolls =  msg.rolls;
     const kKM = KM.replace(/d/g, "k");
     const kKB = msg.rolls[0]._formula.replace(/d/g, "k");
@@ -168,7 +167,7 @@ async function przerzutKB(rollingData, msg, actor) {
         rollingData.tag = ""
         rollingData.wartoscTagu = 0
     }
-    if(rollingData.wartoscTagu !==5){
+    if(rollingData.wartoscTagu ===5){
         rollingData.wartoscTagu = 4
     }
     const template = await renderTemplate("systems/chlopcy/tameplates/chat/rdt.hbs",
@@ -205,7 +204,7 @@ async function przerzutKM(rollingData, msg, actor) {
         rollingData.tag = ""
         rollingData.wartoscTagu = 0
     }
-    if(rollingData.wartoscTagu !==5){
+    if(rollingData.wartoscTagu ===5){
         rollingData.wartoscTagu = 4
     }
     const template = await renderTemplate("systems/chlopcy/tameplates/chat/rdt.hbs",
@@ -231,15 +230,54 @@ async function dodatkowaKM(rollingData, msg, actor) {
         buttons: { },
         render: (html) => {
             // Attach the click handler properly
-            html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => edektDodatkowejKM(html, rollingData, event));
+            html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => edektDodatkowejKM( rollingData, event, d));
             
         }
     });
     d.render(true)
 }
 
-async function edektDodatkowejKM(html, rollingData, event) {
-    console.log(event); // The event object from the click
-    console.log(html); // The dialog HTML
-    console.log(rollingData); // The rolling data
+async function edektDodatkowejKM(rollingData, event, d) {
+    event.stopPropagation();
+    event.preventDefault();
+    const actor = rollingData.actor;
+    const nowaKM = event.target.attributes[1].value
+    const KM = rollingData.KM;
+    const KB = rollingData.KB;
+    const addResult = KB + KM;
+    const subResult = Math.abs(KB-KM); 
+    const RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
+    const dodatkowyRKM = await new Roll(nowaKM).evaluate();
+    rollingData.rolls[2] = dodatkowyRKM;
+    const wynikDodatkowejRKM = dodatkowyRKM.total; 
+    const addNowaKM = RDT + wynikDodatkowejRKM;
+    const subnowaKM = Math.abs(RDT-wynikDodatkowejRKM); 
+    const nowyRDT = Math.abs(10 - addNowaKM) <= Math.abs(10 - subnowaKM) ? addNowaKM : subnowaKM;
+    const  osiagi = await sprawdzRDT(rollingData,nowyRDT,KB)
+    const kDKM = nowaKM.replace(/d/g, "k");
+    const tesktDKM = game.i18n.format("chlopcy.czat.wynik_DKM", { kDKM });
+    if (rollingData.wartoscTagu !==5){
+        rollingData.tag = ""
+        rollingData.wartoscTagu = 0
+    }
+    if(rollingData.wartoscTagu ===5){
+        rollingData.wartoscTagu = 4
+    }
+    const kKB = rollingData.rolls[0].formula.replace(/d/g, "k");
+    const formulaKM = rollingData.rolls[1].formula;
+    const tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM:formulaKM });
+    let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
+    const template = await renderTemplate(
+        "systems/chlopcy/tameplates/chat/rdt.hbs",
+        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:nowyRDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:wynikDodatkowejRKM},
+      );
+      rollingData.RDT = nowyRDT
+      const chatData = {
+        user: game.user?._id,
+        speaker: ChatMessage.getSpeaker({ actor }),
+        content: template,
+        system: rollingData
+    }
+    await dodatkowyRKM.toMessage(chatData);
+    d.close()
 }

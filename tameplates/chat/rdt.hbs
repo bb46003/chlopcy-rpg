@@ -27,7 +27,13 @@
         <div class="wyniki-KM">
             <label class="label-KB">{{tekstKM}}</label>
             <p class="rzut-kb">{{KM}}</p>
-    </div>
+        </div>
+        {{#if (ne DKM undefined)}}
+        <div class="wyniki-dodatkowaKM">
+            <label class="label-KB">{{tekstDKM}}</label>
+            <p class="rzut-kb">{{DKM}}</p>
+        </div>
+        {{/if}}
     <div class="wyniki-RTD">
             <label class="label-KB">{{localize "chlopcy.czat.wynik_RDT"}}</label>
             <p class="rzut-kb">{{RDT}}</p>

@@ -94,7 +94,8 @@
       "wynik_KM": "Wynik rzutu KM {kKM} to: ",
       "wynik_RDT": "Wynik RDT to:",
       "zapewnia_dodatkowe_osiągi_w_liczbie": " zapewnia dodatkowe osiagi w liczbie ",
-      "nie_zdobyto_osiagow_przedmiot_nie_pomogl": "NIe zdobyłeś/zdobyłaś żadnego osiągu, przedmiot {przedmiot} nie pomógł. "
+      "nie_zdobyto_osiagow_przedmiot_nie_pomogl": "NIe zdobyłeś/zdobyłaś żadnego osiągu, przedmiot {przedmiot} nie pomógł. ",
+      "wynik_DKM": "Wynik rzutu dodatkowej KM {kDKM} to:"
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",

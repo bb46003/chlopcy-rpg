@@ -341,3 +341,51 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-11-27T11:01:12.754Z'
+  chlopcy.dodatkowy_bonus:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: AyrzSqBgtHtG1JE9-U8kZ
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-04T21:08:20.201Z'
+  chlopcy.dialog.dodatkowa_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: UH59RgdNynncng4eiBwJA
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-04T21:12:36.289Z'
+  chlopcy.dialog.naglowek_dodatkowa_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 8aKc05nzgMvfGdJ3opf-Q
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-04T21:16:45.735Z'
+  chlopcy.czat.wynik_DKM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: QylAOouOpibZqc3WHGjse
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-05T21:04:26.271Z'
