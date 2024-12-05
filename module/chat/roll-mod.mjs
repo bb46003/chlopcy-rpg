@@ -222,11 +222,24 @@ async function przerzutKM(rollingData, msg, actor) {
 }
 
 async function dodatkowaKM(rollingData, msg, actor) {
-    const uzytaKM = rollingData.rolls[1].formula;
-    const html = await renderTemplate( "systems/chlopcy/tameplates/dialog/dodatkowaKM.hbs",{rollingData:rollingData})
-    new Dialog({
-        title: game.i18n.localize("chlopcy.dialog.naglowek_dodatkowa_KM"),
-        content: html,
-    })
-} 
+    const html = await renderTemplate("systems/chlopcy/tameplates/dialog/dodatkowaKM.hbs", { rollingData: rollingData });
+    const tutyl = game.i18n.localize("chlopcy.dialog.naglowek_dodatkowa_KM");
 
+    const d= new Dialog({
+        title: tutyl,
+        content: html,
+        buttons: { },
+        render: (html) => {
+            // Attach the click handler properly
+            html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => edektDodatkowejKM(html, rollingData, event));
+            
+        }
+    });
+    d.render(true)
+}
+
+async function edektDodatkowejKM(html, rollingData, event) {
+    console.log(event); // The event object from the click
+    console.log(html); // The dialog HTML
+    console.log(rollingData); // The rolling data
+}
