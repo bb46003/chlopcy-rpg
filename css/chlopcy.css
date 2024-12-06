@@ -288,3 +288,17 @@ input.sakwy-checkbo:checked {
     align-items: center;
     margin-bottom: 5px;
   }
+  .dice-display {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.KM-do-przerzutu {
+    display: flex;
+    margin-top: 30px;
+    column-gap: 20px;
+    align-items: center;
+}

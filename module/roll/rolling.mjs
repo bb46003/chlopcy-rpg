@@ -80,6 +80,7 @@ async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsi
         przedmiot: przedmiot,
         dodatkoweOsiagi: dodatkoweOsiagi,
         KM: 0,
+        DKM: 0
     }
     this.roll(rollingData)
 }

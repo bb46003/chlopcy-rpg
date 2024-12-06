@@ -389,3 +389,63 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-12-05T21:04:26.271Z'
+  chlopcy.dialog.przerzut_wielku_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: brxLNvvW8qZ9vUkDjGp-o
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-06T14:22:31.846Z'
+  chlopcy.dialog.pierwsza_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: j5kEPDfZY0IeTlrxDPUcs
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-06T14:25:26.052Z'
+  chlopcy.dialog.druga_KM:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: QM553OWPR7WIwdqh5ZKjf
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-06T14:25:43.238Z'
+  chlopcy.dialog.wybierz_KM_do_przerzutu:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: dscv4_62ne2fzyZqTDD9O
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-06T14:31:11.093Z'
+  chlopcy.dialog.kliknij_na_kosc_ktora-chcesz-przerzucic:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: lLptYJEoIoV9UinCSOi_b
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-06T14:42:18.359Z'

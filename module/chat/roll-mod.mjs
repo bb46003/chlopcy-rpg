@@ -147,11 +147,11 @@ async function przerzutKB(rollingData, msg, actor) {
     rollingData.rolls[0]=nowaKB;
     rollingData.KB = nowaKB.total;
     rollingData.wykorzystsnytag = 1;
-    let tekstKM ="";
+    let tekstKM, tesktDKM ="";
     const kKB = formulaKB.replace(/d/g, "k");
     let RDT = nowaKB.total;
     let osiagi =await sprawdzRDT(rollingData,RDT,nowaKB)
-    if(rollingData.KM !== 0){
+    if(rollingData.KM !== 0 && rollingData.DKM === 0){
         const formulaKM = rollingData.rolls[1].formula;;
         const kKM = formulaKM.replace(/d/g, "k");
         const wynikRKM = rollingData.rolls[1].total
@@ -161,6 +161,32 @@ async function przerzutKB(rollingData, msg, actor) {
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
         osiagi =await sprawdzRDT(rollingData,RDT,nowaKB.total)
     }
+    else if(rollingData.DKM !== 0){
+        const kKM = rollingData.rolls[1].formula.replace(/d/g, "k");
+        const KM = rollingData.rolls[1].total
+        tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM });
+        const kDKM = rollingData.rolls[2].formula.replace(/d/g, "k");
+        const DKM =  rollingData.rolls[2].total
+        tesktDKM = game.i18n.format("chlopcy.czat.wynik_DKM", { kDKM });
+        const combinations = [
+            { expression: `KB + KM + DKM`, result: nowaKB.total + KM + DKM },
+            { expression: `KB + KM - DKM`, result: nowaKB.total + KM - DKM },
+            { expression: `KB - KM + DKM`, result: nowaKB.total - KM + DKM },
+            { expression: `KB - KM - DKM`, result: nowaKB.total - KM - DKM },
+        ];
+        RDT = combinations[0].result;
+        let smallestDifference = Math.abs(RDT - 10);
+
+        combinations.forEach(combination => {
+            const difference = Math.abs(combination.result - 10);
+            if (difference < smallestDifference) {
+                RDT = combination.result;
+                smallestDifference = difference;
+            }
+        });
+        osiagi =await sprawdzRDT(rollingData,RDT,nowaKB.total)
+    }
+
     let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
     let rolls = msg.rolls;
     if (rollingData.wartoscTagu !==5){
@@ -172,7 +198,7 @@ async function przerzutKB(rollingData, msg, actor) {
     }
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:nowyRDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:wynikDodatkowejRKM},
+        {rollingData:rollingData, osiagi:osiagi, KB:nowaKB.total, KM:rollingData.KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:rollingData.DKM},
       );
     const chatData = {
         user: game.user?._id,
@@ -185,6 +211,7 @@ async function przerzutKB(rollingData, msg, actor) {
 }
 
 async function przerzutKM(rollingData, msg, actor) {   
+    if(rollingData.rolls.length <3){
     const formulaKM = rollingData.rolls[1].formula;
     const nowaKM =  await new Roll(formulaKM).evaluate();
     const wynikRKM = nowaKM.total;
@@ -209,10 +236,10 @@ async function przerzutKM(rollingData, msg, actor) {
         rollingData.wartoscTagu = 4
     }
     const tesktDKM = "";
-    const wynikDodatkowejRKM = 0;
+    const DKM = rollingData.DKM;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:nowyRDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:wynikDodatkowejRKM},
+        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:wynikRKM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:DKM},
       );
     const chatData = {
         user: game.user?._id,
@@ -223,6 +250,25 @@ async function przerzutKM(rollingData, msg, actor) {
     };
     await nowaKM.toMessage(chatData);
 }
+else{
+    const formulaKM = rollingData.rolls[1].formula.replace(/^1d/, "d");
+    const formulaDKM = rollingData.rolls[2].formula.replace(/^1d/, "d");
+    console.log(formulaDKM, formulaKM)
+    const html = await renderTemplate("systems/chlopcy/tameplates/dialog/przerzut-dla-wielu-KM.hbs", {formulaKM:formulaKM, formulaDKM:formulaDKM });
+    const tutyl =game.i18n.localize("chlopcy.dialog.wybierz_KM_do_przerzutu")
+    const d= new Dialog({
+        title: tutyl,
+        content: html,
+        buttons: {},
+        render: (html) => {
+            // Attach the click handler properly
+            html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => przerzutWybranejKM( rollingData, event, d));
+            
+        }
+    });
+    d.render(true)
+}
+}
 
 async function dodatkowaKM(rollingData, msg, actor) {
     const html = await renderTemplate("systems/chlopcy/tameplates/dialog/dodatkowaKM.hbs", { rollingData: rollingData });
@@ -231,35 +277,47 @@ async function dodatkowaKM(rollingData, msg, actor) {
     const d= new Dialog({
         title: tutyl,
         content: html,
-        buttons: { },
+        buttons: {},
         render: (html) => {
             // Attach the click handler properly
-            html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => edektDodatkowejKM( rollingData, event, d));
+            html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => efektDodatkowejKM( rollingData, event, d));
             
         }
     });
     d.render(true)
 }
 
-async function edektDodatkowejKM(rollingData, event, d) {
+async function efektDodatkowejKM(rollingData, event, d) {
     event.stopPropagation();
     event.preventDefault();
     const actor = rollingData.actor;
     const nowaKM = event.target.attributes[1].value
     const KM = rollingData.KM;
     const KB = rollingData.KB;
-    const addResult = KB + KM;
-    const subResult = Math.abs(KB-KM); 
-    const RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
+
     const dodatkowyRKM = await new Roll(nowaKM).evaluate();
     rollingData.rolls[2] = dodatkowyRKM;
-    const wynikDodatkowejRKM = dodatkowyRKM.total;
-    rollingData.DKM = wynikDodatkowejRKM;     
-    const addNowaKM = RDT + wynikDodatkowejRKM;
-    const subnowaKM = Math.abs(RDT-wynikDodatkowejRKM); 
-    const nowyRDT = Math.abs(10 - addNowaKM) <= Math.abs(10 - subnowaKM) ? addNowaKM : subnowaKM;
-    const  osiagi = await sprawdzRDT(rollingData,nowyRDT,KB)
-    const kDKM = nowaKM.replace(/d/g, "k");
+    const DKM = dodatkowyRKM.total;
+    rollingData.DKM = DKM;     
+    const combinations = [
+        { expression: `KB + KM + DKM`, result: KB + KM + DKM },
+        { expression: `KB + KM - DKM`, result: KB + KM - DKM },
+        { expression: `KB - KM + DKM`, result: KB - KM + DKM },
+        { expression: `KB - KM - DKM`, result: KB - KM - DKM },
+    ];
+    let RDT = combinations[0].result;
+    let smallestDifference = Math.abs(RDT - 10);
+
+    combinations.forEach(combination => {
+        const difference = Math.abs(combination.result - 10);
+        if (difference < smallestDifference) {
+            RDT = combination.result;
+            smallestDifference = difference;
+        }
+    });
+
+    const  osiagi = await sprawdzRDT(rollingData,RDT,KB)
+    const kDKM = dodatkowyRKM.formula.replace(/d/g, "k");
     const tesktDKM = game.i18n.format("chlopcy.czat.wynik_DKM", { kDKM });
     if (rollingData.wartoscTagu !==5){
         rollingData.tag = ""
@@ -274,9 +332,9 @@ async function edektDodatkowejKM(rollingData, event, d) {
     let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
-        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:nowyRDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:wynikDodatkowejRKM},
+        {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:DKM},
       );
-      rollingData.RDT = nowyRDT
+      rollingData.RDT = RDT
       const chatData = {
         user: game.user?._id,
         speaker: ChatMessage.getSpeaker({ actor }),
@@ -285,4 +343,18 @@ async function edektDodatkowejKM(rollingData, event, d) {
     }
     await dodatkowyRKM.toMessage(chatData);
     d.close()
+}
+
+async function  przerzutWybranejKM(rollingData,event ,d ) {
+    event.stopPropagation();
+    event.preventDefault();
+    const actor = rollingData.actor;
+    const nowaKM = event.target.attributes[1].value;
+    console.log(nowaKM)
+
+
+
+
+    d.close()
+    
 }

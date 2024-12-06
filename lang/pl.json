@@ -102,7 +102,12 @@
       "podaj_nazwę_używanego_przedmiotu": "Podaj nazwę używanego przedmiotu",
       "wybierz_tag": "Wybierz używany tag do RDT",
       "dodatkowa_KM": "Możesz wybrać dodatkową Km z puli cechy",
-      "naglowek_dodatkowa_KM": "Dodatkowa KM z Tagu"
+      "naglowek_dodatkowa_KM": "Dodatkowa KM z Tagu",
+      "przerzut_wielku_KM": "Wybierz którą KM chcesz przerzucić",
+      "pierwsza_KM": "Pierwsza KM to:",
+      "druga_KM": "Druga KM to: ",
+      "wybierz_KM_do_przerzutu": "Wybierz KM do przerzutu",
+      "kliknij_na_kosc_ktora-chcesz-przerzucic": "Kliknij na kość, kltórą chcesz rzerzucić."
     },
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!"
