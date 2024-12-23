@@ -55,7 +55,7 @@
     "cruiser": "Cruiser",
     "klasyk": "Klasyk",
     "przerzut_KB": "Przerzut KB",
-    "przerzut_KM": "Przerzut M",
+    "przerzut_KM": "Przerzut KM",
     "dodatkowa_KM": "Dodatkowa KM",
     "plus_minus_1": "+/- 1 do wyniku",
     "dodatkowy_bonus": "Możesz użyć dwuch różnych efektów tagu",
@@ -95,7 +95,10 @@
       "wynik_RDT": "Wynik RDT to:",
       "zapewnia_dodatkowe_osiągi_w_liczbie": " zapewnia dodatkowe osiagi w liczbie ",
       "nie_zdobyto_osiagow_przedmiot_nie_pomogl": "NIe zdobyłeś/zdobyłaś żadnego osiągu, przedmiot {przedmiot} nie pomógł. ",
-      "wynik_DKM": "Wynik rzutu dodatkowej KM {kDKM} to:"
+      "wynik_DKM": "Wynik rzutu dodatkowej KM {kDKM} to:",
+      "uzytoTagPlusMinus1": "Użyto Tagu +/- 1 do wyniu RDT",
+      "mod_tagu": "Dostepne modyfikacje z Tagu ",
+      "uzyjWiezi": "Użyj Więzi"
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
@@ -112,8 +115,5 @@
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!"
     }
-  },
-  "chlopcyczat": {
-    "mod_tagu": "Dostepne modyfikacje z Tagu "
   }
 }

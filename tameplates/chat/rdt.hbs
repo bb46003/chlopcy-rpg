@@ -34,11 +34,17 @@
             <p class="rzut-kb">{{DKM}}</p>
         </div>
         {{/if}}
+    {{/if}}
+    {{#if (eq rollingData.plusMinus1 true)}}
+         <div class="wyniki-modyfikacja1">
+            <label class="label-KB">{{localize "chlopcy.czat.uzytoTagPlusMinus1"}}</label>
+        </div>
+    {{/if}}
     <div class="wyniki-RTD">
             <label class="label-KB">{{localize "chlopcy.czat.wynik_RDT"}}</label>
             <p class="rzut-kb">{{RDT}}</p>
     </div>
-    {{/if}}
+    
 
         {{#if (eq KM 0)}}
         
@@ -47,15 +53,14 @@
                     {{> "systems/chlopcy/tameplates/chat/partial/cecha-dice.hbs"}}
                 </div>
         {{/if}}
+         
 
             {{#if (and (ne rollingData.tag "") (ne rollingData.wartoscTagu 0))}}
-                <h3 class="mod-tagu">{{localize "chlopcyczat.mod_tagu"}}{{rollingData.tag}}</h3>
+                <h3 class="mod-tagu">{{localize "chlopcy.czat.mod_tagu"}}{{rollingData.tag}}</h3>
                 <div class="mod-z-tagu">
                     {{> "systems/chlopcy/tameplates/chat/partial/tag-mod.hbs"}}
                 </div>
             {{/if}}
-        
-
-
-
+            <h3></h3>
+         <div class="rectangle"id="5">{{localize "chlopcy.czat.uzyjWiezi"}}</div>      
 </div>

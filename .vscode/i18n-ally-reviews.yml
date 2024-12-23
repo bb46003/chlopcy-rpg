@@ -449,3 +449,27 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-12-06T14:42:18.359Z'
+  chlopcy.czat.uzytoTagPlusMinus1:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 6lh35uH-4jpl41FdWSk_2
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-23T12:10:15.523Z'
+  chlopcy.czat.uzyjWiezi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: x_RBgVwPNQpdKtsQLQahf
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-23T12:58:52.786Z'

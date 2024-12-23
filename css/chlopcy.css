@@ -51,8 +51,9 @@ label.top-section-label.stany {
 .manin {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 40px; 
-    
+    margin-bottom: 5px;
+    max-height: 450px;
+    margin-top: 20px;
 }
 
 .checha-chcek-box {
@@ -60,7 +61,9 @@ label.top-section-label.stany {
     flex-direction: row;
     justify-content: space-evenly;
 }
-
+label.efekt-pyłku {
+    margin: 20%;
+}
 
 .dane {
     display: grid;
@@ -149,18 +152,17 @@ label.tagi {
 label.label-poziom-tagu {
     writing-mode: vertical-rl;
     rotate: 180deg;
-    white-space: nowrap;
-    margin-right: 2px;
-
+    white-space: pre-wrap;
+    margin-right: 0.9%;
+    min-height: 170px;
+    max-height: 170px;
 }
 .label-tagi, .sakwy-label {
     height: 30%;
     margin-top: auto;
     display: flex;
     align-items: flex-end;
-    column-gap: 23px;
-    justify-content: flex-end;
-    margin-right: 6px;
+    column-gap: 3.7%;
 }
 
 select.tag-input-bajker {
@@ -210,9 +212,8 @@ input[type="checkbox"].kostki-pyłek:checked + label.inside {
 }
 .eq-i-nowe-szlify {
     display: flex;
-    /* flex-wrap: nowrap; */
-    justify-content: space-between;
-    margin-top: 20px;
+    margin-top: -75px;
+    align-items: flex-end;
 }
 input.sakwy-checkbo {
 
@@ -301,4 +302,8 @@ input.sakwy-checkbo:checked {
     margin-top: 30px;
     column-gap: 20px;
     align-items: center;
+}
+.ssakwy, .sprzet-osobisty {
+    margin-right: auto;
+    margin-left: auto;
 }
