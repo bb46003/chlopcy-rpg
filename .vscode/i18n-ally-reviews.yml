@@ -473,3 +473,27 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-12-23T12:58:52.786Z'
+  chlopcy.dialog.wybierz_postac_do_wiezi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: NiCVt1-8R58odUx3tGpM4
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-25T11:04:36.620Z'
+  chlopcy.usun-wiez:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: TKh-F3HBJP2cuwLzw9osk
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2024-12-25T11:59:31.892Z'

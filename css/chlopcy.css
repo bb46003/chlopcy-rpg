@@ -307,3 +307,19 @@ input.sakwy-checkbo:checked {
     margin-right: auto;
     margin-left: auto;
 }
+img.borderless-small {
+    max-width: 50px;
+}
+.dodaj-postac {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+}
+.dodawanie-wiezi {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+label.actor-nme-wiezi {
+    text-align: center;
+}

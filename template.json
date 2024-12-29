@@ -85,10 +85,7 @@
         "sprzet_osobisty":"",
         "sakwy": 0,
         "wiezi":{
-            "postac1":{
-                "imie":"",
-                "wartosc":""
-            }
+            
         }, 
         "opis_postaci":"",
         "szczesliwe_mysli":"",

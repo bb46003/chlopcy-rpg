@@ -294,7 +294,7 @@ else{
     const d= new Dialog({
         title: tutyl,
         content: html,
-        buttons: {},
+        buttons: "",
         render: (html) => {
             // Attach the click handler properly
             html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => przerzutWybranejKM( rollingData, event, d, id));
@@ -312,7 +312,7 @@ async function dodatkowaKM(rollingData, msg, actor, id) {
     const d= new Dialog({
         title: tutyl,
         content: html,
-        buttons: {},
+        buttons: "",
         render: (html) => {
             // Attach the click handler properly
             html.on("click", "[class^='fas fa-dice-'], .fa-coin", (event) => efektDodatkowejKM( rollingData, event, d, id));

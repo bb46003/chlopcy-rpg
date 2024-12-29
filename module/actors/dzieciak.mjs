@@ -70,6 +70,10 @@ export class dzieciak extends ActorSheet {
         html.on("change", ".xp", (ev) =>this.zmianaXp(ev));
         html.on("change", ".sakwy-checkbo", (ev) =>this.zmianaSakwy(ev));
         html.on("click", ".cecha", (ev) => this.rzut(ev));
+        html.on("click", ".dodaj-wiezi", (ev) => this.dodajWięzi(ev));
+        html.on("change", ".wartosc-wiezi", (ev) =>this.wartoscWiezi(ev));
+        html.on("click", ".usun-wiez", (ev) => this.usunWięzi(ev));
+
       }
 
       async dawkiPylku(ev){
@@ -151,10 +155,71 @@ export class dzieciak extends ActorSheet {
            await this.actor.update({["system.sakwy"]:value})
          }    
       }
-
       async rzut(ev){
        const cecha = ev.target.innerHTML.toLowerCase()
         const roll = new rzutDoTarczy(this.actor, cecha);
         roll.preRollDialog()
+      }
+      async dodajWięzi(ev){
+        const actor = this.actor;
+        const othersActors = game.actors.filter(actorX => (actorX.type === "dzieciak")&&(actorX !== actor));
+        const dialogTemplate = await renderTemplate("systems/chlopcy/tameplates/dialog/dodaj-wiezi.hbs",{othersActors:othersActors});
+        const tytul = game.i18n.localize("chlopcy.dialog.wybierz_postac_do_wiezi")
+        const d= new Dialog({
+          title: tytul,
+          content: dialogTemplate,
+          buttons: "",
+          render: (html) => {
+              html.on("click", ".dodaj-do-katy-wiezi", (event) => this.dodajPostacDoWiezi(event));
+              
+          }
+      });
+      await d.render(true)
+
+        
+      }
+      async dodajPostacDoWiezi(event){
+        const actor = this.actor;
+        const target =event.target.closest(".dodaj-postac").id;
+        const actorZWiezi = game.actors.get(target)
+        const updateData = {
+          [`system.wiezi.${target}`]: {
+              name: actorZWiezi.name,
+              wartosc: 0,
+              img: actorZWiezi.img,
+          }
+        };
+        actor.update(updateData)
+      }
+      async wartoscWiezi(ev){
+        const target = ev.target.parentNode.parentElement.id
+        const wartoscWiezi = ev.target.value;
+        const actor = this.actor;
+        const updateData = {
+          [`system.wiezi.${target}`]: {
+              wartosc: wartoscWiezi,
+
+          }
+        };
+        actor.update(updateData)
+      }
+      async usunWięzi(ev){
+        const target = ev.target.parentNode.id;
+        const actor = this.actor;
+        let wiezi = actor.system.wiezi;
+        console.log(wiezi)
+        delete wiezi[target];
+        console.log(wiezi)
+        let updateData = {
+          [`system.wiezi`]: {}
+        };
+        await actor.update(updateData)
+        updateData = {
+          [`system.wiezi`]: wiezi
+        };
+        await actor.update(updateData)
+        await actor.sheet.render(true)
+
+
       }
     }

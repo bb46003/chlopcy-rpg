@@ -1,9 +1,28 @@
 
 <div class="wiezi-label">
     <label>{{localize "chlopcy.wiezi"}}</label>
-    <button class="dodaj-wiezi" data-tooltip="{{localize "chlopcy.dodaj_wiez"}}"><i class="fas fa-plus"><label class="button-label">{{localize "chlopcy.dodaj_wiezi"}}</label></i></button>
+    <button class="dodaj-wiezi" data-tooltip="{{localize "chlopcy.dodaj_wiez"}}">
+        <i class="fas fa-plus"></i>
+        <label class="button-label">{{localize "chlopcy.dodaj_wiezi"}}</label>
+    </button>
 </div>
 <div class="wartosc-więz">
-
-        
+    {{#each system.wiezi as |actor key|}}
+    <div class="postac-z-wiezami" id="{{key}}">
+          <img class="borderless-small" src="{{actor.img}}">
+          <label class="actor-nme-wiezi">{{actor.name}}</label>
+          <div class="wartosc-wiezi">
+            <input type="checkbox" class="wartosc-wiezi" value=1 {{#if (gte actor.wartosc 1)}}checked{{/if}}>
+            <input type="checkbox" class="wartosc-wiezi" value=2 {{#if (gte actor.wartosc 2)}}checked{{/if}}>
+            <input type="checkbox" class="wartosc-wiezi" value=3 {{#if (gte actor.wartosc 3)}}checked{{/if}}>
+            <input type="checkbox" class="wartosc-wiezi" value=4 {{#if (gte actor.wartosc 4)}}checked{{/if}}>
+            <input type="checkbox" class="wartosc-wiezi" value=5 {{#if (gte actor.wartosc 5)}}checked{{/if}}>
+            <input type="checkbox" class="wartosc-wiezi" value=6 {{#if (gte actor.wartosc 6)}}checked{{/if}}>
+          </div>
+          <button class="usun-wiez">
+                <i for="usun-wiez" class="fa fa-trash" title="{{localize "chlopcy.usun_wiez"}}"></i>
+          </button>
+          
+    </div>
+    {{/each}}        
 </div>
