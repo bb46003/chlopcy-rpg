@@ -95,7 +95,7 @@ export class dzieciak extends ActorSheet {
         
 
         }
-        this.actor.update(updateData)
+        await this.actor.update(updateData)
         
       }
       async wartoscTagu(ev){
@@ -179,6 +179,7 @@ export class dzieciak extends ActorSheet {
         
       }
       async dodajPostacDoWiezi(event){
+        event.preventDefault()
         const actor = this.actor;
         const target =event.target.closest(".dodaj-postac").id;
         const actorZWiezi = game.actors.get(target)
@@ -189,7 +190,7 @@ export class dzieciak extends ActorSheet {
               img: actorZWiezi.img,
           }
         };
-        actor.update(updateData)
+       await actor.update(updateData)
       }
       async wartoscWiezi(ev){
         const target = ev.target.parentNode.parentElement.id
@@ -201,24 +202,24 @@ export class dzieciak extends ActorSheet {
 
           }
         };
-        actor.update(updateData)
+        await actor.update(updateData)
       }
       async usunWięzi(ev){
-        const target = ev.target.parentNode.id;
+        const target = ev.target; // Get the parentNode of the target
+        const closestElement = target.closest('.postac-z-wiezami');
+        const ID = closestElement.id
         const actor = this.actor;
         let wiezi = actor.system.wiezi;
-        console.log(wiezi)
-        delete wiezi[target];
-        console.log(wiezi)
+        delete wiezi[ID];
         let updateData = {
-          [`system.wiezi`]: {}
+          [`system.wiezi`]: null
         };
         await actor.update(updateData)
         updateData = {
           [`system.wiezi`]: wiezi
         };
         await actor.update(updateData)
-        await actor.sheet.render(true)
+  
 
 
       }

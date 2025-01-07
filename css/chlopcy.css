@@ -260,6 +260,7 @@ input.sakwy-checkbo:checked {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 .wyniki-KB, .wyniki-RTD, .wyniki-KM, .wyniki-dodatkowaKM {
     display: flex;
@@ -322,4 +323,20 @@ img.borderless-small {
 }
 label.actor-nme-wiezi {
     text-align: center;
+}
+.postac-z-wiezami {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 0.15fr 0.2fr 0.5fr 0.1fr;
+    margin-bottom: 20px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+img.borderless-small {
+    max-width: 50px;
+    margin: auto;
+}
+i.fas[class*="fa-dice-"], i.fas.fa-coin {
+    cursor: url(http://profilki.pl/files/cur/123.png) 2 1, default;
 }
