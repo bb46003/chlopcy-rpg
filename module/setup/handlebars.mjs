@@ -28,3 +28,14 @@ function checkRange(v1, v2, v3){
 Handlebars.registerHelper("localizeWithParams", function (key, options) {
   return game.i18n.format(key, options.hash);
 });
+Handlebars.registerHelper('getWartosc', function(actor, actorID) {
+  return actor.system.wiezi[actorID] ? actor.system.wiezi[actorID].wartosc : null;
+});
+Handlebars.registerHelper('zakres', function(start, end) {
+  var result = [];
+  const ends = Number(end)
+  for (var i = start; i <= ends; i++) {
+    result.push(i);
+  }
+  return result;
+});

@@ -95,7 +95,7 @@ export async function dzialanieTagow(ev) {
         case 4:
             dodajOdejmijJeden(rollingData,msg, actor, id)
             break;
-        case 5:
+        case 6:
             uzyjWiezji(rollingData,msg, actor, id)
             break;
 
@@ -503,6 +503,46 @@ async function dodajOdejmijJeden(rollingData,msg, actor, id) {
 }
 
 async function  uzyjWiezji(rollingData,msg, actor, id){
-    
+    const allActors = game.actors.filter(actor => actor.type === "dzieciak");
+    const matchingActors = [];
+    const actorId = actor._id; 
+    allActors.forEach(actor => {
+    if (actor.system.wiezi?.[actorId]) {
+        const wartosc = actor.system.wiezi[actorId].wartosc;
+        if (wartosc !== 0) {
+            matchingActors.push(actor); 
+        }
+        }
+    });
+   
+    const templateData = {
+        actorID: actorId, // make sure this is being passed here
+        matchingActors: matchingActors,
+        rollingData: rollingData,
+        pustyTag: game.i18n.localize("chlopcy.bez_tagu")
+      };
+      
+      const dialogTemplate = await renderTemplate('systems/chlopcy/tameplates/dialog/uzyj-wiezi.hbs', templateData);
+    new Dialog({
+        title: "Select Value for Actors",
+        content: dialogTemplate,
+        buttons: {
+            use: {
+                label: "Use",
+                callback: (html) => {
+                    // Collect the selected values for each actor.
+                    matchingActors.forEach((item, index) => {
+                        const selectedValue = html.find(`#actor-${index}`).val();
+                        console.log(`Actor ${item.actor.name}: Selected Value = ${selectedValue}`);
+                        // Process the selected value here as needed.
+                    });
+                }
+            }
+        },
+        default: "use",
+        close: () => {
+            console.log("Dialog closed.");
+        }
+    }).render(true);    
     
 }

@@ -1,0 +1,24 @@
+{{#each matchingActors as |actor index|}}
+  <div class="uzycie-wiezi">
+    <div class="z-kim-wiezi">
+      <label for="actor-{{index}}">{{localize "chlopcy.dialog.twojaWiezZ"}} {{actor.name}}</label>
+    </div>
+    <div class="wartosc-wiezi-uzycie">
+       <label>{{localize "chlopcy.dialog.wartoscWiezi"}}</label>
+      <select class="wartosc-uzytych-wiezi" id="actor-{{index}}" name="actor-{{index}}">
+        {{#each (zakres 0 (getWartosc actor  ../actorID)) as |value|}}
+          <option value="{{value}}">{{value}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="typ-dzialania">
+      <label>{{localize "chlopcy.dialog.wybierzDzialanieWiezi"}}</label>
+      <select class="typ-uzytych-wiezi">
+        <option value="1">{{localize "chlopcy.dialog.typWieziCecha"}}</option>
+        {{#if (ne ../rollingData.tag ../pustyTag)}}
+          <option value="2">{{localize "chlopcy.dialog.typWieziTag"}}</option>
+        {{/if}}
+      </select>
+    </div>
+  </div>
+{{/each}}

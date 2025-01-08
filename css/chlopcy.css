@@ -340,3 +340,22 @@ img.borderless-small {
 i.fas[class*="fa-dice-"], i.fas.fa-coin {
     cursor: url(http://profilki.pl/files/cur/123.png) 2 1, default;
 }
+
+.uzycie-wiezi {
+    display: flex;
+    flex-direction: column;
+  
+    border-bottom: 1px dashed;
+    margin-bottom: 5px;
+}
+.wartosc-wiezi-uzycie, .typ-dzialania {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 5px;
+}
+.wartosc-uzytych-wiezi, .typ-uzytych-wiezi {
+
+    justify-self: center;
+    min-width: 70%;
+    text-align: center;
+}

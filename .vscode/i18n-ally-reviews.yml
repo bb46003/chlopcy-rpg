@@ -497,3 +497,51 @@ reviews:
             suggestion: ''
             type: approve
             time: '2024-12-25T11:59:31.892Z'
+  chlopcy.dialog.typWieziCecha:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: cNzCN0X1Ge0HXmR9AQ9Af
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-08T14:18:32.455Z'
+  chlopcy.dialog.typWieziTag:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 9W2EjyVSqX2uvEqSv0K7F
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-08T14:18:43.155Z'
+  chlopcy.dialog.wybierzDzialanieWiezi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: dkPuUDtX3j0Xhki_dt9Rh
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-08T14:36:25.715Z'
+  chlopcy.dialog.wartoscWiezi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: xJffa9mRRlse3ZanBljs4
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-08T14:42:42.650Z'
