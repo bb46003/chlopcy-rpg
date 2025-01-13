@@ -51,9 +51,9 @@ export class dzieciak extends ActorSheet {
       }
     }
 
-    context.system.opis_postaci = await enrich(context.system.equipment);
-    context.system.szczesliwe_mysli = await enrich(context.system.equipment);
-    context.system.sprzet_osobisty = await enrich(context.system.equipment);
+    context.system.opis_postaci = await enrich(context.system.opis_postaci);
+    context.system.szczesliwe_mysli = await enrich(context.system.szczesliwe_mysli);
+    //context.system.sprzet_osobisty = await enrich(context.system.sprzet_osobisty);
     
 
     
@@ -73,6 +73,7 @@ export class dzieciak extends ActorSheet {
         html.on("click", ".dodaj-wiezi", (ev) => this.dodajWięzi(ev));
         html.on("change", ".wartosc-wiezi", (ev) =>this.wartoscWiezi(ev));
         html.on("click", ".usun-wiez", (ev) => this.usunWięzi(ev));
+        html.on("click",".top-section-label-bangarang", (ev) => this.uzyjPunktowBANGARANG(ev))
 
       }
 
@@ -222,5 +223,30 @@ export class dzieciak extends ActorSheet {
   
 
 
+      }
+
+      async uzyjPunktowBANGARANG(ev){
+        const typ = ev.currentTarget.innerText.toLowerCase();
+        const typOrignial = ev.currentTarget.innerText;
+        const actor = this.actor;
+
+      
+            const obecnaWartsc = actor.system.bangarang[typ];
+            if(obecnaWartsc >= 3){
+              const nowaWartosc = obecnaWartsc - 3;
+              const updateData = {[`system.bangarang.${typ}`]:nowaWartosc};
+              await actor.update(updateData)
+              const content = game.i18n.format("chlopcy.czat.uzytoBangarang",{typ:typOrignial});
+              const chatData = {
+                user: game.user?._id,
+                speaker: ChatMessage.getSpeaker({ actor }),
+                content: content,
+            }
+            await ChatMessage.create(chatData);
+            }
+            else{
+              ui.notifications.warn(game.i18n.localize("chlopcy.ui.nieMaszWystarczajacoBANGARANG"));
+            }
+        
       }
     }

@@ -359,3 +359,34 @@ i.fas[class*="fa-dice-"], i.fas.fa-coin {
     min-width: 70%;
     text-align: center;
 }
+
+.sheet .editor {
+    height: auto;
+}
+
+.sheet .editor .editor-content {
+    height: 100%;
+    min-height: fit-content;
+}
+
+.description-field .editor {
+    height: 100%;
+}
+
+.editor .editor-content {
+    width: 100%;
+    height: 100%;
+    min-height: 10rem;
+    flex: 1;
+}
+
+.editor-container {
+    min-height: 350px;
+}
+
+.editor.prosemirror {
+    border: 1px solid;
+}
+.note-tab {
+    border: 1px solid;
+}

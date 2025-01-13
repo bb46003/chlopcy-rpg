@@ -5,16 +5,18 @@
     </div>
     <div class="wartosc-wiezi-uzycie">
        <label>{{localize "chlopcy.dialog.wartoscWiezi"}}</label>
-      <select class="wartosc-uzytych-wiezi" id="actor-{{index}}" name="actor-{{index}}">
-        {{#each (zakres 0 (getWartosc actor  ../actorID)) as |value|}}
+      <select class="wartosc-uzytych-wiezi" id="{{actor.id}}">
+        {{#each (zakres 0 (getWartosc actor  ../actorID ../rollingData)) as |value|}}
           <option value="{{value}}">{{value}}</option>
         {{/each}}
       </select>
     </div>
     <div class="typ-dzialania">
       <label>{{localize "chlopcy.dialog.wybierzDzialanieWiezi"}}</label>
-      <select class="typ-uzytych-wiezi">
+      <select class="typ-uzytych-wiezi" id="{{actor.id}}">
+        {{#if (eq ../rollingData/KM 0)}}
         <option value="1">{{localize "chlopcy.dialog.typWieziCecha"}}</option>
+        {{/if}}
         {{#if (ne ../rollingData.tag ../pustyTag)}}
           <option value="2">{{localize "chlopcy.dialog.typWieziTag"}}</option>
         {{/if}}

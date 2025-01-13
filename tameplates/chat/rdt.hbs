@@ -44,6 +44,9 @@
             <label class="label-KB">{{localize "chlopcy.czat.wynik_RDT"}}</label>
             <p class="rzut-kb">{{RDT}}</p>
     </div>
+    {{#if (ne uzyteWiezi undefined)}}
+        {{> "systems/chlopcy/tameplates/chat/partial/uzyte-wiezi.hbs" uzyteWiezi=uzyteWiezi}}
+    {{/if}}
     
 
         {{#if (eq KM 0)}}
@@ -61,6 +64,9 @@
                     {{> "systems/chlopcy/tameplates/chat/partial/tag-mod.hbs"}}
                 </div>
             {{/if}}
-            <h3></h3>
-         <div class="rectangle" id="6">{{localize "chlopcy.czat.uzyjWiezi"}}</div>      
+           
+        {{#czywiezi rollingData}}
+        {{/czywiezi}}   
+        {{#czyextraXP rollingData}}
+        {{/czyextraXP}} 
 </div>

@@ -28,8 +28,39 @@ function checkRange(v1, v2, v3){
 Handlebars.registerHelper("localizeWithParams", function (key, options) {
   return game.i18n.format(key, options.hash);
 });
-Handlebars.registerHelper('getWartosc', function(actor, actorID) {
-  return actor.system.wiezi[actorID] ? actor.system.wiezi[actorID].wartosc : null;
+Handlebars.registerHelper('getWartosc', function(actor, actorID, rollingData) {
+  const wartoscWiezi = actor.system.wiezi[actorID] ? actor.system.wiezi[actorID].wartosc : null;
+  const KM = rollingData.KM;
+  const tag = rollingData.wartoscTagu;
+  let dopuszczalnaWartoscWiezi;
+  const cecha = rollingData.wartoscCechy
+  if(KM === 0 && tag === 0){
+    dopuszczalnaWartoscWiezi = 6 - cecha;
+    if (dopuszczalnaWartoscWiezi >= wartoscWiezi){
+      return wartoscWiezi
+    }
+    else{
+      return dopuszczalnaWartoscWiezi
+    }
+  }
+  if(KM !== 0 && tag !==0){
+    dopuszczalnaWartoscWiezi = 6 - tag;
+    if (dopuszczalnaWartoscWiezi >= wartoscWiezi){
+      return wartoscWiezi
+    }
+    else{
+      return dopuszczalnaWartoscWiezi
+    }
+  }
+  if(KM === 0 && tag !== 0){
+    dopuszczalnaWartoscWiezi = 6 - cecha;
+    if (dopuszczalnaWartoscWiezi >= wartoscWiezi){
+      return wartoscWiezi
+    }
+    else{
+      return dopuszczalnaWartoscWiezi
+    }
+  }
 });
 Handlebars.registerHelper('zakres', function(start, end) {
   var result = [];
@@ -39,3 +70,23 @@ Handlebars.registerHelper('zakres', function(start, end) {
   }
   return result;
 });
+
+Handlebars.registerHelper("czywiezi", function(rollingData){
+  const KM = rollingData.KM;
+  const tag = rollingData.wartoscTagu
+  if(KM === 0 || tag !== 0){
+    const buttonTile = game.i18n.localize("chlopcy.czat.uzyjWiezi")
+    const button =  ` <h3></h3><div class="rectangle" id="6">${buttonTile}</div>`  
+    return button
+  }
+})
+
+Handlebars.registerHelper("czyextraXP", function(rollingData){
+  const KB = rollingData.KB;
+  const dodanoXP = rollingData?.dodanoXP;
+  if((KB === 20 || KB === 10)&& dodanoXP === undefined){
+    const buttonTile = game.i18n.localize("chlopcy.czat.dodajXP")
+    const button =  ` <h3></h3><div class="rectangle" id="7">${buttonTile}</div>`  
+    return button
+  }
+})

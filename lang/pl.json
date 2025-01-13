@@ -81,7 +81,7 @@
       "BANGARANG": "wykanałeś/Wykonałaś BANGARANG!",
       "dwa_osiagi": "Zdobyłeś/Zdobyłaś 2 osiągi.",
       "jeden_osiag": "Zdobyłeś/Zdobyłas 1 osiąg.",
-      "klopoty": "Wyrzuciłeś/Wyrzucilaś 20! Traz czeka Cię sukces z problemmami lub pech!",
+      "klopoty": "Wyrzuciłeś/Wyrzucilaś 20! Teraz czeka Cię sukces z problemmami lub pech!",
       "brak_osiagow": "Nie zdobyłeś/zdobyłaś żadnych osiągów.",
       "trzy_osiagi": "Zdobyłeś/Zdobyłaś 3 osiągi",
       "pech": "Nie zdobyłeś/zdobyłaś żadnych osiągów i masz Pecha!",
@@ -98,7 +98,11 @@
       "wynik_DKM": "Wynik rzutu dodatkowej KM {kDKM} to:",
       "uzytoTagPlusMinus1": "Użyto Tagu +/- 1 do wyniu RDT",
       "mod_tagu": "Dostepne modyfikacje z Tagu ",
-      "uzyjWiezi": "Użyj Więzi"
+      "uzyjWiezi": "Użyj Więzi",
+      "uzylesWiezow": "Wykorzystałeś swoje Więzi z {name} w wartości {wartosc}.",
+      "uzytoBangarang": "Wykorzystałeś/Wykorzystałaś punky BANGARANG z puli {typ} aby zdać test.",
+      "dodajXP": "Dodaj punkt rozwoju",
+      "zdobylesXP": "Zyskujesz punkt rozwoju za wyrzucenie {KB} na KB!"
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
@@ -116,11 +120,17 @@
       "typWieziTag": "Podbij Tag",
       "twojaWiezZ": "Twoja więź z postacią ",
       "wybierzDzialanieWiezi": "Wybierz działanie więzi: ",
-      "wartoscWiezi": "Wartosc waszych więzi"
+      "wartoscWiezi": "Wartosc waszych więzi",
+      "dostepneWiezi": "Wybierz Więzi",
+      "uzyj": "Użyj"
     },
     "ui": {
-      "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!"
+      "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!",
+      "nieMaszWystarczajacoBANGARANG": "NIe masz wystarczająco Punktów BANGARANG!"
     },
-    "usun_wiez": "Usuń Więź"
+    "usun_wiez": "Usuń Więź",
+    "kurta-i-wspomnienia": "Kurta i Szczęśliwe Wspomnienia",
+    "glowna": "Główna",
+    "szczesliweMysli": "Spis Twoich  Szczęśliwych Wspomnień"
   }
 }

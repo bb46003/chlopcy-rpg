@@ -545,3 +545,123 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-01-08T14:42:42.650Z'
+  chlopcy.dialog.dostepneWiezi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: CAYtOmlsEg8CEJpuRfWfS
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-12T14:33:21.292Z'
+  chlopcy.dialog.uzyj:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: L0ulhaR7zAITW9eq9Dx6Q
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-12T14:33:56.786Z'
+  chlopcy.czat.uzylesWiezow:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: IsUNamho8hHTBxoLm7hr4
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T12:12:38.316Z'
+  chlopcy.ui.nieMaszWystarczajacoBANGARANG:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 5hgWYY6YNkp3GlFeBMO3L
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T14:12:52.316Z'
+  chlopcy.czat.uzytoBangarang:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: MRC9irf75XSefA34_6U3c
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T14:19:13.032Z'
+  chlopcy.czat.dodajXP:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: V44fA_hhVGRQd2z-FtHEc
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T14:27:24.463Z'
+  chlopcy.czat.zdobylesXP:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: SrPIaAvkYrRGh1rekHphi
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T14:55:44.828Z'
+  chlopcy.kurta-i-wspomnienia:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: qxSqMRdZ__WygxgzUrhKY
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T15:34:20.485Z'
+  chlopcy.glowna:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: ikOMeGUbh4eyWHdQEfUHH
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T15:36:22.589Z'
+  chlopcy.szczesliweMysli:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: xuPjKWZsdUYHJlrznwUnR
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-13T16:01:25.312Z'

@@ -1,3 +1,5 @@
+import { uzycieWiezi } from "../dialog/uzycie-wiezi.mjs"
+
 export function addChatListeners(_app, html, _data) {
     html.on("click", "[class^='fas fa-dice-'], .fa-coin", dodajKM);
     html.on("click", ".rectangle", dzialanieTagow);
@@ -40,7 +42,7 @@ export async function dodajKM(ev){
     const kKB = msg.rolls[0].formula.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB });
     const tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM });
-
+    rollingData.KM = wynikRKM;
     const  osiagi = await sprawdzRDT(rollingData,RDT,KB)
     rollingData.RDT = RDT;
     const template = await renderTemplate(
@@ -74,29 +76,31 @@ export async function dzialanieTagow(ev) {
     switch (id){
 
         case 1:
-            przerzutKB(rollingData, msg, actor, id)
+            przerzutKB(rollingData, msg, actor, id);
             break;
         case 2:
             if(rollingData.KM === 0){
-                ui.notifications.warn(game.i18n.localize("chlopcy.ui.najpierw_użyjKM"))
+                ui.notifications.warn(game.i18n.localize("chlopcy.ui.najpierw_użyjKM"));
             }
             else{
-                przerzutKM(rollingData, msg, actor, id)
+                przerzutKM(rollingData, msg, actor, id);
             }
             break;
         case 3:
             if(rollingData.KM === 0){
-                ui.notifications.warn(game.i18n.localize("chlopcy.ui.najpierw_użyjKM"))
+                ui.notifications.warn(game.i18n.localize("chlopcy.ui.najpierw_użyjKM"));
             }
             else{
-                dodatkowaKM(rollingData, msg, actor, id)
+                dodatkowaKM(rollingData, msg, actor, id);
             }
             break;
         case 4:
-            dodajOdejmijJeden(rollingData,msg, actor, id)
+            dodajOdejmijJeden(rollingData,msg, actor, id);
             break;
         case 6:
-            uzyjWiezji(rollingData,msg, actor, id)
+            uzyjWiezji(rollingData,msg, actor, id);
+        case 7:
+            dodajXP(actor,rollingData);
             break;
 
 
@@ -503,46 +507,47 @@ async function dodajOdejmijJeden(rollingData,msg, actor, id) {
 }
 
 async function  uzyjWiezji(rollingData,msg, actor, id){
-    const allActors = game.actors.filter(actor => actor.type === "dzieciak");
-    const matchingActors = [];
-    const actorId = actor._id; 
-    allActors.forEach(actor => {
-    if (actor.system.wiezi?.[actorId]) {
-        const wartosc = actor.system.wiezi[actorId].wartosc;
-        if (wartosc !== 0) {
-            matchingActors.push(actor); 
-        }
-        }
-    });
-   
-    const templateData = {
-        actorID: actorId, // make sure this is being passed here
-        matchingActors: matchingActors,
-        rollingData: rollingData,
-        pustyTag: game.i18n.localize("chlopcy.bez_tagu")
-      };
-      
-      const dialogTemplate = await renderTemplate('systems/chlopcy/tameplates/dialog/uzyj-wiezi.hbs', templateData);
-    new Dialog({
-        title: "Select Value for Actors",
-        content: dialogTemplate,
-        buttons: {
-            use: {
-                label: "Use",
-                callback: (html) => {
-                    // Collect the selected values for each actor.
-                    matchingActors.forEach((item, index) => {
-                        const selectedValue = html.find(`#actor-${index}`).val();
-                        console.log(`Actor ${item.actor.name}: Selected Value = ${selectedValue}`);
-                        // Process the selected value here as needed.
-                    });
-                }
-            }
-        },
-        default: "use",
-        close: () => {
-            console.log("Dialog closed.");
-        }
-    }).render(true);    
-    
+        
+    const uzycieW = new uzycieWiezi(rollingData,msg, actor, id)
+    uzycieW.pokazDostepneWiezi(rollingData,msg, actor, id)
+}
+
+async function dodajXP(actor, rollingData) {
+    const obecneXP = actor.system.xp;
+    const noweXP = obecneXP + 1;
+    const updateData = {['system.xp']:noweXP}
+    const actor2 = game.actors.get(actor._id);
+    await actor2.update(updateData);
+    const KB = rollingData.KB
+    const content = game.i18n.format("chlopcy.czat.zdobylesXP", {KB})
+    const chatData = {
+        user: game.user?._id,
+        speaker: ChatMessage.getSpeaker({ actor2 }),
+        content: content
+    }
+    await ChatMessage.create(chatData);
+    rollingData.dodanoXP = true;
+    const kDKM = rollingData?.rolls[2]?.formula.replace(/d/g, "k");
+    let tesktDKM = "";
+    if(kDKM !== undefined){
+        tesktDKM = game.i18n.format("chlopcy.czat.wynik_DKM", { kDKM });
+    }
+    const kKB = rollingData.rolls[0].formula.replace(/d/g, "k");
+    const formulaKM = rollingData?.rolls[1]?.formula;
+    let tekstKM = "";
+    if(formulaKM !== undefined){
+        tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM:formulaKM });
+    }
+    let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
+    const template = await renderTemplate(
+        "systems/chlopcy/tameplates/chat/rdt.hbs",
+        {rollingData:rollingData, osiagi:rollingData.osiagi, KB:rollingData.KB, KM:rollingData.KM, RDT:rollingData.RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:rollingData.DKM, uzytyTag:rollingData.uzytyTag, uzyteWiezi: undefined},
+    ); 
+    const chatData2 = {
+        user: game.user?._id,
+        speaker: ChatMessage.getSpeaker({ actor2 }),
+        content: template,
+        system: rollingData
+    }
+    await ChatMessage.create(chatData2);
 }

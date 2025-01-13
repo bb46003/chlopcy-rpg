@@ -3,6 +3,8 @@ import { registerHandlebarsHelpers } from "./setup/handlebars.mjs";
 import { preloadHandlebarsTemplates } from "./setup/templates.mjs";
 import { CHLOPCYCONFIG } from "./config.mjs";
 import * as chlopcyChat from "./chat/roll-mod.mjs"
+import { uzycieWiezi } from "./dialog/uzycie-wiezi.mjs";
+import { chlopcyActor } from "./actors/actors.mjs";
 
 Hooks.once("init", async function () {
     
@@ -10,8 +12,10 @@ Hooks.once("init", async function () {
     registerHandlebarsHelpers();    
     console.log("System \"Chłopcy RPG\" został poprawnie załadowany");
     CONFIG.CHLOPCYCONFIG = CHLOPCYCONFIG;
+   
+    game.chlopcy = {uzycieWiezi}
+    CONFIG.Actor.documentClass = chlopcyActor;
     return preloadHandlebarsTemplates();
-
   });
   
 Hooks.on("renderChatLog", chlopcyChat.addChatListeners);
