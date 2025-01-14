@@ -362,6 +362,7 @@ i.fas[class*="fa-dice-"], i.fas.fa-coin {
 
 .sheet .editor {
     height: auto;
+    min-height: 3em;
 }
 
 .sheet .editor .editor-content {
@@ -389,4 +390,66 @@ i.fas[class*="fa-dice-"], i.fas.fa-coin {
 }
 .note-tab {
     border: 1px solid;
+    margin-bottom: 10px;
+}
+.kurtka {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+.znaczniki-plecow {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 70%;
+}
+.naszywka-plecy {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: center;
+}
+.naszywka-plecy.lokacja {
+    grid-template-columns: auto auto auto;
+
+}
+input[type="checkbox"]#dzieciak, 
+input[type="checkbox"]#herb, 
+input[type="checkbox"]#lokacja, 
+input[type="checkbox"]#zagubieni-chlopcy {
+    margin-left: auto;
+ 
+}
+
+.naszywka-plecy label {
+    display: inline-block;
+    text-transform: uppercase; 
+    
+}
+
+.naszywka-plecy input[type="text"] {
+    display: inline-block; 
+    margin-left: 0; 
+    vertical-align: middle;
+    margin-left: 5px;
+}
+.plecy, .przody {
+    display: grid;
+    height: fit-content;
+}
+label#label-plecy, label#label-przody {
+    justify-self: center;
+    text-transform: uppercase;
+    font-size: X-LARGE;
+    margin-bottom: 5px;
+}
+
+label#lokacja {
+    text-transform: none;
+}
+img.obraz-kurtki {
+    border: none;
+    height: 290px;
+    margin: auto;
+    top: -2em;
 }

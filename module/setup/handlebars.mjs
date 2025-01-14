@@ -21,7 +21,6 @@ export function registerHandlebarsHelpers() {
 function checkRange(v1, v2, v3){
 
   const ouput = (v1 >= v2)&&(v1 <= v3)
-  console.log(ouput)
   return ouput
 }
 
@@ -89,4 +88,10 @@ Handlebars.registerHelper("czyextraXP", function(rollingData){
     const button =  ` <h3></h3><div class="rectangle" id="7">${buttonTile}</div>`  
     return button
   }
+})
+
+Handlebars.registerHelper("wybierzObrazKurtki", function(actor){
+  let obrazKurtki = "systems/chlopcy/art/kurtka-pusta.png"
+  const html = `<img class="obraz-kurtki" src="${obrazKurtki}" />`
+  return html
 })

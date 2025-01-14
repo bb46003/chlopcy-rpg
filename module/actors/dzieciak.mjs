@@ -74,6 +74,8 @@ export class dzieciak extends ActorSheet {
         html.on("change", ".wartosc-wiezi", (ev) =>this.wartoscWiezi(ev));
         html.on("click", ".usun-wiez", (ev) => this.usunWięzi(ev));
         html.on("click",".top-section-label-bangarang", (ev) => this.uzyjPunktowBANGARANG(ev))
+        html.on("change", ".znaczniki-plecow input[type='checkbox']", (ev) => this.zmianaNaszywekPlecy(ev))
+        html.on("click", '[data-tab="kurta-i-wspomnienia"]', (ev) => this.dynamicznyStyl(ev))
 
       }
 
@@ -224,7 +226,6 @@ export class dzieciak extends ActorSheet {
 
 
       }
-
       async uzyjPunktowBANGARANG(ev){
         const typ = ev.currentTarget.innerText.toLowerCase();
         const typOrignial = ev.currentTarget.innerText;
@@ -248,5 +249,51 @@ export class dzieciak extends ActorSheet {
               ui.notifications.warn(game.i18n.localize("chlopcy.ui.nieMaszWystarczajacoBANGARANG"));
             }
         
+      }
+      async zmianaNaszywekPlecy(ev) {
+        const target = ev.currentTarget;
+        const jestZaznaczony = target.checked;
+        const parentContainer = target.closest('.znaczniki-plecow');
+        const checkboxes = Array.from(parentContainer.querySelectorAll('input[type="checkbox"]'));
+        const targetIndex = checkboxes.indexOf(target);
+        let updateData = {};
+        let wartosc
+        checkboxes.forEach((cb, index) => {
+          if(index <= targetIndex && jestZaznaczony === true){
+            wartosc = jestZaznaczony;
+          }
+          else if(index > targetIndex && jestZaznaczony === false) {
+            wartosc = jestZaznaczony;   
+          }
+          else if(index <= targetIndex && jestZaznaczony === false){
+            wartosc = cb.checked
+          }
+          else if(index > targetIndex && jestZaznaczony === true) {
+            wartosc = !jestZaznaczony;   
+          }
+          if(cb.name === "system.plecy.lokacja" && wartosc === false){
+            updateData["system.plecy.lokacja-text"] = ""; 
+          }
+          
+          updateData[cb.name] = wartosc; 
+        });
+        
+        const actor = this.actor;     
+        await actor.update(updateData);
+    }
+    
+    
+      async dynamicznyStyl(ev){
+        const przody = document.querySelector('.przody');
+        const plecy = document.querySelector('.plecy');
+        const przodyWysokosc = przody.offsetHeight;
+        const plecyWysokosc = plecy.offsetHeight;
+        const maxWysokosc = Math.max(przodyWysokosc, plecyWysokosc);
+        if(plecyWysokosc === maxWysokosc){
+          plecy.style.borderLeft = '1px dashed black';
+        }
+        else{
+          przody.style.borderRight = '1px dashed black';
+        }
       }
     }

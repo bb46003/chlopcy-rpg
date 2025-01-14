@@ -98,7 +98,7 @@
   
     },    
     "Item": {
-        "types":["naszywki_przody", "naszywki_plecy"],
+        "types":["naszywki_przody"],
         "naszywki_przody":{
             "efekt":""
         }

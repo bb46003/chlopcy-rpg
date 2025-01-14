@@ -4,3 +4,38 @@
             {{editor system.szczesliwe_mysli target="system.szczesliwe_mysli"  engine="prosemirror" button=true owner=owner editable=editable}}
         </div>
 </div>
+<h3></h3>
+<div class="kurtka">
+    <div class="przody">
+        <label id="label-przody">{{localize "chlopcy.przody"}}</label>
+
+    </div>
+    <div class="plecy">
+        <label id="label-plecy">{{localize "chlopcy.plecy"}}</label>
+        <div class="znaczniki-plecow">
+            <div class="naszywka-plecy">
+                
+                <input type="checkbox" id="dzieciak" name="system.plecy.dzieciak"{{#if system.plecy.dzieciak }}checked{{/if}}>
+                <label>{{localize "chlopcy.plecy-dzieciak"}}</label>
+            </div>
+             <div class="naszywka-plecy">
+                
+                <input type="checkbox" id="zagubieni-chlopcy" name="system.plecy.zagubieni-chlopcy"{{#if system.plecy.zagubieni-chlopcy}}checked{{/if}}>
+                <label>{{localize "chlopcy.plecy-zagubieni-chlopcy"}}</label>
+             </div>
+              <div class="naszywka-plecy lokacja">
+                
+                <input type="checkbox" id="lokacja" name="system.plecy.lokacja"{{#if system.plecy.lokacja}}checked{{/if}}>
+                <label id="lokacja">{{localize "chlopcy.plecy-lokacja"}}</label>
+                <input type="text" id="lokacja" name="system.plecy.lokacja-text" value="{{system.plecy.lokacja-text}}">
+              </div>
+               <div class="naszywka-plecy">
+                
+                <input type="checkbox" id="herb" name="system.plecy.herb"{{#if system.plecy.herb}}checked{{/if}}>
+                <label>{{localize "chlopcy.plecy-herb"}}</label>
+            </div>
+        </div>
+        {{#wybierzObrazKurtki actor}}
+        {{/wybierzObrazKurtki}}
+    </div>
+</div>
