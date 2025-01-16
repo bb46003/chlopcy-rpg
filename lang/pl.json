@@ -1,4 +1,20 @@
 {
+  "ACTOR": {
+    "dzieciak": "Dzieciak",
+    "tykacz": "Tykacz"
+  },
+  "ITEM": {
+    "naszywki_przody": "Naszywki Przody"
+  },
+  "TYPES": {
+    "Actor": {
+      "dzieciak": "Dzieciak",
+      "tykacz": "Tykacz"
+    },
+    "Item": {
+      "naszywki_przody": "Naszywki Przody"
+    }
+  },
   "chlopcy": {
     "ksywka": "Ksywka",
     "wiek": "Wiek",
@@ -137,6 +153,17 @@
     "plecy-lokacja": "Lokacja",
     "plecy-herb": "Herb",
     "plecy": "Plecy",
-    "przody": "Przody"
+    "przody": "Przody",
+    "nazwaNaszywki": "Nazwa naszywki:",
+    "wygladNaszywki": "Wygląd naszywki",
+    "wymaganiaNaszywki": "Wymagania:",
+    "bonusNaszywki": "Bonus:",
+    "nazwaTykacza": "Nazwa Tykacza",
+    "podajCzasTrwania": "Jak dużo czasu jest na pokonanie Tykacza:",
+    "tykaczJestPrzeciwnikiem": "Czy Tykacz jest walką?",
+    "podajOsiagiTykacza": "Ile Osiągów potrzebne jest do pokonania Tykacza",
+    "uruchomTykacz": "Uruchom Tykacz",
+    "czyTykaczJestOgraniczonyWCzasie": "Czy Tykacz jest ograniczony w czasie?",
+    "opisTykacza": "Opis Tykacza"
   }
 }

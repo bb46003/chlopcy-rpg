@@ -15,7 +15,20 @@ Hooks.once("init", async function () {
    
     game.chlopcy = {uzycieWiezi}
     CONFIG.Actor.documentClass = chlopcyActor;
+    //CONFIG.Scene.documentClass = chlopcyScena
     return preloadHandlebarsTemplates();
   });
   
 Hooks.on("renderChatLog", chlopcyChat.addChatListeners);
+
+Hooks.on('preCreateScene', (scene) => {
+  scene.updateSource({
+    tokenVision: false, 
+    fog:{
+      exploration:false
+    },
+       grid:{
+        type: CONST.GRID_TYPES.GRIDLESS
+      }
+    })
+});

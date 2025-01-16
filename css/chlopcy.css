@@ -337,6 +337,10 @@ img.borderless-small {
     max-width: 50px;
     margin: auto;
 }
+img.borderless {
+    max-height: 20%;
+    border: none;
+}
 i.fas[class*="fa-dice-"], i.fas.fa-coin {
     cursor: url(http://profilki.pl/files/cur/123.png) 2 1, default;
 }
@@ -452,4 +456,20 @@ img.obraz-kurtki {
     height: 290px;
     margin: auto;
     top: -2em;
+}
+.obrazek-naszywka {
+    height: 100px;
+    display: grid;
+    justify-items: center;
+    margin-bottom: 1em;
+}
+.nazwa-naszywki {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+input.nazwa-naszywki{
+    text-align: center;
+    width: 50%;
+    margin: auto;
 }

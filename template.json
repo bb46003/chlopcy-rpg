@@ -1,6 +1,6 @@
 {
     "Actor": {
-      "types": ["dzieciak","przeciwnicy"],
+      "types": ["dzieciak","tykacz"],
        "dzieciak":{
         "cechy":{
             "brutal": 0,
@@ -94,13 +94,20 @@
 
        },
       
-        "przeciwnicy":{}
+        "tykacz":{
+            "czasTrwania":1,
+            "osiagi":2,
+            "opis":"",
+            "jestPrzeciwnikiem": false,
+            "jestCzas": false
+        }
   
     },    
     "Item": {
         "types":["naszywki_przody"],
         "naszywki_przody":{
-            "efekt":""
+            "wymagania":"",
+            "bonus":""
         }
 
     }
