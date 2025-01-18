@@ -76,9 +76,41 @@ export class dzieciak extends ActorSheet {
         html.on("click",".top-section-label-bangarang", (ev) => this.uzyjPunktowBANGARANG(ev))
         html.on("change", ".znaczniki-plecow input[type='checkbox']", (ev) => this.zmianaNaszywekPlecy(ev))
         html.on("click", '[data-tab="kurta-i-wspomnienia"]', (ev) => this.dynamicznyStyl(ev))
+        html.on("click","button.usun-nazywke", (ev) => this.usunNaszywki(ev))
+        html.on("click","a#label-przody",(ev)=> this.dodajNaszywkę(ev))
+        html.on("click contextmenu", ".naszywka-przody-obrazek", (ev) => this.owtorzNaszywke(ev))
 
       }
 
+      async _onDragOver(event) {
+        event.preventDefault(); 
+        event.currentTarget.classList.add('drag-over');
+      }
+      async _onDragLeave(event) {
+
+        event.currentTarget.classList.remove('drag-over');
+      }   
+      async _onDrop(event) {
+        event.preventDefault();
+     
+        const data = event.dataTransfer;
+        if (data) {
+          const droppedItem = JSON.parse(data.getData("text/plain"));
+    
+          const droppedType = droppedItem.type;
+          if( droppedType === "Item"){
+            const itemUUID = droppedItem.uuid;
+            const item = await fromUuid(itemUUID);
+            const itemData = item.toObject();
+            const actor = this.actor;
+            await actor.createEmbeddedDocuments("Item", [itemData])
+            await actor.update()
+            
+          }
+          
+       
+    }
+      }  
       async dawkiPylku(ev){
         ev.preventDefault(); 
        
@@ -280,9 +312,7 @@ export class dzieciak extends ActorSheet {
         
         const actor = this.actor;     
         await actor.update(updateData);
-    }
-    
-    
+      }
       async dynamicznyStyl(ev){
         const przody = document.querySelector('.przody');
         const plecy = document.querySelector('.plecy');
@@ -296,4 +326,48 @@ export class dzieciak extends ActorSheet {
           przody.style.borderRight = '1px dashed black';
         }
       }
-    }
+      async usunNaszywki(ev){
+        const button = ev.target;
+        const ID = button.id;
+        const item = await this.actor.items.get(ID);
+        
+        const innerText = game.i18n.format("chlopcy.dialog.usunNaszywke",{name:item.name})
+        const d = new Dialog({
+          title: game.i18n.format("chlopcy.dialog.usunNaszywkeTytul",{name:item.name}), 
+          content: `
+            <p>${innerText}</p>
+          `,
+          buttons: {
+            delete: {
+              label: game.i18n.localize("Delete"),
+              callback: async () => {
+                await this.actor.deleteEmbeddedDocuments("Item", [ID]);
+              }
+            },
+            
+            cancel: {
+              label: game.i18n.localize("Cancel"),
+              callback: () => {
+                  ui.notifications.info("Deletion canceled.");
+              }
+            }
+          },
+          default: "cancel", 
+          close: () => {
+          }
+        });
+        d.render(true);
+
+      }
+      async dodajNaszywkę(ev){
+        console.log(ev)
+      }
+      async owtorzNaszywke(ev){
+        const id = ev.target.id;
+        const actor = this.actor;
+        const item = actor.items.get(id);
+        if (ev.type === "contextmenu") {
+          item.sheet.render(true);
+        } 
+      }
+}

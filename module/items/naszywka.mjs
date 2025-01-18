@@ -11,15 +11,15 @@ export class naszywka extends ItemSheet {
         const source = super.getData();
         const itemData = this.item.toObject(false);
         const context = {
-          actor: actorData,
+          item: itemData,
           editable: this.isEditable,
-          limited: this.actor.limited,
+          limited: this.item.limited,
           options: this.options,
-          owner: this.actor.isOwner,
+          owner: this.item.isOwner,
           source: source.system,
           system: itemData.system,
-          type: this.actor.type,
-          useKgs: this.actor.useKgs,
+          type: this.item.type,
+          useKgs: this.item.useKgs,
         };       
         
         return context

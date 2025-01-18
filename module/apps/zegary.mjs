@@ -1,15 +1,15 @@
 export class zegarTykacza extends Application {
-    constructor(options = { id }) {
+    constructor(tykacz) {
       if (zegarTykacza._instance && !zegarTykacza.closed && zegarTykacza._instance.data.id === options.id) {
         throw new Error(`Home Score instance with ID "${options.id}" is already open!`);
       }
   
-      super(options);
+      super(tykacz);
   
       zegarTykacza._instance = this;
       zegarTykacza.closed = true;
   
-      this.data = { id: options.id };
+      this.data = {tykacz};
     }
   
     static get defaultOptions() {
@@ -24,5 +24,10 @@ export class zegarTykacza extends Application {
         width: "auto",
       });
     }
-  }
   
+  getData() {
+    super.getData();
+    const data = this.data
+    return data
+  }
+}

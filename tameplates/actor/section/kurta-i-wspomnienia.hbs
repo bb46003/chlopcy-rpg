@@ -7,7 +7,17 @@
 <h3></h3>
 <div class="kurtka">
     <div class="przody">
-        <label id="label-przody">{{localize "chlopcy.przody"}}</label>
+        <a id="label-przody" class="label-przody" data-tooltip="{{localize "chlopcy.dodajNaszywke"}}">{{localize "chlopcy.przody"}}</a>
+        {{#each items as |item|}}
+        <div class="naszywka-przody">
+            <div class="naszywka-przody-obrazek"id="{{item.id}}">
+                <label class="naszywka-przody-label" id="{{item.id}}" >{{item.name}}</label>
+                <img class="naszywka-przody-obrazek-img" id="{{item.id}}" src="{{item.img}}">
+                <textarea class="bonus-naszywki" id="{{item.id}}" name="system.bonus" value="system.bonus" disabled>{{system.wymagania}}</textarea>
+                <button class="usun-nazywke" id="{{item.id}}"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+        {{/each}}
 
     </div>
     <div class="plecy">

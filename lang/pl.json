@@ -118,7 +118,8 @@
       "uzylesWiezow": "Wykorzystałeś swoje Więzi z {name} w wartości {wartosc}.",
       "uzytoBangarang": "Wykorzystałeś/Wykorzystałaś punky BANGARANG z puli {typ} aby zdać test.",
       "dodajXP": "Dodaj punkt rozwoju",
-      "zdobylesXP": "Zyskujesz punkt rozwoju za wyrzucenie {KB} na KB!"
+      "zdobylesXP": "Zyskujesz punkt rozwoju za wyrzucenie {KB} na KB!",
+      "wykorzystajOsiagiNaTykacz": "Wykorzystaj zdobyte osoiągi na pokonanie Tykacza"
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
@@ -138,7 +139,9 @@
       "wybierzDzialanieWiezi": "Wybierz działanie więzi: ",
       "wartoscWiezi": "Wartosc waszych więzi",
       "dostepneWiezi": "Wybierz Więzi",
-      "uzyj": "Użyj"
+      "uzyj": "Użyj",
+      "usunNaszywke": "Czy chcesz usunąć naszywkę {name} ?",
+      "usunNaszywkeTytul": "Potwierdzenie usunięcia naszywki {name}"
     },
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!",
@@ -164,6 +167,12 @@
     "podajOsiagiTykacza": "Ile Osiągów potrzebne jest do pokonania Tykacza",
     "uruchomTykacz": "Uruchom Tykacz",
     "czyTykaczJestOgraniczonyWCzasie": "Czy Tykacz jest ograniczony w czasie?",
-    "opisTykacza": "Opis Tykacza"
+    "opisTykacza": "Opis Tykacza",
+    "dodajNaszywke": "Kliknij aby dodać naszywkę",
+    "tykaczapp": {
+      "czasTrwaniaTykacza": "Czas trwania Tykacza:",
+      "osiagiTykacza": "Wartość Osiagów wymagana do pokonania Tykacza",
+      "zmiejssz": "Zmniejsz ilość osiągów Tykacza"
+    }
   }
 }

@@ -1,0 +1,20 @@
+<div class="zegar">
+    <div class="nazwa">
+        <h1>{{tykacz.name}}</h1>
+    </div>
+    {{#log tykacz}}
+    {{/log}}
+     {{#if tykacz.system.jestCzas}}
+    <div class="czas-trwania">
+        <label class="czas-trwania-label">{{localize "chlopcy.tykaczapp.czasTrwaniaTykacza"}}</label>
+       
+        <input class="czas-trwania-input" value="{{tykacz.system.czasTrwania}}" disabled>
+    </div>
+    {{/if}}
+        <div class="osiagi">
+        <label class="osiagi-label">{{localize "chlopcy.tykaczapp.osiagiTykacza"}}</label>
+        <input class="osiagi-input" value="{{tykacz.system.osiagi}}" disabled>
+        <i class="fa fas-minus" data-tooltip="{{localize "chlopcy.tykaczapp.zmiejssz"}}"></i>
+    </div>
+    </div>
+</div>

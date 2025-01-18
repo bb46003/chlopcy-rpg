@@ -857,3 +857,87 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-01-16T15:00:05.750Z'
+  chlopcy.dialog.usunNaszywke:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: ORCkfrUHCVGfXCiuDCXq9
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-17T13:49:18.646Z'
+  chlopcy.dialog.usunNaszywkeTytul:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: hKVgInLxr6e4T-0qM1KM9
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-17T13:50:19.280Z'
+  chlopcy.dodajNaszywke:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: aqT05WIwgBO2AtfpmDJE0
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-17T14:50:51.447Z'
+  chlopcy.czat.wykorzystajOsiagiNaTykacz:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: frbeB8dgUkhTjBfYRWsoH
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-18T17:16:44.536Z'
+  chlopcy.tykaczapp.czasTrwaniaTykacza:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: BL4RGrUt9aNhMA94WafBX
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-18T17:30:44.915Z'
+  chlopcy.tykaczapp.osiagiTykacza:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: K-9r1JKCMOJRTsb7UbcZV
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-18T17:34:22.308Z'
+  chlopcy.tykaczapp.zmiejssz:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: IbpZbl-_14563Lzv8Fa-E
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-18T17:36:13.612Z'

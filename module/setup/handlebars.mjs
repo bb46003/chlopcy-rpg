@@ -95,3 +95,17 @@ Handlebars.registerHelper("wybierzObrazKurtki", function(actor){
   const html = `<img class="obraz-kurtki" src="${obrazKurtki}" />`
   return html
 })
+
+Handlebars.registerHelper("czyJestTykacz", function(rollingData){
+  const zegarTykacza = game.chlopcy.zegarTykacza?._instance;
+  if(zegarTykacza !== undefined && rollingData.wartoscTagu === 0 && rollingData.KM !== 0){
+    const buttonTile = game.i18n.localize("chlopcy.czat.wykorzystajOsiagiNaTykacz")
+    const html = `<div class="rectangle" id="8">${buttonTile}</div> `
+    return html
+
+  }
+Handlebars.registerHelper("log", function(log){
+  const tykacz = log
+  console.log(tykacz.system.czasTrwania)
+})
+})

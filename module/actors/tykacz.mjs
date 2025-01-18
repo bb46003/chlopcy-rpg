@@ -1,10 +1,12 @@
+import { zegarTykacza } from "../apps/zegary.mjs";
+
 export class tykacz extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
           classes: ["chlopcy"],
           template: "systems/chlopcy/tameplates/actor/tykacz.hbs",
           width: 500,
-          height: 400
+          height: "auto"
           
         });
     }
@@ -35,5 +37,16 @@ export class tykacz extends ActorSheet {
         }
         context.system.opis = await enrich(context.system.opis);  
         return context
+    }
+
+    async activateListeners(html) {
+        super.activateListeners(html);
+        html.on("click",".uruchom-tykacz", (ev) => this.uruchomZegar(ev))
+    }
+    async uruchomZegar(ev){
+        const target = ev.target;
+        const actor = game.actors.get(target.id);
+        const nowyTykacz = new zegarTykacza(actor);
+        nowyTykacz.render(true)
     }
 }

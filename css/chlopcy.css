@@ -337,10 +337,7 @@ img.borderless-small {
     max-width: 50px;
     margin: auto;
 }
-img.borderless {
-    max-height: 20%;
-    border: none;
-}
+
 i.fas[class*="fa-dice-"], i.fas.fa-coin {
     cursor: url(http://profilki.pl/files/cur/123.png) 2 1, default;
 }
@@ -441,7 +438,7 @@ input[type="checkbox"]#zagubieni-chlopcy {
     display: grid;
     height: fit-content;
 }
-label#label-plecy, label#label-przody {
+label#label-plecy, a#label-przody {
     justify-self: center;
     text-transform: uppercase;
     font-size: X-LARGE;
@@ -457,11 +454,16 @@ img.obraz-kurtki {
     margin: auto;
     top: -2em;
 }
+
 .obrazek-naszywka {
     height: 100px;
-    display: grid;
+    display: flex;
     justify-items: center;
     margin-bottom: 1em;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1em;
 }
 .nazwa-naszywki {
     display: flex;
@@ -472,4 +474,64 @@ input.nazwa-naszywki{
     text-align: center;
     width: 50%;
     margin: auto;
+}
+.naszywka-przody-obrazek {
+    display: flex;
+    justify-items: center;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+img.naszywka-przody-obrazek-img {
+    height: 3em;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+button.usun-nazywke {
+    max-width: 10%;
+    margin-left: 5px;
+}
+textarea.bonus-naszywki {
+    resize: none;
+    height: fit-content;
+}
+.tykacz {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content;
+}
+.czas {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 5px;
+    justify-content: space-around;
+}
+.przeciwnik, .osiagi-tykacza {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.tykacz input[type="checkbox"] {
+    margin-left: auto;
+}
+.tykacz-label {
+    margin: auto;
+    width: 200px;
+}
+.nazwa-tykacza {
+    margin-bottom: 10px;
+    align-items: center;
+    display: grid;
+}
+label.tykacz-label {
+    width: 350px;
+}
+.tykacz input[type="number"] {
+    width: 50px;
+    margin-left: auto;
+}
+.zegar {
+    background: aqua;
+    position: absolute;
+    left: 20px;
+    top: 550px;
 }

@@ -6,28 +6,28 @@
     <div class="tykacz">
         <div class="dane-tykacza">
             <div class="czas">
-                <label>{{localize "chlopcy.czyTykaczJestOgraniczonyWCzasie"}}</label>
+                <label class="tykacz-label">{{localize "chlopcy.czyTykaczJestOgraniczonyWCzasie"}}</label>
                 <input type="checkbox" name="system.jestCzas" {{#if system.jestCzas}}checked{{/if}}>
                 {{#if system.jestCzas}}
                     <label>{{localize "chlopcy.podajCzasTrwania"}}</label>
-                    <input type="number" name="system.czasTrwania" vale="{{system.czasTrwania}}" min="1">
+                    <input type="number" name="system.czasTrwania" value="{{system.czasTrwania}}" min="1">
                 {{/if}}
             </div>
             <div class="przeciwnik">
-                <label>{{localize "chlopcy.tykaczJestPrzeciwnikiem"}}</label>
+                <label class="tykacz-label">{{localize "chlopcy.tykaczJestPrzeciwnikiem"}}</label>
                 <input type="checkbox" name="system.jestPrzeciwnikiem" {{#if system.jestPrzeciwnikiem}}checked{{/if}}> 
             </div>
             <div class="osiagi-tykacza">
-                <label>{{localize "chlopcy.podajOsiagiTykacza"}}</label>
+                <label class="tykacz-label">{{localize "chlopcy.podajOsiagiTykacza"}}</label>
                 <input type="number" name="system.osiagi" value="{{system.osiagi}}" min="2">
             </div>
         </div>
         <div class="opis">
-            <label>{{localize "chlopcy.opisTykacza"}}</label>
+            <label class="tykacz-label">{{localize "chlopcy.opisTykacza"}}</label>
             {{editor system.opis target="system.opis"  engine="prosemirror" button=true owner=owner editable=editable}}
         </div>
     </div>
-    <button class="uruchom-tykacz" id="{{actor.id}}">
+    <button class="uruchom-tykacz" id="{{actor._id}}">
         <label for="uruchom-tykacz">{{localize "chlopcy.uruchomTykacz"}}</label>
     </button>
 </form>

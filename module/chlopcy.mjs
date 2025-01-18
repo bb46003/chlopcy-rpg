@@ -5,6 +5,7 @@ import { CHLOPCYCONFIG } from "./config.mjs";
 import * as chlopcyChat from "./chat/roll-mod.mjs"
 import { uzycieWiezi } from "./dialog/uzycie-wiezi.mjs";
 import { chlopcyActor } from "./actors/actors.mjs";
+import { zegarTykacza } from "./apps/zegary.mjs";
 
 Hooks.once("init", async function () {
     
@@ -13,9 +14,8 @@ Hooks.once("init", async function () {
     console.log("System \"Chłopcy RPG\" został poprawnie załadowany");
     CONFIG.CHLOPCYCONFIG = CHLOPCYCONFIG;
    
-    game.chlopcy = {uzycieWiezi}
+    game.chlopcy = {uzycieWiezi, zegarTykacza}
     CONFIG.Actor.documentClass = chlopcyActor;
-    //CONFIG.Scene.documentClass = chlopcyScena
     return preloadHandlebarsTemplates();
   });
   
