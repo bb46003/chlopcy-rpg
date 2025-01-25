@@ -17,7 +17,7 @@ export function registerHandlebarsHelpers() {
     Handlebars.registerHelper("lowercase", function (str) {
       return str.toLowerCase();
     });
-}
+
 function checkRange(v1, v2, v3){
 
   const ouput = (v1 >= v2)&&(v1 <= v3)
@@ -104,8 +104,13 @@ Handlebars.registerHelper("czyJestTykacz", function(rollingData){
     return html
 
   }
+})
 Handlebars.registerHelper("log", function(log){
   const tykacz = log
   console.log(tykacz.system.czasTrwania)
 })
+Handlebars.registerHelper("isUserGM", function(tykacz){
+  const isGM = game.user.isGM;
+  return isGM
 })
+}

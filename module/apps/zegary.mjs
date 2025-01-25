@@ -1,33 +1,106 @@
 export class zegarTykacza extends Application {
-    constructor(tykacz) {
-      if (zegarTykacza._instance && !zegarTykacza.closed && zegarTykacza._instance.data.id === options.id) {
-        throw new Error(`Home Score instance with ID "${options.id}" is already open!`);
-      }
+  static instances = new Map(); // Static Map to store instances
+
+  constructor(tykacz) {
+    super();
+
   
-      super(tykacz);
-  
-      zegarTykacza._instance = this;
-      zegarTykacza.closed = true;
-  
-      this.data = {tykacz};
+
+
+    // Initialize instance data
+    const osizagiZegar = tykacz?.system.osiagi;
+    const czasZegar = tykacz?.system.czasTrwania;
+    this.data = {
+      tykacz,
+      osizagiZegar,
+      czasZegar,
+    };
+
+    // Store the instance in the Map
+    zegarTykacza.instances.set(this.id, this);
+  }
+
+  static get defaultOptions() {
+    const randomId = String(foundry.utils.randomID());
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      classes: ["chlopcy"],
+      height: 200,
+      id: "zegar-tykacza-app-"+randomId,
+      popOut: false,
+      resizable: false,
+      template: "systems/chlopcy/tameplates/app/zegar-tykacza.hbs",
+      title: "Zegar Tykacza",
+      width: "auto",
+    });
+  }
+
+  static async initialise(tykacz) {
+    const id = tykacz?.id || foundry.utils.randomID();
+    if (!this.instances.has(id)) {
+      const instance = new zegarTykacza(tykacz);
+      instance.render(true);
+    } else {
+      console.warn(`Instance for ID ${id} already exists.`);
     }
-  
-    static get defaultOptions() {
-      return foundry.utils.mergeObject(super.defaultOptions, {
-        classes: ["chlopcy"],
-        height: "200",
-        id: "zegar-tykacza-app",
-        popOut: false,
-        resizable: false,
-        template: "systems/chlopcy/tameplates/app/zegar-tykacza.hbs",
-        title: "Zegar Tykacza",
-        width: "auto",
-      });
-    }
-  
+  }
+
   getData() {
-    super.getData();
-    const data = this.data
-    return data
+    const data = super.getData();
+    return {
+      ...data,
+      ...this.data,
+    };
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    html.on("click", ".nazwa-zegar i.fas.fa-window-close", (ev) =>
+      this.closeApp(ev)
+    );
+  }
+
+  async closeApp(ev) {
+    if (this.data?.tykacz) {
+      await this.data.tykacz.update({ ["system.aktywny"]: false });
+    }
+    zegarTykacza.instances.delete(this.id); // Remove the instance from the Map
+    this.close();
+    game.socket.emit("system.chlopcy", {
+      type: "zamknijZegarTykacza",
+      id: this.id,
+    });
+  }
+}
+
+export class zegarTykaczaSocketHandler{
+    constructor() {
+    this.identifier = "system.chlopcy" // whatever event name is correct for your package
+    this.registerSocketEvents()
+  }
+  registerSocketEvents() {
+    game.socket.on("system.chlopcy", async (data) => {
+      if (data.type === "renderZegarTykacza") {
+        const actor = data.actor;
+        if (actor) {
+          zegarTykacza.initialise(actor);
+        }
+      }
+    });
+    game.socket.on("system.chlopcy", (data)=>{
+      if (data.type === "zamknijZegarTykacza") {
+        const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); // Convert Map values to an array
+        const tykacz = tykaczArray.find((element) => element.id === data.id); // Find the matching element
+      
+        if (tykacz) {
+          console.log("Found instance:", tykacz);
+          tykacz.close(); // Close the found instance
+        } else {
+          console.warn(`No instance found with ID: ${data.id}`);
+        }
+      }
+      
+
+    })
   }
 }

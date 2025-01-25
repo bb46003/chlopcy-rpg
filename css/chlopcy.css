@@ -532,6 +532,24 @@ label.tykacz-label {
 .zegar {
     background: aqua;
     position: absolute;
-    left: 20px;
-    top: 550px;
+    left: 1em;
+    top: 35em;
+}
+
+input.osiagi-input {
+    width: 100%;
+}
+
+.osiagi {
+    display: grid;
+    grid-template-columns: 2fr 0.1fr 0.1fr;
+    align-items: center;
+}
+.nazwa-zegar h1 {
+    text-align: center;
+}
+.nazwa-zegar i.fas.fa-window-close {
+    font-size: large;
+    position: sticky;
+    left: 100%;
 }

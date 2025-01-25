@@ -5,7 +5,7 @@ import { CHLOPCYCONFIG } from "./config.mjs";
 import * as chlopcyChat from "./chat/roll-mod.mjs"
 import { uzycieWiezi } from "./dialog/uzycie-wiezi.mjs";
 import { chlopcyActor } from "./actors/actors.mjs";
-import { zegarTykacza } from "./apps/zegary.mjs";
+import { zegarTykacza, zegarTykaczaSocketHandler } from "./apps/zegary.mjs";
 
 Hooks.once("init", async function () {
     
@@ -16,6 +16,7 @@ Hooks.once("init", async function () {
    
     game.chlopcy = {uzycieWiezi, zegarTykacza}
     CONFIG.Actor.documentClass = chlopcyActor;
+    game.chlopcy.zegarTykacza.socketHandler = new zegarTykaczaSocketHandler()
     return preloadHandlebarsTemplates();
   });
   
@@ -32,3 +33,29 @@ Hooks.on('preCreateScene', (scene) => {
       }
     })
 });
+Hooks.on("ready", async ()=>{
+  const tykacze = game.actors.filter(actor => actor.type === "tykacz");
+  tykacze.forEach(async tykacz => {
+    if(tykacz.system?.aktywny){
+      const nowyTykacz = new zegarTykacza(tykacz);
+      nowyTykacz.render(true)
+    }
+   
+    
+  });
+  
+
+})
+Hooks.on("renderzegarTykacza",async()=>{
+  const zegary = document.querySelectorAll(".zegar");
+    const sumHeight = Array.from(zegary).reduce((acc, zegar) => acc + zegar.offsetHeight, 0);
+    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const sumHeightInEm = sumHeight / rootFontSize;
+    const firstZegarTop = parseFloat(getComputedStyle(zegary[0]).top) +10;
+    const firstZegarTopInEm = firstZegarTop / rootFontSize;
+    const totalOffsetInEm = firstZegarTopInEm + sumHeightInEm;
+    const newElement = zegary[zegary.length-1]
+    newElement.style.position = 'absolute';
+    newElement.style.left = '1em'; // Assuming the same left position
+    newElement.style.top = `${totalOffsetInEm}em`; 
+})

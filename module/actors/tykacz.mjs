@@ -45,8 +45,19 @@ export class tykacz extends ActorSheet {
     }
     async uruchomZegar(ev){
         const target = ev.target;
-        const actor = game.actors.get(target.id);
-        const nowyTykacz = new zegarTykacza(actor);
-        nowyTykacz.render(true)
+        let id= target.id;
+        if(target.id === ""){
+            const closestButton = target.closest("button");
+            id=closestButton.id;
+        }
+        const actor = await game.actors.get(id);
+       
+      
+        zegarTykacza.initialise(actor);
+        await actor.update({['system.aktywny']:true})
+        game.socket.emit("system.chlopcy", {
+            type: "renderZegarTykacza",
+            actor: actor,
+        });
     }
 }
