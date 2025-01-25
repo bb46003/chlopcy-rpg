@@ -68,7 +68,7 @@ export class zegarTykacza extends Application {
     this.close();
     game.socket.emit("system.chlopcy", {
       type: "zamknijZegarTykacza",
-      id: this.id,
+      tykacz: this.data?.tykacz,
     });
   }
 }
@@ -89,14 +89,15 @@ export class zegarTykaczaSocketHandler{
     });
     game.socket.on("system.chlopcy", (data)=>{
       if (data.type === "zamknijZegarTykacza") {
-        const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); // Convert Map values to an array
-        const tykacz = tykaczArray.find((element) => element.id === data.id); // Find the matching element
-      
-        if (tykacz) {
-          console.log("Found instance:", tykacz);
-          tykacz.close(); // Close the found instance
+        const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); 
+        const tykacz = data.tykacz
+        const zegar = tykaczArray.find((element) => element.data.tykacz._id === tykacz._id); // Find the matching element
+        
+        if (zegar) {
+          
+          zegar.close(); // Close the found instance
         } else {
-          console.warn(`No instance found with ID: ${data.id}`);
+        
         }
       }
       
