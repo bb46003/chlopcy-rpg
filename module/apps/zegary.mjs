@@ -8,8 +8,12 @@ export class zegarTykacza extends Application {
 
 
     // Initialize instance data
-    const osizagiZegar = tykacz?.system.osiagi;
-    const czasZegar = tykacz?.system.czasTrwania;
+    const osizagiZegar = (tykacz?.system.pozostaleOsiagi > 0) 
+    ? tykacz?.system.pozostaleOsiagi 
+    : tykacz?.system.osiagi;
+    const czasZegar = (tykacz?.system.pozostalyCzas > 0)
+    ? tykacz?.system.pozostalyCzas
+    : tykacz?.system.czasTrwania
     this.data = {
       tykacz,
       osizagiZegar,
@@ -35,13 +39,8 @@ export class zegarTykacza extends Application {
   }
 
   static async initialise(tykacz) {
-    const id = tykacz?.id || foundry.utils.randomID();
-    if (!this.instances.has(id)) {
       const instance = new zegarTykacza(tykacz);
       instance.render(true);
-    } else {
-      console.warn(`Instance for ID ${id} already exists.`);
-    }
   }
 
   getData() {
@@ -58,24 +57,41 @@ export class zegarTykacza extends Application {
     html.on("click", ".nazwa-zegar i.fas.fa-window-close", (ev) =>
       this.closeApp(ev)
     );
+    html.on("click",".osiagi i.fa.fa-minus", (ev)=>this.zmiejszOsiagi(ev))
   }
 
   async closeApp(ev) {
     if (this.data?.tykacz) {
       await this.data.tykacz.update({ ["system.aktywny"]: false });
     }
-    zegarTykacza.instances.delete(this.id); // Remove the instance from the Map
+    zegarTykacza.instances.delete(this.id); 
     this.close();
     game.socket.emit("system.chlopcy", {
       type: "zamknijZegarTykacza",
       tykacz: this.data?.tykacz,
     });
   }
+  async zmiejszOsiagi(ev){
+    const obecnyTykacz = this;
+    const obecnieOsiagi = this.data.osizagiZegar;
+    const tykacz = obecnyTykacz.data.tykacz;
+    const noweOsiagi = obecnieOsiagi -1;
+    obecnyTykacz.data.osizagiZegar = noweOsiagi;
+    tykacz.update({["system.pozostaleOsiagi"]:noweOsiagi});
+    const container = obecnyTykacz.element; 
+    if (container) {
+      container.find(".osiagi-input").val(noweOsiagi);
+    }
+    if(noweOsiagi === 1){
+      this.closeApp(ev)
+    }
+    
+  }
 }
 
 export class zegarTykaczaSocketHandler{
     constructor() {
-    this.identifier = "system.chlopcy" // whatever event name is correct for your package
+    this.identifier = "system.chlopcy" 
     this.registerSocketEvents()
   }
   registerSocketEvents() {

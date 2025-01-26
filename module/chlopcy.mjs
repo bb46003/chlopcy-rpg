@@ -48,14 +48,14 @@ Hooks.on("ready", async ()=>{
 })
 Hooks.on("renderzegarTykacza",async()=>{
   const zegary = document.querySelectorAll(".zegar");
-    const sumHeight = Array.from(zegary).reduce((acc, zegar) => acc + zegar.offsetHeight, 0);
-    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const sumHeightInEm = sumHeight / rootFontSize;
-    const firstZegarTop = parseFloat(getComputedStyle(zegary[0]).top) +10;
-    const firstZegarTopInEm = firstZegarTop / rootFontSize;
-    const totalOffsetInEm = firstZegarTopInEm + sumHeightInEm;
+  if(zegary.length >1){
+    const topOffset = zegary[zegary.length-2].offsetTop;
+    const lasCientHeight = zegary[zegary.length-2].clientHeight;
+    const h1FontSize = parseFloat(getComputedStyle(document.body).fontSize);
+    const totalOffsetInEm = ((topOffset+lasCientHeight+10)/h1FontSize);
     const newElement = zegary[zegary.length-1]
     newElement.style.position = 'absolute';
     newElement.style.left = '1em'; // Assuming the same left position
     newElement.style.top = `${totalOffsetInEm}em`; 
+  }
 })

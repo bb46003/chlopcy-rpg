@@ -99,7 +99,9 @@
             "osiagi":2,
             "opis":"",
             "jestPrzeciwnikiem": false,
-            "jestCzas": false
+            "jestCzas": false,
+            "pozostalyCzas": 0,
+            "pozostaleOsiagi":0
         }
   
     },    
