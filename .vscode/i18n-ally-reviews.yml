@@ -941,3 +941,39 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-01-18T17:36:13.612Z'
+  chlopcy.pozostaleOsiagiTykacza:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: wo_6JanuDUYi-bFAjM2eV
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-26T15:22:09.830Z'
+  chlopcy.pozostalyCzasTykacza:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: xt3lGpX7OH9_mzoz_0WBA
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-26T15:26:03.301Z'
+  chlopcy.tykaczapp.zmiejsszCzas:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: cNcCY6qDll7owBXOffGLd
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-01-26T16:02:55.487Z'

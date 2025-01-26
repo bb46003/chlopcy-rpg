@@ -536,11 +536,11 @@ label.tykacz-label {
     top: 35em;
 }
 
-input.osiagi-input {
+input.osiagi-input, input.czas-trwania-input {
     width: 100%;
 }
 
-.osiagi {
+.osiagi, .czas-trwania {
     display: grid;
     grid-template-columns: 2fr 0.1fr 0.1fr;
     align-items: center;

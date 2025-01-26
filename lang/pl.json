@@ -172,7 +172,10 @@
     "tykaczapp": {
       "czasTrwaniaTykacza": "Czas trwania Tykacza:",
       "osiagiTykacza": "Wartość Osiagów wymagana do pokonania Tykacza",
-      "zmiejssz": "Zmniejsz ilość osiągów Tykacza"
-    }
+      "zmiejssz": "Zmniejsz ilość osiągów Tykacza",
+      "zmiejsszCzas": "Zmniejsz czas trwania Tykacza"
+    },
+    "pozostaleOsiagiTykacza": "Pozostałe osiągi Tykacza",
+    "pozostalyCzasTykacza": "Pozostały czas Tykacza"
   }
 }

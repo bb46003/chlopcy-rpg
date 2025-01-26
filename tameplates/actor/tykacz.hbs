@@ -11,6 +11,12 @@
                 {{#if system.jestCzas}}
                     <label>{{localize "chlopcy.podajCzasTrwania"}}</label>
                     <input type="number" name="system.czasTrwania" value="{{system.czasTrwania}}" min="1">
+                    {{#if (ne system.pozostalyCzas 0)}}
+                        <div class="osiagi-tykacza">
+                            <label class="tykacz-label">{{localize "chlopcy.pozostalyCzasTykacza"}}</label>
+                            <input type="number" name="system.pozostalyCzas" value="{{system.pozostalyCzas}}" min="1">
+                        </div>
+                    {{/if}}
                 {{/if}}
             </div>
             <div class="przeciwnik">
@@ -21,6 +27,12 @@
                 <label class="tykacz-label">{{localize "chlopcy.podajOsiagiTykacza"}}</label>
                 <input type="number" name="system.osiagi" value="{{system.osiagi}}" min="2">
             </div>
+            {{#if (ne system.pozostaleOsiagi 0)}}
+                <div class="osiagi-tykacza">
+                    <label class="tykacz-label">{{localize "chlopcy.pozostaleOsiagiTykacza"}}</label>
+                    <input type="number" name="system.pozostaleOsiagi" value="{{system.pozostaleOsiagi}}" min="1">
+                </div>
+            {{/if}}
         </div>
         <div class="opis">
             <label class="tykacz-label">{{localize "chlopcy.opisTykacza"}}</label>
