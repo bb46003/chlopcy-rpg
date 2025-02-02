@@ -36,7 +36,7 @@ export  default class rzutDoTarczy {
                             wybranyTag = tagi.querySelector("option:checked");
                         }
                         
-                        await this.prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsiagi);
+                        this.prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsiagi);
                     }
                 },
                 cancel: {
@@ -133,7 +133,7 @@ async roll(rollingData){
     }
     const kKB = rollingData.KB.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", {kKB: kKB });
-    rollingData.rolls = [RKB];
+    rollingData.rolls = [ RKB.toJSON()];
     rollingData.KB = wynikKB;
     rollingData.RDT = wynikKB;
     rollingData.plusMinus1 = false;
@@ -150,6 +150,7 @@ async roll(rollingData){
         content: template,
         system: rollingData
     }
+
     await RKB.toMessage(chatData);
     
 

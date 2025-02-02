@@ -251,9 +251,7 @@ input.sakwy-checkbo:checked {
     align-items: flex-end;
 }
 .wiezi {
-    display: flex;
-
-    justify-content: center;
+     justify-content: center;
 }
 .wiezi-label {
 

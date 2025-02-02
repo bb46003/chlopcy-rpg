@@ -1,8 +1,25 @@
 import { uzycieWiezi } from "../dialog/uzycie-wiezi.mjs"
 
-export function addChatListeners(_app, html, _data) {
-    html.on("click", "[class^='fas fa-dice-'], .fa-coin", dodajKM);
-    html.on("click", ".rectangle", dzialanieTagow);
+export function renderChatMessageHTML(_app, html, _data) {
+
+    const dice = document.querySelectorAll("[class^='fas fa-dice-'], .fa-coin");
+
+    if (dice.length !== 0) {
+        dice.forEach((die) => {
+
+            die.addEventListener('click', dodajKM);
+        });
+    }
+    const buttons = document.querySelectorAll(".rectangle");
+    if (buttons.length !== 0) {
+        buttons.forEach((button) => {
+
+            button.addEventListener('click', dzialanieTagow);
+        });
+    }
+
+    //html.on("click", "[class^='fas fa-dice-'], .fa-coin", dodajKM);
+    //html.on("click", ".rectangle", dzialanieTagow);
 
 }
 
@@ -35,7 +52,8 @@ export async function dodajKM(ev){
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
     }
     const rollingData = msg
-     rollingData.rolls[1] = RKM; 
+    console.log(rollingData)
+     rollingData.rolls[1] = RKM.toJSON(); 
     const actor = msg.actor;
     const rolls =  msg.rolls;
     const kKM = KM.replace(/d/g, "k");
