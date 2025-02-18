@@ -1,6 +1,6 @@
 import { uzycieWiezi } from "../dialog/uzycie-wiezi.mjs"
 
-export function renderChatMessageHTML(_app, html, _data) {
+export function renderChatMessageHTML(message, element, data) {
 
     const dice = document.querySelectorAll("[class^='fas fa-dice-'], .fa-coin");
 
@@ -188,7 +188,7 @@ async function przerzutKB(rollingData, msg, actor, id) {
     rollingData.uzytyTag = id;
     const formulaKB = rollingData.rolls[0].formula;
     const nowaKB =  await new Roll(formulaKB).evaluate();
-    rollingData.rolls[0]=nowaKB;
+    rollingData.rolls[0]=nowaKB.toJSON();
     rollingData.KB = nowaKB.total;
     rollingData.wykorzystsnytag = 1;
     let tekstKM, tesktDKM ="";
@@ -267,7 +267,7 @@ async function przerzutKM(rollingData, msg, actor, id) {
     const nowaKM =  await new Roll(formulaKM).evaluate();
     const wynikRKM = nowaKM.total;
     rollingData.KM = nowaKM.total;
-    rollingData.rolls[1] = nowaKM;
+    rollingData.rolls[1] = nowaKM.toJSON();
     const KB = rollingData.rolls[0].total;
     let tekstKM ="";
     const kKB = rollingData.rolls[0].formula.replace(/d/g, "k");
@@ -353,7 +353,7 @@ async function efektDodatkowejKM(rollingData, event, d, id) {
     const KB = rollingData.KB;
 
     const dodatkowyRKM = await new Roll(nowaKM).evaluate();
-    rollingData.rolls[2] = dodatkowyRKM;
+    rollingData.rolls[2] = dodatkowyRKM.toJSON();
     const DKM = dodatkowyRKM.total;
     rollingData.DKM = DKM;     
     const combinations = [
@@ -418,10 +418,10 @@ async function  przerzutWybranejKM(rollingData,event ,d, id) {
     const przerzuconaKM =  await new Roll(formulaKM).evaluate();
     const rzutyKM = rollingData.rolls;
     if(rzutyKM[1].formula === przerzuconaKM.formula){
-        rollingData.rolls[1] = przerzuconaKM;
+        rollingData.rolls[1] = przerzuconaKM.toJSON();
     }
     else{
-        rollingData.rolls[2] = przerzuconaKM;
+        rollingData.rolls[2] = przerzuconaKM.toJSON();
     }
 
     const KB = rollingData.rolls[0].total;

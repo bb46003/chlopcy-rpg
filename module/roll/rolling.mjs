@@ -82,7 +82,7 @@ async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsi
         KM: 0,
         DKM: 0,
     }
-    this.roll(rollingData)
+    await this.roll(rollingData)
 }
 async roll(rollingData){
     const RKB = await new Roll(rollingData.KB).evaluate();

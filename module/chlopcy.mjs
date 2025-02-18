@@ -20,7 +20,8 @@ Hooks.once("init", async function () {
     return preloadHandlebarsTemplates();
   });
   
-Hooks.on("renderChatMessageHTML", chlopcyChat.renderChatMessageHTML);
+//Hooks.on("renderChatMessageHTML",(message, element, data) => {
+  // chlopcyChat.renderChatMessageHTML(message, element, data)});
 
 Hooks.on('preCreateScene', (scene) => {
   scene.updateSource({
