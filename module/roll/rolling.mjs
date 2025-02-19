@@ -81,6 +81,7 @@ async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsi
         dodatkoweOsiagi: dodatkoweOsiagi,
         KM: 0,
         DKM: 0,
+        osiagi: 0
     }
     this.roll(rollingData)
 }
@@ -88,14 +89,18 @@ async roll(rollingData){
     const RKB = await new Roll(rollingData.KB).evaluate();
     const wynikKB = RKB.total;
     let osiagi = ""
+    let liczbaOsiagow = 0
     if(rollingData.przedmiot === ""){
         if(wynikKB === 10){
+            liczbaOsiagow = 3;
             osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
         }
         else if(wynikKB === 9 || wynikKB === 11) {
+            liczbaOsiagow = 2
             osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi")
         }
         else if (wynikKB === 8 || wynikKB === 12){
+            liczbaOsiagow = 1
             osiagi = game.i18n.localize("chlopcy.rzut.jeden_osiag")
         }
         else if (wynikKB === 20){
@@ -107,14 +112,18 @@ async roll(rollingData){
         }
     else{
         if(wynikKB === 10){
+            const iloscOsiagow = String(3 + rollingData.dodatkoweOsiagi);
+            liczbaOsiagow = iloscOsiagow
             osiagi = game.i18n.localize("chlopcy.rzut.BANGARANG");        
         }
         else if(wynikKB === 9 || wynikKB === 11) {
             const iloscOsiagow = String(2 + rollingData.dodatkoweOsiagi);
+            liczbaOsiagow = iloscOsiagow
             osiagi = game.i18n.localize("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow})
         }
         else if (wynikKB === 8 || wynikKB === 12){
             const iloscOsiagow = String(1 + rollingData.dodatkoweOsiagi);
+            liczbaOsiagow = iloscOsiagow
             if(iloscOsiagow == 2){
                 osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi") 
             }
@@ -129,7 +138,7 @@ async roll(rollingData){
         else{
             osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow")
         }
-
+      
     }
     const kKB = rollingData.KB.replace(/d/g, "k");
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", {kKB: kKB });
@@ -137,6 +146,7 @@ async roll(rollingData){
     rollingData.KB = wynikKB;
     rollingData.RDT = wynikKB;
     rollingData.plusMinus1 = false;
+    rollingData.osiagi = liczbaOsiagow;
     const actor = rollingData.actor;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
