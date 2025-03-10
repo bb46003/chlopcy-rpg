@@ -158,11 +158,14 @@ export class zegarTykaczaSocketHandler{
               if (container) {
                 container.find(".czas-trwania-input").val(nowyCzas);
               }
-
+        break;
+      
+       
       }
       
 
     })
+    
     
   }
 }

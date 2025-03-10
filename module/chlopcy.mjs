@@ -33,19 +33,19 @@ Hooks.on('preCreateScene', (scene) => {
       }
     })
 });
-Hooks.on("ready", async ()=>{
+Hooks.on("ready", async ()=>{ 
   const tykacze = game.actors.filter(actor => actor.type === "tykacz");
   tykacze.forEach(async tykacz => {
     if(tykacz.system?.aktywny){
       const nowyTykacz = new zegarTykacza(tykacz);
       nowyTykacz.render(true)
     }
-   
-    
-  });
+   })
+});
+
+  
   
 
-})
 Hooks.on("renderzegarTykacza",async()=>{
   const zegary = document.querySelectorAll(".zegar");
   if(zegary.length >1){
@@ -59,3 +59,8 @@ Hooks.on("renderzegarTykacza",async()=>{
     newElement.style.top = `${totalOffsetInEm}em`; 
   }
 })
+
+
+
+
+
