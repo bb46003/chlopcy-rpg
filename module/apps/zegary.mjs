@@ -121,7 +121,7 @@ export class zegarTykaczaSocketHandler{
   }
   registerSocketEvents() {
     game.socket.on("system.chlopcy", async (data) => {
-      let tykacz, zegar,container;
+      let wybranyTykacz, zegar,container;
       const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); 
       switch(data.type){
         case "renderZegarTykacza":
@@ -133,8 +133,8 @@ export class zegarTykaczaSocketHandler{
     
         case "zamknijZegarTykacza":
       
-          tykacz = data.tykacz
-          zegar = tykaczArray.find((element) => element.data.tykacz._id === tykacz._id);         
+        wybranyTykacz = data.tykacz
+          zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);         
           if (zegar) {          
             zegar.close(); 
           }     
@@ -142,18 +142,38 @@ export class zegarTykaczaSocketHandler{
 
         case "zmniejszOsiagiZegara":
               const noweOsiagi = data.noweOsiagi;
-              tykacz = data.tykacz
-              zegar = tykaczArray.find((element) => element.data.tykacz._id === tykacz._id);
-              container = zegar.element; 
-              if (container) {
-                container.find(".osiagi-input").val(noweOsiagi);
+              wybranyTykacz = data.tykacz
+              zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);
+             if(game.user.isGM){
+              const tykaczActor= game.actors.get(wybranyTykacz._id)
+              if(noweOsiagi <= 0){
+                game.socket.emit("system.chlopcy", {
+                  type: "zamknijZegarTykacza",
+                  tykacz: wybranyTykacz,
+                });
+                tykaczActor.update({["system.pozostaleOsiagi"]:0});
               }
+              else{
+  
+                tykaczActor.update({["system.pozostaleOsiagi"]:noweOsiagi})
+              }
+              
+             }
+            
+              zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);
+                container = zegar.element; 
+                if (container) {
+                    container.find(".osiagi-input").val(noweOsiagi);
+                }
+              
+               
+                  
         break;
 
         case "zmniejszCzasZegara":
           const nowyCzas = data.nowyCzas;
-          tykacz = data.tykacz
-          zegar = tykaczArray.find((element) => element.data.tykacz._id === tykacz._id);
+          wybranyTykacz = data.tykacz
+          zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);
           container = zegar.element; 
               if (container) {
                 container.find(".czas-trwania-input").val(nowyCzas);

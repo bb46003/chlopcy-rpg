@@ -977,3 +977,15 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-01-26T16:02:55.487Z'
+  chlopcy.ui.mastaMusiBycObecnyZebyZmieniacTykacz:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: Js7-XNVdeRwCiIvxBH401
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-10T21:31:24.459Z'

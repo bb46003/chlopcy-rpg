@@ -98,8 +98,7 @@ Handlebars.registerHelper("wybierzObrazKurtki", function(actor){
 
 Handlebars.registerHelper("czyJestTykacz", function(rollingData){
   const zegarTykacza = game.chlopcy.zegarTykacza?.instances;
-  console.log(rollingData, zegarTykacza)
-  if(zegarTykacza !== undefined && rollingData.osiagi !== 0){
+  if(zegarTykacza !== undefined && rollingData.iloscOsiagow !== 0){
     const buttonTile = game.i18n.localize("chlopcy.czat.wykorzystajOsiagiNaTykacz")
     const html = `<div class="rectangle" id="8">${buttonTile}</div> `
     return html
@@ -109,7 +108,7 @@ Handlebars.registerHelper("czyJestTykacz", function(rollingData){
 Handlebars.registerHelper("log", function(log){
   console.log(log)
 })
-Handlebars.registerHelper("isUserGM", function(tykacz){
+Handlebars.registerHelper("isUserGM", function(){
   const isGM = game.user.isGM;
   return isGM
 })

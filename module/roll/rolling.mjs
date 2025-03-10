@@ -81,7 +81,8 @@ async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsi
         dodatkoweOsiagi: dodatkoweOsiagi,
         KM: 0,
         DKM: 0,
-        osiagi: 0
+        osiagi: "",
+        iloscOsiagow: 0
     }
     this.roll(rollingData)
 }
@@ -146,7 +147,8 @@ async roll(rollingData){
     rollingData.KB = wynikKB;
     rollingData.RDT = wynikKB;
     rollingData.plusMinus1 = false;
-    rollingData.osiagi = liczbaOsiagow;
+    rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = liczbaOsiagow;
     const actor = rollingData.actor;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",

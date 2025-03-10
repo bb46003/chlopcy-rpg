@@ -44,9 +44,10 @@ async function dodajKM(ev){
     const tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB });
     const tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM });
     rollingData.KM = wynikRKM;
-    const  osiagi = await sprawdzRDT(rollingData,RDT,KB)
+    const  {osiagi, iloscOsiagow} = await sprawdzRDT(rollingData,RDT,KB)
     rollingData.RDT = RDT;
     rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = iloscOsiagow;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:wynikRKM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, uzytyTag:rollingData.uzytyTag},
@@ -117,15 +118,19 @@ async function dzialanieTagow(ev) {
       
 async function sprawdzRDT(rollingData,RDT,KB){
     let osiagi = "";
+    let iloscOsiagow = 0;
     if(rollingData.przedmiot === ""){
         if(RDT === 10){
-            osiagi = game.i18n.localize("chlopcy.rzut.trzy_osiagi");        
+            osiagi = game.i18n.localize("chlopcy.rzut.trzy_osiagi"); 
+            iloscOsiagow = 3       
         }
         else if(RDT === 9 || RDT === 11) {
-            osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi")
+            osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi");
+            iloscOsiagow = 2;
         }
         else if (RDT === 8 || RDT === 12){
             osiagi = game.i18n.localize("chlopcy.rzut.jeden_osiag")
+            iloscOsiagow = 1;
         }
         else if (KB === 20 && (RDT >12 || RDT < 8) ){
             osiagi = game.i18n.localize("chlopcy.rzut.pech")
@@ -140,15 +145,15 @@ async function sprawdzRDT(rollingData,RDT,KB){
         }
     else{
         if(RDT === 10){
-            const iloscOsiagow = (3 + rollingData.dodatkoweOsiagi);
+            iloscOsiagow = (3 + rollingData.dodatkoweOsiagi);
             osiagi = game.i18n.format("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow}) 
         }
         else if(RDT === 9 || RDT === 11) {
-            const iloscOsiagow = (2 + rollingData.dodatkoweOsiagi);
+            iloscOsiagow = (2 + rollingData.dodatkoweOsiagi);
             osiagi = game.i18n.format("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow})
         }
         else if (RDT === 8 || RDT === 12){
-            const iloscOsiagow = (1 + rollingData.dodatkoweOsiagi);
+            iloscOsiagow = (1 + rollingData.dodatkoweOsiagi);
             if(iloscOsiagow == 2){
                 osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi") 
             }
@@ -159,19 +164,23 @@ async function sprawdzRDT(rollingData,RDT,KB){
         }       
         else if (KB === 20 && (RDT >12 || RDT < 8) ){
             osiagi = game.i18n.localize("chlopcy.rzut.klopoty")
+           
         }
         else{
-            osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow")
+            osiagi = game.i18n.localize("chlopcy.rzut.brak_osiagow");
+            
         }
         if(KB===20){
-            osiagi+=game.i18n.localize("chlopcy.rzut.masz_komplikacje")
+            osiagi+=game.i18n.localize("chlopcy.rzut.masz_komplikacje");
+         
         }
 
     }
-    return osiagi
+    return {osiagi, iloscOsiagow} 
 }     
 
 async function przerzutKB(rollingData, msg, actor, id) {
+    let iloscOsiagow = 0;
     rollingData.uzytyTag = id;
     const formulaKB = rollingData.rolls[0].formula;
     const nowaKB =  await new Roll(formulaKB).evaluate();
@@ -181,7 +190,7 @@ async function przerzutKB(rollingData, msg, actor, id) {
     let tekstKM, tesktDKM ="";
     const kKB = formulaKB.replace(/d/g, "k");
     let RDT = nowaKB.total;
-    let osiagi =await sprawdzRDT(rollingData,RDT,nowaKB)
+    osiagi =await sprawdzRDT(rollingData,RDT,nowaKB)
     if(rollingData.KM !== 0 && rollingData.DKM === 0){
         const formulaKM = rollingData.rolls[1].formula;;
         const kKM = formulaKM.replace(/d/g, "k");
@@ -190,7 +199,7 @@ async function przerzutKB(rollingData, msg, actor, id) {
         const addResult = nowaKB.total + wynikRKM;
         const subResult = Math.abs(nowaKB.total-wynikRKM); 
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
-        osiagi =await sprawdzRDT(rollingData,RDT,nowaKB.total)
+        ({ osiagi, iloscOsiagow }  =await sprawdzRDT(rollingData,RDT,nowaKB.total))
     }
     else if(rollingData.DKM !== 0){
         const kKM = rollingData.rolls[1].formula.replace(/d/g, "k");
@@ -215,13 +224,13 @@ async function przerzutKB(rollingData, msg, actor, id) {
                 smallestDifference = difference;
             }
         });
-        osiagi =await sprawdzRDT(rollingData,RDT,nowaKB.total)
+        ({ osiagi, iloscOsiagow }  =await sprawdzRDT(rollingData,RDT,nowaKB.total))
     }
     if(rollingData.plusMinus1){
         let addResult = RDT + 1;
         let subResult = RDT - 1; 
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
-        osiagi =await sprawdzRDT(rollingData,RDT,nowaKB.total)
+        ({ osiagi, iloscOsiagow } = await sprawdzRDT(rollingData, RDT, nowaKB.total));
     }
     let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
     let rolls = msg.rolls;
@@ -234,6 +243,7 @@ async function przerzutKB(rollingData, msg, actor, id) {
     }
     rollingData.RDT = RDT;
     rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = iloscOsiagow;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:nowaKB.total, KM:rollingData.KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:rollingData.DKM, uzytyTag:rollingData.uzytyTag},
@@ -263,7 +273,9 @@ async function przerzutKM(rollingData, msg, actor, id) {
     const addResult = KB + wynikRKM;
     const subResult = Math.abs(KB-wynikRKM); 
     let RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
-    let osiagi =await sprawdzRDT(rollingData,RDT, KB);
+    let osiagi;
+    let iloscOsiagow;
+    ({osiagi, iloscOsiagow} =await sprawdzRDT(rollingData,RDT, KB));
     let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
     let rolls = msg.rolls;
     if (rollingData.wartoscTagu !==5){
@@ -284,6 +296,7 @@ async function przerzutKM(rollingData, msg, actor, id) {
     }
     rollingData.RDT = RDT;
     rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = iloscOsiagow;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:wynikRKM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:DKM, uzytyTag:rollingData.uzytyTag},
@@ -362,7 +375,7 @@ async function efektDodatkowejKM(rollingData, event, d, id) {
         }
     });
 
-    let  osiagi = await sprawdzRDT(rollingData,RDT,KB)
+    let  {osiagi,iloscOsiagow} = await sprawdzRDT(rollingData,RDT,KB)
     const kDKM = dodatkowyRKM.formula.replace(/d/g, "k");
     const tesktDKM = game.i18n.format("chlopcy.czat.wynik_DKM", { kDKM });
     if (rollingData.wartoscTagu !==5){
@@ -381,10 +394,11 @@ async function efektDodatkowejKM(rollingData, event, d, id) {
         let addResult = RDT + 1;
         let subResult = RDT - 1; 
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
-        osiagi =await sprawdzRDT(rollingData,RDT,KB)
+        ({osiagi, iloscOsiagow} =await sprawdzRDT(rollingData,RDT,KB))
     }
     rollingData.RDT = RDT;
     rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = iloscOsiagow;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:DKM, uzytyTag:rollingData.uzytyTag},
@@ -434,7 +448,7 @@ async function  przerzutWybranejKM(rollingData,event ,d, id) {
         }
     });
 
-    const  osiagi = await sprawdzRDT(rollingData,RDT,KB)
+    const  {osiagi,iloscOsiagow} = await sprawdzRDT(rollingData,RDT,KB)
     const kDKM = rollingData.rolls[2].formula.replace(/d/g, "k");
     const tesktDKM = game.i18n.format("chlopcy.czat.wynik_DKM", { kDKM });
     if (rollingData.wartoscTagu !==5){
@@ -451,6 +465,7 @@ async function  przerzutWybranejKM(rollingData,event ,d, id) {
     rollingData.uzytyTag = id;
     rollingData.RDT = RDT;
     rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = iloscOsiagow;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:DKM, uzytyTag:rollingData.uzytyTag},
@@ -498,10 +513,11 @@ async function dodajOdejmijJeden(rollingData,msg, actor, id) {
     }
     let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
     rollingData.uzytyTag = id;
-    const  osiagi = await sprawdzRDT(rollingData,RDT,KB)
+    const  {osiagi, iloscOsiagow} = await sprawdzRDT(rollingData,RDT,KB)
     rollingData.RDT = RDT
     rollingData.plusMinus1 = true;
     rollingData.osiagi = osiagi;
+    rollingData.iloscOsiagow = iloscOsiagow;
     const template = await renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:KB, KM:KM, RDT:RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:DKM, uzytyTag:rollingData.uzytyTag},
@@ -562,27 +578,41 @@ async function dodajXP(actor, rollingData) {
     await ChatMessage.create(chatData2);
 }
 
-async function zdejmijOsiagiTykacza(paractor, rollingData, idams) {
+async function zdejmijOsiagiTykacza(actor, rollingData, id) {
     const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); 
     if(tykaczArray.length > 1){
-
+        game.socket.emit("")
     }
     else{
         const tykacz = tykaczArray[0]
         const obecneOsiagiTykacza = tykacz.data.osiagiZegar;
-        const pozostaleOsiagiTykacza = obecneOsiagiTykacza - rollingData.osiagi;
-        tykacz.data.tykacz.update({["system.pozostaleOsiagi"]:pozostaleOsiagiTykacza});
-        const container = tykacz.element; 
-        if (container) {
-            container.find(".osiagi-input").val(pozostaleOsiagiTykacza);
+        const pozostaleOsiagiTykacza = obecneOsiagiTykacza - rollingData.iloscOsiagow;
+        console.log(obecneOsiagiTykacza,pozostaleOsiagiTykacza,rollingData.iloscOsiagow, tykacz)
+        const activeGMs = game.users.filter(user => user.active && user.isGM);
+
+        if (activeGMs.length > 0) {
+            if(pozostaleOsiagiTykacza >0){
+                const container = tykacz.element; 
+                    if (container) {
+                        container.find(".osiagi-input").val(pozostaleOsiagiTykacza);
+                    }       
+                game.socket.emit("system.chlopcy", {
+                    type: "zmniejszOsiagiZegara",
+                    noweOsiagi: pozostaleOsiagiTykacza,
+                    tykacz: tykacz.data.tykacz
+                });
+            }
+            else{
+                game.socket.emit("system.chlopcy", {
+                    type: "zamknijZegarTykacza",
+                    tykacz: tykacz.data.tykacz
+                  });
+            }
         }
-        if(pozostaleOsiagiTykacza <= 0){
-            this.closeApp(ev)
-        }
-        game.socket.emit("system.chlopcy", {
-            type: "zmniejszOsiagiZegara",
-            noweOsiagi: pozostaleOsiagiTykacza,
-            tykacz: tykacz
-          });    
+        else{
+            const uwaga = game.i18n.localize("chlopcy.ui.mastaMusiBycObecnyZebyZmieniacTykacz")
+            ui.notifications.warn(uwaga);
+
+        }    
     }
 }
