@@ -41,6 +41,25 @@ export class zegarTykacza extends Application {
   static async initialise(tykacz) {
       const instance = new zegarTykacza(tykacz);
       instance.render(true);
+      if(tykacz.system.jestPrzeciwnikiem){
+        if(game.user.isGM){
+          const walka = await Combat.create()
+          await walka.update({
+            active:true,
+            round: 1, 
+            turn: 0 });
+        }
+          game.combats.apps[0].renderPopout(true)
+          let combatApp = game.combats.apps[0]._popout; 
+          const windowSize = window.innerWidth; 
+          const combatAppSize = combatApp.position.width; 
+          const sideBar = ui.sidebar.position.width; 
+          const newLeftPosition = windowSize - combatAppSize - sideBar + 10;
+          combatApp.position.top =  0;
+          combatApp.position.left =  newLeftPosition 
+          
+          
+      }
   }
 
   getData() {
@@ -65,12 +84,14 @@ export class zegarTykacza extends Application {
     if (this.data?.tykacz) {
       await this.data.tykacz.update({ ["system.aktywny"]: false });
     }
-    zegarTykacza.instances.delete(this.id); 
-    this.close();
+   
     game.socket.emit("system.chlopcy", {
       type: "zamknijZegarTykacza",
       tykacz: this.data?.tykacz,
     });
+    zegarTykacza.instances.delete(this.id); 
+    this.close();
+    await game.combats.apps[0]._popout?.close()
   }
   async zmiejszOsiagi(ev){
     const obecnyTykacz = this;
@@ -128,6 +149,9 @@ export class zegarTykaczaSocketHandler{
           const actor = data.actor;
           if (actor) {
             zegarTykacza.initialise(actor);
+            if(actor.system.jestPrzeciwnikiem){
+            game.combats.apps[0].renderPopout(true)           
+            }
           }
         break;
     
@@ -136,7 +160,15 @@ export class zegarTykaczaSocketHandler{
         wybranyTykacz = data.tykacz
           zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);         
           if (zegar) {          
-            zegar.close(); 
+            zegar.close();
+            await game.combats.apps[0]._popout?.close()
+            if(game.user.isGM){
+              if (data?.tykacz) {
+                const tykaczActor= game.actors.get(wybranyTykacz._id)
+                await tykaczActor.update({ ["system.aktywny"]: false });
+                zegarTykacza.instances.delete(tykaczActor.id); 
+              }
+            }
           }     
         break;
 

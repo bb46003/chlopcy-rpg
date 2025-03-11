@@ -141,12 +141,16 @@
       "dostepneWiezi": "Wybierz Więzi",
       "uzyj": "Użyj",
       "usunNaszywke": "Czy chcesz usunąć naszywkę {name} ?",
-      "usunNaszywkeTytul": "Potwierdzenie usunięcia naszywki {name}"
+      "usunNaszywkeTytul": "Potwierdzenie usunięcia naszywki {name}",
+      "wybierzTykacz": "Wybierz Tykacz",
+      "modyfikujWybranyTykacz": "Modyfikuj wybrany Tykacz",
+      "wybierzTykaczDoModyfikacji": "W grze jest wiele Tykaczy, wybierz, który Tykach chcesz zmodyfikować swoimi Osiągami."
     },
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!",
       "nieMaszWystarczajacoBANGARANG": "NIe masz wystarczająco Punktów BANGARANG!",
-      "mastaMusiBycObecnyZebyZmieniacTykacz": "Masta Musi być obecny żeby zmieniać Tykacz!"
+      "mastaMusiBycObecnyZebyZmieniacTykacz": "Masta Musi być obecny żeby zmieniać Tykacz!",
+      "brakAktywnychTykaczy": "W grze nie ma aktywnych Tykaczy!"
     },
     "usun_wiez": "Usuń Więź",
     "kurta-i-wspomnienia": "Kurta i Szczęśliwe Wspomnienia",

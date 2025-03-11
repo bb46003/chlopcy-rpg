@@ -581,32 +581,79 @@ async function dodajXP(actor, rollingData) {
 async function zdejmijOsiagiTykacza(actor, rollingData, id) {
     const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); 
     if(tykaczArray.length > 1){
-        game.socket.emit("")
+       
+        const template = await renderTemplate(
+            "systems/chlopcy/tameplates/dialog/wybierz-tykacz.hbs",{tykaczArray: tykaczArray});
+        const tytul = game.i18n.localize("chlopcy.dialog.wybierzTykacz")
+            const d= new Dialog({
+                title: tytul,
+                content: template,
+                buttons:  {
+                    wybierz: {
+                        label: game.i18n.localize("chlopcy.dialog.modyfikujWybranyTykacz"),
+                        callback: async (html) => {
+                            const selectElement = html.find(".wybierz-tykacz")[0];
+                            const selectedOption = selectElement.options[selectElement.selectedIndex]; 
+                            const tykaczData = JSON.parse(selectedOption.dataset.tykacz); 
+                            const tykaczActor = game.actors.get(tykaczData.data.tykacz._id)
+                            const tykacze = game.chlopcy.zegarTykacza.instances;
+                            const tykacz = tykacze.get(tykaczData.options.id);
+                            await modyfikacjaTykacza(tykacz,tykaczActor,rollingData)
+                        }
+                    }
+                }
+            });
+            d.render(true)
+
     }
     else{
         const tykacz = tykaczArray[0]
-        const obecneOsiagiTykacza = tykacz.data.osiagiZegar;
+        if(tykacz !== undefined){
+            const wybranyTykacz = tykacz.data.tykacz
+            const tykaczActor= game.actors.get(wybranyTykacz._id);
+            await modyfikacjaTykacza(tykacz,tykaczActor,rollingData)
+        }
+        else{
+            const uwaga = game.i18n.localize("chlopcy.ui.brakAktywnychTykaczy")
+            ui.notifications.warn(uwaga); 
+        }
+        
+    }
+}
+async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
+    const obecneOsiagiTykacza = tykaczActor.system.pozostaleOsiagi;
         const pozostaleOsiagiTykacza = obecneOsiagiTykacza - rollingData.iloscOsiagow;
-        console.log(obecneOsiagiTykacza,pozostaleOsiagiTykacza,rollingData.iloscOsiagow, tykacz)
         const activeGMs = game.users.filter(user => user.active && user.isGM);
-
+   
         if (activeGMs.length > 0) {
+            const container = tykacz.element; 
             if(pozostaleOsiagiTykacza >0){
-                const container = tykacz.element; 
+               
                     if (container) {
                         container.find(".osiagi-input").val(pozostaleOsiagiTykacza);
-                    }       
+                    } 
+                   
+                       
                 game.socket.emit("system.chlopcy", {
                     type: "zmniejszOsiagiZegara",
                     noweOsiagi: pozostaleOsiagiTykacza,
                     tykacz: tykacz.data.tykacz
                 });
+                if(game.user.isGM){
+                    await tykaczActor.update({["system.pozostaleOsiagi"]:pozostaleOsiagiTykacza})
+                }
             }
             else{
                 game.socket.emit("system.chlopcy", {
                     type: "zamknijZegarTykacza",
                     tykacz: tykacz.data.tykacz
                   });
+                  if(game.user.isGM){
+                    await tykaczActor.update({ ["system.aktywny"]: false });
+                    zegarTykacza.instances.delete(tykaczActor.id); 
+                } 
+                    tykacz.close(); 
+             
             }
         }
         else{
@@ -614,5 +661,5 @@ async function zdejmijOsiagiTykacza(actor, rollingData, id) {
             ui.notifications.warn(uwaga);
 
         }    
-    }
+    
 }

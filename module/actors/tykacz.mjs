@@ -59,5 +59,6 @@ export class tykacz extends ActorSheet {
             type: "renderZegarTykacza",
             actor: actor,
         });
+        actor.sheet.close()
     }
 }

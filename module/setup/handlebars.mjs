@@ -105,9 +105,15 @@ Handlebars.registerHelper("czyJestTykacz", function(rollingData){
 
   }
 })
+
+Handlebars.registerHelper("json", function(context) {
+  return JSON.stringify(context);
+});
+
 Handlebars.registerHelper("log", function(log){
   console.log(log)
 })
+
 Handlebars.registerHelper("isUserGM", function(){
   const isGM = game.user.isGM;
   return isGM
