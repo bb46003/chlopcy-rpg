@@ -41,14 +41,18 @@ export class zegarTykacza extends Application {
   static async initialise(tykacz) {
       const instance = new zegarTykacza(tykacz);
       instance.render(true);
+      let walka;
       if(tykacz.system.jestPrzeciwnikiem){
         if(game.user.isGM){
-          const walka = await Combat.create()
+          
+          if(game.combats.size === 0){
+          walka = await Combat.create()
           await walka.update({
             active:true,
             round: 1, 
             turn: 0 });
-        }
+        
+        await this.dodajPostacieDowalki(walka)
           game.combats.apps[0].renderPopout(true)
           let combatApp = game.combats.apps[0]._popout; 
           const windowSize = window.innerWidth; 
@@ -57,7 +61,8 @@ export class zegarTykacza extends Application {
           const newLeftPosition = windowSize - combatAppSize - sideBar + 10;
           combatApp.position.top =  0;
           combatApp.position.left =  newLeftPosition 
-          
+          }
+      }
           
       }
   }
@@ -68,6 +73,53 @@ export class zegarTykacza extends Application {
       ...data,
       ...this.data,
     };
+  }
+  static async dodajPostacieDowalki(walka){
+    const dzieciaki =  game.actors.filter(actor => actor.type === "dzieciak");
+    const template = await renderTemplate(
+      "systems/chlopcy/tameplates/dialog/wybierz-dziaciaki-do-walki.hbs", {dzieciaki:dzieciaki} )
+      const tytul = game.i18n.localize("chlopcy.dialog.wyborDzieciakiDoWalki")
+      const d= new Dialog({
+          title: tytul,
+          content: template,
+          buttons:  {
+            dodaj:{                   
+              label: game.i18n.localize("chlopcy.dialog.dodajDoWalki"),
+              callback: async () => {
+                const wybraneDzieciaki = Array.from(document.querySelectorAll(".wybrany-dzieciak")).filter(input => input.value !== "all");
+                let i = 1;
+                const combatants = wybraneDzieciaki.map(input => {
+                    let actor = game.actors.get(input.value);
+                    if (!actor) return null;                
+                    const combatant = {
+                        actorId: actor.id,
+                        name: actor.name,
+                        initiative: i, 
+                        hidden: false
+                    };                
+                    i++; 
+                    return combatant;
+                }).filter(c => c !== null); 
+              await walka.createEmbeddedDocuments("Combatant", combatants);
+
+              }
+            }
+          },
+          render: (html) => {
+            html.on("change", ".wybrany-dzieciak", (event) => {
+              const checkboxes = html.find('.wybrany-dzieciak').not('[value="all"]');
+              if (event.target.value === "all") {
+                checkboxes.prop("checked", event.target.checked);
+              }
+            });
+          },
+          style: {
+            height: 'auto'
+          }
+        })
+        d.render(true)
+        
+
   }
 
   activateListeners(html) {
@@ -91,7 +143,15 @@ export class zegarTykacza extends Application {
     });
     zegarTykacza.instances.delete(this.id); 
     this.close();
-    await game.combats.apps[0]._popout?.close()
+    const przeciwnikExists = [...zegarTykacza.instances.values()].some(
+      instance => instance.data?.tykacz?.system.jestPrzeciwnikiem
+  );
+
+  if (!przeciwnikExists) {
+      await game.combat?.endCombat();
+      await game.combats.apps[0]._popout?.close()
+  }
+   
   }
   async zmiejszOsiagi(ev){
     const obecnyTykacz = this;
@@ -150,7 +210,7 @@ export class zegarTykaczaSocketHandler{
           if (actor) {
             zegarTykacza.initialise(actor);
             if(actor.system.jestPrzeciwnikiem){
-            game.combats.apps[0].renderPopout(true)           
+              game.combats.apps[0].renderPopout(true)           
             }
           }
         break;
@@ -167,6 +227,7 @@ export class zegarTykaczaSocketHandler{
                 const tykaczActor= game.actors.get(wybranyTykacz._id)
                 await tykaczActor.update({ ["system.aktywny"]: false });
                 zegarTykacza.instances.delete(tykaczActor.id); 
+                await game.combat.endCombat();
               }
             }
           }     

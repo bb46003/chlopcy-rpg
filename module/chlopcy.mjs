@@ -17,7 +17,11 @@ Hooks.once("init", async function () {
     game.chlopcy = {uzycieWiezi, zegarTykacza}
     CONFIG.Actor.documentClass = chlopcyActor;
     game.chlopcy.zegarTykacza.socketHandler = new zegarTykaczaSocketHandler()
+    if (game.i18n.lang !== "pl") {
+      game.i18n.lang = "pl";
+  }
     return preloadHandlebarsTemplates();
+    
   });
   
 Hooks.on("renderChatLog", chlopcyChat.addChatListeners);
@@ -39,6 +43,30 @@ Hooks.on("ready", async ()=>{
     if(tykacz.system?.aktywny){
       const nowyTykacz = new zegarTykacza(tykacz);
       nowyTykacz.render(true)
+      if(tykacz.system.jestPrzeciwnikiem){
+        if(game.user.isGM){
+          
+          if(game.combats.size === 0){
+          walka = await Combat.create()
+          await walka.update({
+            active:true,
+            round: 1, 
+            turn: 0 });
+        
+        await this.dodajPostacieDowalki(walka)
+          
+          }
+        }
+        
+        game.combats.apps[0].renderPopout(true)
+          let combatApp = game.combats.apps[0]._popout; 
+          const windowSize = window.innerWidth; 
+          const combatAppSize = combatApp.position.width; 
+          const sideBar = ui.sidebar.position.width; 
+          const newLeftPosition = windowSize - combatAppSize - sideBar + 10;
+          combatApp.position.top =  0;
+          combatApp.position.left =  newLeftPosition 
+      }    
     }
    })
 });

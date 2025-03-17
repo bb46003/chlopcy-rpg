@@ -63,7 +63,7 @@ export class dzieciak extends ActorSheet {
       async activateListeners(html) {
         super.activateListeners(html);
 
-        html.on("change", ".kostki-pyłek", (ev) =>this.dawkiPylku(ev));
+        html.on("change", ".kostki-pyłek", (ev) => this.dawkiPylku(ev));
         html.on("change", ".cecha-wartosc", (ev) =>this.wartoscTagu(ev));
         html.on("change", ".stan", (ev) =>this.zmianaStanu(ev));
         html.on("change", ".bangarang", (ev) =>this.zmianaBangarang(ev));
@@ -79,6 +79,9 @@ export class dzieciak extends ActorSheet {
         html.on("click","button.usun-nazywke", (ev) => this.usunNaszywki(ev))
         html.on("click","a#label-przody",(ev)=> this.dodajNaszywkę(ev))
         html.on("click contextmenu", ".naszywka-przody-obrazek", (ev) => this.owtorzNaszywke(ev))
+        html.on("click", '[data-action="roll-dice"]', (ev) => this.rzutNaPylek (ev))
+        html.on("click", '[for="uzycie_pylku"]', (ev) => this.uzyciePylku(ev))
+
 
       }
 
@@ -92,7 +95,7 @@ export class dzieciak extends ActorSheet {
       }   
       async _onDrop(event) {
         event.preventDefault();
-     
+        console.log("Checkbox checked:", event.target.checked);
         const data = event.dataTransfer;
         if (data) {
           const droppedItem = JSON.parse(data.getData("text/plain"));
@@ -132,6 +135,55 @@ export class dzieciak extends ActorSheet {
         }
         await this.actor.update(updateData)
         
+      }
+      async rzutNaPylek(ev){
+        ev.preventDefault();
+        let roll = new Roll("1d6");
+        await roll.evaluate();
+        const dawkiPyłku = this.actor.system.pylek;
+        const obecnieZaznaczonaDawka = Math.max(
+          ...Object.entries(dawkiPyłku)
+              .filter(([_, value]) => value === true) 
+              .map(([key]) => Number(key)), 
+          0 
+      );
+          let content = "";
+        const czasDzialania = roll.total;
+        if(obecnieZaznaczonaDawka >= czasDzialania){
+          let efekt = ""
+            switch (czasDzialania) {
+                case 1:
+                case 2:
+                  efekt = game.i18n.localize("chlopcy.przytkanie");
+                  break;
+                case 3:
+                case 4:
+                  efekt = game.i18n.localize("chlopcy.krwawienie")
+                  break;
+                case 5:
+                case 6:
+                  efekt = game.i18n.localize("chlopcy.odciecie")
+                  break;
+            }
+          
+          content = game.i18n.format("chlopcy.czat.przyjeciepylkuZEfektem",{actor: this.actor.name, efekt:efekt, czasDzialania:czasDzialania});
+         
+        }
+        else{
+          content=game.i18n.format("chlopcy.czat.przyjeciepylkuBezEfektu",{actor: this.actor.name, czasDzialania:czasDzialania});
+         
+        }
+        this.actor.update({[`system.pylek.${obecnieZaznaczonaDawka+1}`]:true})
+        roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: game.user.character }),
+            flavor: content
+        });
+
+      }
+      async uzyciePylku(ev){
+        const checkbox = document.getElementById('uzycie_pylku');
+        this.actor.update({["system.pod_wplywem_pylku"]: !checkbox.checked}); 
+              
       }
       async wartoscTagu(ev){
         const target = ev.target.checked;

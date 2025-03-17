@@ -1,12 +1,19 @@
 <div class="pyłek-label">
+    <input type="checkbox" class="uzycie-pylku" name="system.pod_wplywem_pylku" id="uzycie_pylku" {{#if system.pod_wplywem_pylku}}checked{{/if}} hidden>
     
-    <input type="checkbox" class="użycuie-pylku" name="system.pod_wplywem_pylku" id="uzycie_pylku"{{#if system.pod_wplywem_pylku}}checked{{/if}}>
     {{#if system.pod_wplywem_pylku}}
-     <label for="uzycie_pylku" class="pod_wplywem_pylku" data-tooltip="{{localize "chlopcy.koniec_dzialania_pylku"}}">{{localize "chlopcy.pod_wpływem_pylku"}}</label>
+        <label for="uzycie_pylku" class="pod_wplywem_pylku" data-tooltip="{{localize "chlopcy.koniec_dzialania_pylku"}}">
+            {{localize "chlopcy.pod_wpływem_pylku"}}
+        </label>
     {{else}}
-    <label for="uzycie_pylku" data-tooltip="{{localize "chlopcy.uzyj_pylku"}}">{{localize "chlopcy.pylek"}}</label>
+        <label for="uzycie_pylku" data-tooltip="{{localize "chlopcy.uzyj_pylku"}}" data-action="roll-dice">
+            {{localize "chlopcy.pylek"}}
+        </label>
     {{/if}}
 </div>
+
+
+
 <div class="kostki-pulku">
 <div class="przytkanie">
     <div class="kostki">

@@ -553,3 +553,11 @@ input.osiagi-input, input.czas-trwania-input {
     position: sticky;
     left: 100%;
 }
+.lista-dzieciakow {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: center;
+}
+label.ksywka-do-walki {
+    justify-self: left;
+}

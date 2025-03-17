@@ -119,7 +119,9 @@
       "uzytoBangarang": "Wykorzystałeś/Wykorzystałaś punky BANGARANG z puli {typ} aby zdać test.",
       "dodajXP": "Dodaj punkt rozwoju",
       "zdobylesXP": "Zyskujesz punkt rozwoju za wyrzucenie {KB} na KB!",
-      "wykorzystajOsiagiNaTykacz": "Wykorzystaj zdobyte osoiągi na pokonanie Tykacza"
+      "wykorzystajOsiagiNaTykacz": "Wykorzystaj zdobyte osoiągi na pokonanie Tykacza",
+      "przyjeciepylkuZEfektem": "<strong>{actor}</strong> przyją dawkę pyłku z efektem ubocznym <strong>{efekt}</strong>.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostek czasu.",
+      "przyjeciepylkuBezEfektu": "<strong>{actor}</strong> przyją dawkę pyłku bez efektu ubocznego.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostk czasu."
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
@@ -144,7 +146,11 @@
       "usunNaszywkeTytul": "Potwierdzenie usunięcia naszywki {name}",
       "wybierzTykacz": "Wybierz Tykacz",
       "modyfikujWybranyTykacz": "Modyfikuj wybrany Tykacz",
-      "wybierzTykaczDoModyfikacji": "W grze jest wiele Tykaczy, wybierz, który Tykach chcesz zmodyfikować swoimi Osiągami."
+      "wybierzTykaczDoModyfikacji": "W grze jest wiele Tykaczy, wybierz, który Tykach chcesz zmodyfikować swoimi Osiągami.",
+      "wybierzDzieciakiDoWalki": "Wybierz któe Dzieciaki biorą udział w rozpoczętej walce:",
+      "dodajWszystkieDziaciaki": "Dodaj wszystkie Dzieciaki do walki",
+      "wyborDzieciakiDoWalki": "Wybierz kto bierze udział w walce",
+      "dodajDoWalki": "Dodaj wybrne Dzieciaki do walki"
     },
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!",

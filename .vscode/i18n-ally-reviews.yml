@@ -1037,3 +1037,83 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-03-11T10:15:57.175Z'
+  chlopcy.dialog.wybierzDzieciakiDoWalki:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: T6CXvOspPJVmj5EBmloAN
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-12T11:03:58.158Z'
+  chlopcy.dialog.dodajWszystkieDziaciaki:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: hiqwel54ULEB0G58XQmox
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-12T11:09:43.045Z'
+  chlopcy.dialog.wyborDzieciakiDoWalki:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: N16oTS2JaTvs-Q74Lx-k5
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-12T11:11:46.639Z'
+  chlopcy.dialog.dodajDoWalki:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: Gk2t0jGvDWyDpeTqN79Ti
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-12T11:13:26.852Z'
+  chlopcy.czat.przyjeciepylkuZEfektem:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: O99phaV-ffhjRcjmflDi6
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-17T11:38:25.769Z'
+          - user:
+              name: Unknown
+              email: ''
+            id: 83J2SfQBtQBmDRwpbBITg
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-17T11:48:20.445Z'
+  chlopcy.czat.przyjeciepylkuBezEfektu:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: wQW1UnsqeGcYPPdp-SoUM
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-17T11:48:05.204Z'
