@@ -538,7 +538,7 @@ async function dodajOdejmijJeden(rollingData,msg, actor, id) {
 async function  uzyjWiezji(rollingData,msg, actor, id){
         
     const uzycieW = new uzycieWiezi(rollingData,msg, actor, id)
-    uzycieW.pokazDostempneWiezi(rollingData,msg, actor, id)
+    uzycieW.pokazDostepneWiezi(rollingData,msg, actor, id)
 }
 
 async function dodajXP(actor, rollingData) {
