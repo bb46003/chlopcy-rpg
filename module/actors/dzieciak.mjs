@@ -64,6 +64,7 @@ export class dzieciak extends ActorSheet {
         super.activateListeners(html);
 
         html.on("change", ".kostki-pyłek", (ev) => this.dawkiPylku(ev));
+        html.on("click", "label.inside", (ev) => this.dawkiPylku(ev));
         html.on("change", ".cecha-wartosc", (ev) =>this.wartoscTagu(ev));
         html.on("change", ".stan", (ev) =>this.zmianaStanu(ev));
         html.on("change", ".bangarang", (ev) =>this.zmianaBangarang(ev));
@@ -116,23 +117,29 @@ export class dzieciak extends ActorSheet {
       }  
       async dawkiPylku(ev){
         ev.preventDefault(); 
-       
-        const id = Number(ev.target.labels[0].id);
-        const val = ev.target.checked;
+       console.log(ev)
+        const id = Number(ev.currentTarget.outerText);
+        let targetId = ev.target.id; 
+        let val = document.querySelector(`input[type="checkbox"]#${CSS.escape(targetId)}`).checked
         let updateData = {};
-        if (val){
-        for(let i=1; i<=id; i++){
-          updateData[`system.pylek.${i}`]= val
+        const currentPylek = this.actor.system.pylek[id];
+         
+        for(let i=1; i<=6; i++){
+          if(i<id && val=== currentPylek){
+          updateData[`system.pylek.${i}`]= true
+          }
+          else{
+            updateData[`system.pylek.${i}`]= false
+          }
+          if(i === id){
+            updateData[`system.pylek.${i}`]= !currentPylek
+          }
          
         }
-      }
-        else{
-          for(let i=id; i<=6; i++){
-          updateData[`system.pylek.${i}`]=val
-          }
-        
+      
 
-        }
+
+        
         await this.actor.update(updateData)
         
       }
@@ -140,15 +147,30 @@ export class dzieciak extends ActorSheet {
         ev.preventDefault();
         let roll = new Roll("1d6");
         await roll.evaluate();
-        const dawkiPyłku = this.actor.system.pylek;
-        const obecnieZaznaczonaDawka = Math.max(
+        let dawkiPyłku = this.actor.system.pylek;
+        let obecnieZaznaczonaDawka = Math.max(
           ...Object.entries(dawkiPyłku)
               .filter(([_, value]) => value === true) 
               .map(([key]) => Number(key)), 
           0 
-      );
+        );
           let content = "";
         const czasDzialania = roll.total;
+        let kolejnaDawka
+        if(obecnieZaznaczonaDawka+1 >= 6 ){
+          kolejnaDawka = 6
+        }
+        else{
+          kolejnaDawka = obecnieZaznaczonaDawka+1
+        }
+        await this.actor.update({[`system.pylek.${kolejnaDawka}`]:true})
+        dawkiPyłku = this.actor.system.pylek;
+        obecnieZaznaczonaDawka = Math.max(
+          ...Object.entries(dawkiPyłku)
+              .filter(([_, value]) => value === true) 
+              .map(([key]) => Number(key)), 
+          0 
+        );
         if(obecnieZaznaczonaDawka >= czasDzialania){
           let efekt = ""
             switch (czasDzialania) {
@@ -173,7 +195,7 @@ export class dzieciak extends ActorSheet {
           content=game.i18n.format("chlopcy.czat.przyjeciepylkuBezEfektu",{actor: this.actor.name, czasDzialania:czasDzialania});
          
         }
-        this.actor.update({[`system.pylek.${obecnieZaznaczonaDawka+1}`]:true})
+
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: game.user.character }),
             flavor: content
@@ -205,6 +227,9 @@ export class dzieciak extends ActorSheet {
          }
          else{
            value = Number(ev.target.value)-1;
+           if(value === 0){
+            value = 1
+           }
            await this.actor.update({["system.stan"]:value})
          }
       }

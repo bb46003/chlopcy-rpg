@@ -190,7 +190,9 @@ async function przerzutKB(rollingData, msg, actor, id) {
     let tekstKM, tesktDKM ="";
     const kKB = formulaKB.replace(/d/g, "k");
     let RDT = nowaKB.total;
-    osiagi =await sprawdzRDT(rollingData,RDT,nowaKB)
+    let osiagi
+
+    ({ osiagi, iloscOsiagow }  =await sprawdzRDT(rollingData,RDT,nowaKB))
     if(rollingData.KM !== 0 && rollingData.DKM === 0){
         const formulaKM = rollingData.rolls[1].formula;;
         const kKM = formulaKM.replace(/d/g, "k");

@@ -209,6 +209,7 @@ input[type="checkbox"].kostki-pyłek:checked + label.inside {
 .kostki-pulku {
     display: flex;
     margin: auto;
+    z-index: 9999
 }
 .eq-i-nowe-szlify {
     display: flex;

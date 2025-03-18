@@ -97,8 +97,8 @@ Handlebars.registerHelper("wybierzObrazKurtki", function(actor){
 })
 
 Handlebars.registerHelper("czyJestTykacz", function(rollingData){
-  const zegarTykacza = game.chlopcy.zegarTykacza?.instances;
-  if(zegarTykacza !== undefined && rollingData.iloscOsiagow !== 0){
+  const zegarTykacza = game.chlopcy.zegarTykacza?.instances.size;
+  if(zegarTykacza !== 0 && rollingData.iloscOsiagow !== 0){
     const buttonTile = game.i18n.localize("chlopcy.czat.wykorzystajOsiagiNaTykacz")
     const html = `<div class="rectangle" id="8">${buttonTile}</div> `
     return html

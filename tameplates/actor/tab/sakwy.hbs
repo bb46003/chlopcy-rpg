@@ -3,10 +3,10 @@
     <label >{{localize "chlopcy.sakwy"}}</label>
     </div>
     <div class="sakwy-check-box">
-    {{#if (eq system.tagi.bajker.opis (lowercase (localize "chlopcy.scigacz")))}}
+    {{#if (eq (lowercase system.tagi.bajker.opis) (lowercase (localize "chlopcy.scigacz")))}}
         <input type="checkbox" class="sakwy-checkbo"  value=1 {{#if (eq system.sakwy 1)}}checked{{/if}}>
     {{else}}
-        {{#if (eq system.tagi.bajker.opis (lowercase (localize "chlopcy.turystyk")))}}
+        {{#if (eq (lowercase system.tagi.bajker.opis) (lowercase (localize "chlopcy.turystyk")))}}
             <input type="checkbox" class="sakwy-checkbo"  value=1 {{#if (gte system.sakwy 1)}}checked{{/if}}>
             <input type="checkbox" class="sakwy-checkbo"  value=2 {{#if (gte system.sakwy 2)}}checked{{/if}}>
             <input type="checkbox" class="sakwy-checkbo"  value=3 {{#if (eq system.sakwy 3)}}checked{{/if}}>

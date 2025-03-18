@@ -19,6 +19,7 @@
         <p class="rzut-kb">{{KB}}</p>
     </div>
     {{/if}}
+    {{#if (ne rollingData.stan 3)}}
     {{#if (ne KM 0)}}
         <div class="wyniki-KB">
             <label class="label-KB">{{tekstKB}}</label>
@@ -66,7 +67,8 @@
             {{/if}}
            
         {{#czywiezi rollingData}}
-        {{/czywiezi}}   
+        {{/czywiezi}} 
+        {{/if}}  
         {{#czyextraXP rollingData}}
         {{/czyextraXP}} 
         {{#czyJestTykacz rollingData}}
