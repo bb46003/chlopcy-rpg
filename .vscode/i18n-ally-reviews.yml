@@ -1117,3 +1117,27 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-03-17T11:48:05.204Z'
+  chlopcy.czat.pozytywnyWynikTwardziela:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: kjGZMiTp6zL3OFrWsRcD8
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-25T22:35:40.925Z'
+  chlopcy.czat.negatywnyWynikTwardziela:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: x5wHI48bayFJESSXqNofx
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-03-25T22:36:33.203Z'

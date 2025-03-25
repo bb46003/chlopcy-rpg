@@ -82,6 +82,7 @@ export class dzieciak extends ActorSheet {
         html.on("click contextmenu", ".naszywka-przody-obrazek", (ev) => this.owtorzNaszywke(ev))
         html.on("click", '[data-action="roll-dice"]', (ev) => this.rzutNaPylek (ev))
         html.on("click", '[for="uzycie_pylku"]', (ev) => this.uzyciePylku(ev))
+        html.on("click", '.top-section-label-twardziel', (ev) => this.rzutNaTwardziela(ev))
 
 
       }
@@ -446,5 +447,28 @@ export class dzieciak extends ActorSheet {
         if (ev.type === "contextmenu") {
           item.sheet.render(true);
         } 
+      }
+      async rzutNaTwardziela(ev){
+        const actor = this.actor;
+        const obecnyTwardziel = actor.system.twardziel.aktualne
+        const rzutNaTwardziela =  new Roll("1d8")
+        await rzutNaTwardziela.evaluate();
+        const wynikRzutu = rzutNaTwardziela.total;
+        let content;
+        if(wynikRzutu <= obecnyTwardziel){
+          content = game.i18n.localize("chlopcy.czat.pozytywnyWynikTwardziela")
+          rzutNaTwardziela.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: game.user.character }),
+            flavor: content
+          })
+        }
+        else{
+          content = game.i18n.localize("chlopcy.czat.negatywnyWynikTwardziela")
+          rzutNaTwardziela.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: game.user.character }),
+            flavor: content
+          })
+
+        }
       }
 }

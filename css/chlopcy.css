@@ -83,7 +83,7 @@ input.zdrowie, input.twardziel, input.wiek{
     max-width: 40%;
 
 }
-label.top-section-label {
+label.top-section-label, a.top-section-label-twardziel{
     margin-left: auto;
     margin-right: 5px;
 }
@@ -97,10 +97,7 @@ label.top-section-label {
     display: grid;
     grid-template-rows: 0.2fr 2fr;
 }
-.sheet img[data-edit] {
-    cursor: pointer;
-    height: 100%;
-}
+
 .stan.row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -236,6 +233,12 @@ input.sakwy-checkbo:checked {
     height: 100%;
     min-height: 10rem;
     flex: 1;
+  }
+  .sheet img[data-edit] {
+    cursor: pointer;
+    /* height: 100%; */
+    max-width: 200px;
+    max-height: 250px;
   }
 
   textarea.sprzet-osobisty-textarea {

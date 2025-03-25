@@ -121,7 +121,9 @@
       "zdobylesXP": "Zyskujesz punkt rozwoju za wyrzucenie {KB} na KB!",
       "wykorzystajOsiagiNaTykacz": "Wykorzystaj zdobyte osoiągi na pokonanie Tykacza",
       "przyjeciepylkuZEfektem": "<strong>{actor}</strong> przyją dawkę pyłku z efektem ubocznym <strong>{efekt}</strong>.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostek czasu.",
-      "przyjeciepylkuBezEfektu": "<strong>{actor}</strong> przyją dawkę pyłku bez efektu ubocznego.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostk czasu."
+      "przyjeciepylkuBezEfektu": "<strong>{actor}</strong> przyją dawkę pyłku bez efektu ubocznego.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostk czasu.",
+      "pozytywnyWynikTwardziela": "Udało Ci się dalej stoisz na nogach!",
+      "negatywnyWynikTwardziela": "Padasz na ryj."
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",

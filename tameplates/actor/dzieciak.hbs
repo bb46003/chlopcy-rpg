@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="twardziel row">
-                    <label class="top-section-label">{{localize "chlopcy.trwardziel"}}</label>
+                    <a class="top-section-label-twardziel">{{localize "chlopcy.trwardziel"}}</a>
                     <div class="twardziel-wartości">
                     <input class="twardziel" type="number" name="system.twardziel.aktualne" value="{{system.twardziel.aktualne}}">
                     <p>/</p>
@@ -107,7 +107,8 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="glowna" data-tab="glowna">{{localize "chlopcy.glowna"}}</a>
         <a class="kurta-i-wspomnienia" data-tab="kurta-i-wspomnienia">{{localize "chlopcy.kurta-i-wspomnienia"}}</a>
-        <a class="wiezi" data-tab="wiezi">{{localize "chlopcy.wiezi"}}</a>     
+        <a class="wiezi" data-tab="wiezi">{{localize "chlopcy.wiezi"}}</a>   
+        <a class="opis" data-tab="opis">{{localize "chlopcy.opis"}}</a>  
     </nav>
 <section class="sheet-body">
 <section class="bottom-section">
@@ -121,6 +122,10 @@
         </div>
          <div class="tab wiezi" data-group="primary" data-tab="wiezi">
             {{> "systems/chlopcy/tameplates/actor/section/wiezi.hbs"}}
+            
+        </div>
+        <div class="tab opis" data-group="primary" data-tab="opis">
+            {{> "systems/chlopcy/tameplates/actor/section/opis.hbs"}}
             
         </div>
 

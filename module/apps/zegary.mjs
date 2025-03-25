@@ -41,6 +41,10 @@ export class zegarTykacza extends Application {
   static async initialise(tykacz) {
       const instance = new zegarTykacza(tykacz);
       instance.render(true);
+      await tykacz.update({
+        ["system.pozostaleOsiagi"]:tykacz.system.osiagi,
+        ["system.pozostalyCzas"]:tykacz.system.czasTrwania
+      })
       let walka;
       if(tykacz.system.jestPrzeciwnikiem){
         if(game.user.isGM){
@@ -226,8 +230,10 @@ export class zegarTykaczaSocketHandler{
               if (data?.tykacz) {
                 const tykaczActor= game.actors.get(wybranyTykacz._id)
                 await tykaczActor.update({ ["system.aktywny"]: false });
-                zegarTykacza.instances.delete(tykaczActor.id); 
-                await game.combat.endCombat();
+                zegarTykacza.instances.delete(zegar.id); 
+                if (data?.tykacz.system.jestPrzeciwnikiem){
+                  await game.combat.endCombat();
+                }
               }
             }
           }     
