@@ -41,7 +41,10 @@ export class zegarTykacza extends Application {
   static async initialise(tykacz) {
       const instance = new zegarTykacza(tykacz);
       instance.render(true);
- 
+      await tykacz.update({
+        ["system.pozostaleOsiagi"]:tykacz.system.osiagi,
+        ["system.pozostalyCzas"]:tykacz.system.czasTrwania
+      })
       let walka;
       if(tykacz.system.jestPrzeciwnikiem){
         if(game.user.isGM){
@@ -144,7 +147,6 @@ export class zegarTykacza extends Application {
     });
     zegarTykacza.instances.delete(this.id); 
     this.close();
-    game.chlopcy.zegarTykacza.instances.delete(zegar.id); 
     const przeciwnikExists = [...zegarTykacza.instances.values()].some(
       instance => instance.data?.tykacz?.system.jestPrzeciwnikiem
   );
@@ -223,13 +225,12 @@ export class zegarTykaczaSocketHandler{
           zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);         
           if (zegar) {          
             zegar.close();
-            game.chlopcy.zegarTykacza.instances.delete(zegar.id); 
             await game.combats.apps[0]._popout?.close()
             if(game.user.isGM){
               if (data?.tykacz) {
                 const tykaczActor= game.actors.get(wybranyTykacz._id)
                 await tykaczActor.update({ ["system.aktywny"]: false });
-               
+                zegarTykacza.instances.delete(zegar.id); 
                 if (data?.tykacz.system.jestPrzeciwnikiem){
                   await game.combat.endCombat();
                 }
