@@ -655,7 +655,8 @@ async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
                     await tykaczActor.update({ ["system.aktywny"]: false });
                     zegarTykacza.instances.delete(tykaczActor.id); 
                 } 
-                    tykacz.close(); 
+                    tykacz.close();
+                    game.chlopcy.zegarTykacza.instances.delete(tykacz.id); 
              
             }
         }
