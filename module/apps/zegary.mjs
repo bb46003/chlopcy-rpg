@@ -1,13 +1,8 @@
 export class zegarTykacza extends Application {
-  static instances = new Map(); // Static Map to store instances
-
+  static instances = new Map();
   constructor(tykacz) {
     super();
 
-  
-
-
-    // Initialize instance data
     const osiagiZegar = (tykacz?.system.pozostaleOsiagi > 0) 
     ? tykacz?.system.pozostaleOsiagi 
     : tykacz?.system.osiagi;
@@ -16,11 +11,10 @@ export class zegarTykacza extends Application {
     : tykacz?.system.czasTrwania
     this.data = {
       tykacz,
-      osiagiZegar,
-      czasZegar,
+      osiagiZegar: osiagiZegar,
+      czasZegar: czasZegar,
     };
 
-    // Store the instance in the Map
     zegarTykacza.instances.set(this.id, this);
   }
 
@@ -41,10 +35,6 @@ export class zegarTykacza extends Application {
   static async initialise(tykacz) {
       const instance = new zegarTykacza(tykacz);
       instance.render(true);
-      await tykacz.update({
-        ["system.pozostaleOsiagi"]:tykacz.system.osiagi,
-        ["system.pozostalyCzas"]:tykacz.system.czasTrwania
-      })
       let walka;
       if(tykacz.system.jestPrzeciwnikiem){
         if(game.user.isGM){
@@ -199,92 +189,3 @@ export class zegarTykacza extends Application {
   }
 }
 
-export class zegarTykaczaSocketHandler{
-    constructor() {
-    this.identifier = "system.chlopcy" 
-    this.registerSocketEvents()
-  }
-  registerSocketEvents() {
-    game.socket.on("system.chlopcy", async (data) => {
-      let wybranyTykacz, zegar,container;
-      const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); 
-      switch(data.type){
-        case "renderZegarTykacza":
-          const actor = data.actor;
-          if (actor) {
-            zegarTykacza.initialise(actor);
-            if(actor.system.jestPrzeciwnikiem){
-              game.combats.apps[0].renderPopout(true)           
-            }
-          }
-        break;
-    
-        case "zamknijZegarTykacza":
-      
-        wybranyTykacz = data.tykacz
-          zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);         
-          if (zegar) {          
-            zegar.close();
-            await game.combats.apps[0]._popout?.close()
-            if(game.user.isGM){
-              if (data?.tykacz) {
-                const tykaczActor= game.actors.get(wybranyTykacz._id)
-                await tykaczActor.update({ ["system.aktywny"]: false });
-                zegarTykacza.instances.delete(zegar.id); 
-                if (data?.tykacz.system.jestPrzeciwnikiem){
-                  await game.combat.endCombat();
-                }
-              }
-            }
-          }     
-        break;
-
-        case "zmniejszOsiagiZegara":
-              const noweOsiagi = data.noweOsiagi;
-              wybranyTykacz = data.tykacz
-              zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);
-             if(game.user.isGM){
-              const tykaczActor= game.actors.get(wybranyTykacz._id)
-              if(noweOsiagi <= 0){
-                game.socket.emit("system.chlopcy", {
-                  type: "zamknijZegarTykacza",
-                  tykacz: wybranyTykacz,
-                });
-                tykaczActor.update({["system.pozostaleOsiagi"]:0});
-              }
-              else{
-  
-                tykaczActor.update({["system.pozostaleOsiagi"]:noweOsiagi})
-              }
-              
-             }
-            
-              zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);
-                container = zegar.element; 
-                if (container) {
-                    container.find(".osiagi-input").val(noweOsiagi);
-                }
-              
-               
-                  
-        break;
-
-        case "zmniejszCzasZegara":
-          const nowyCzas = data.nowyCzas;
-          wybranyTykacz = data.tykacz
-          zegar = tykaczArray.find((element) => element.data.tykacz._id === wybranyTykacz._id);
-          container = zegar.element; 
-              if (container) {
-                container.find(".czas-trwania-input").val(nowyCzas);
-              }
-        break;
-      
-       
-      }
-      
-
-    })
-    
-    
-  }
-}

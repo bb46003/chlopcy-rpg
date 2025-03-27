@@ -624,7 +624,7 @@ async function zdejmijOsiagiTykacza(actor, rollingData, id) {
     }
 }
 async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
-    const obecneOsiagiTykacza = tykaczActor.system.pozostaleOsiagi;
+    const obecneOsiagiTykacza = tykacz.data.osiagiZegar;
         const pozostaleOsiagiTykacza = obecneOsiagiTykacza - rollingData.iloscOsiagow;
         const activeGMs = game.users.filter(user => user.active && user.isGM);
    
@@ -636,7 +636,7 @@ async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
                         container.find(".osiagi-input").val(pozostaleOsiagiTykacza);
                     } 
                    
-                       
+                    tykacz.data.osiagiZegar = pozostaleOsiagiTykacza;   
                 game.socket.emit("system.chlopcy", {
                     type: "zmniejszOsiagiZegara",
                     noweOsiagi: pozostaleOsiagiTykacza,
@@ -651,10 +651,12 @@ async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
                     type: "zamknijZegarTykacza",
                     tykacz: tykacz.data.tykacz
                   });
+
                   if(game.user.isGM){
                     await tykaczActor.update({ ["system.aktywny"]: false });
-                    zegarTykacza.instances.delete(tykaczActor.id); 
+                     
                 } 
+                zegarTykacza.instances.delete(tykacz.id);
                     tykacz.close(); 
              
             }

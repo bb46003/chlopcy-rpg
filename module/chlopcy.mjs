@@ -5,7 +5,8 @@ import { CHLOPCYCONFIG } from "./config.mjs";
 import * as chlopcyChat from "./chat/roll-mod.mjs"
 import { uzycieWiezi } from "./dialog/uzycie-wiezi.mjs";
 import { chlopcyActor } from "./actors/actors.mjs";
-import { zegarTykacza, zegarTykaczaSocketHandler } from "./apps/zegary.mjs";
+import { zegarTykacza } from "./apps/zegary.mjs";
+import {SocketHandler} from "./socketHandler.mjs"
 
 Hooks.once("init", async function () {
     
@@ -16,7 +17,7 @@ Hooks.once("init", async function () {
    
     game.chlopcy = {uzycieWiezi, zegarTykacza}
     CONFIG.Actor.documentClass = chlopcyActor;
-    game.chlopcy.zegarTykacza.socketHandler = new zegarTykaczaSocketHandler()
+    game.chlopcy.zegarTykacza.socketHandler = new SocketHandler()
     if (game.i18n.lang !== "pl") {
       game.i18n.lang = "pl";
   }

@@ -29,7 +29,7 @@ export class uzycieWiezi extends Dialog {
             }
         });
         const templateData = {
-            actorID: actorId, // make sure this is being passed here
+            actorID: actorId, 
             matchingActors: matchingActors,
             rollingData: rollingData,
             pustyTag: game.i18n.localize("chlopcy.bez_tagu")
@@ -42,16 +42,14 @@ export class uzycieWiezi extends Dialog {
             content: dialogTemplate,
             buttons: {
                 use: {
-                    label: "Use",
+                    label: game.i18n.localize("chlopcy.dialog.uzyj"),
                     callback: async (html) => {
                         await this.modyfikujDaneRzutu(rollingData,msg, actor, id, html)
                     }
                 }
             },
-            default: game.i18n.localize("chlopcy.dialog.uzyj"),
-            close: () => {
-                console.log("Dialog closed.");
-            }
+            default: game.i18n.localize("chlopcy.dialog.uzyj")
+           
         }).render(true);
     }
     async dostosujWartoscWiezi(event){
@@ -283,7 +281,16 @@ export class uzycieWiezi extends Dialog {
         const actor = game.actors.get(wiez.id);
         const nowaWartosc = String(actor.system.wiezi[celWieziID].wartosc - Number(wiez.value));
         const updateData = {[`system.wiezi.${celWieziID}.wartosc`]: nowaWartosc}
+        if(actor.ownership[game.user.id] === 3){
         await actor.update(updateData)
+        }
+        else{
+          game.socket.emit("system.chlopcy", {
+            type: "aktualizacjaWiezi",
+            updateData: updateData,
+            actor: actor
+          });
+        }
         }
       })
     }
