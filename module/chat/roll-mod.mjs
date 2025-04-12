@@ -21,9 +21,9 @@ async function dodajKM(ev){
     let addResult, subResult, subResult2, addResult2, RDT ;
     if(msg.plusMinus1){
         addResult = KB + wynikRKM + 1;
-        subResult = Math.abs(KB-wynikRKM) +1;
+        subResult = KB-wynikRKM +1;
         addResult2 = KB + wynikRKM - 1;
-        subResult2 = Math.abs(KB-wynikRKM) - 1; 
+        subResult2 = KB-wynikRKM - 1; 
         const results = [addResult, subResult, addResult2, subResult2];
         RDT = results.reduce((closest, current) => 
             Math.abs(current - 10) < Math.abs(closest - 10) ? current : closest
@@ -32,7 +32,7 @@ async function dodajKM(ev){
     }
     else{
         addResult = KB + wynikRKM;
-        subResult = Math.abs(KB-wynikRKM); 
+        subResult = KB-wynikRKM; 
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
     }
     const rollingData = msg
@@ -200,7 +200,7 @@ async function przerzutKB(rollingData, msg, actor, id) {
         const wynikRKM = rollingData.rolls[1].total
         tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM });
         const addResult = nowaKB.total + wynikRKM;
-        const subResult = Math.abs(nowaKB.total-wynikRKM); 
+        const subResult = nowaKB.total-wynikRKM; 
         RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
         ({ osiagi, iloscOsiagow }  =await sprawdzRDT(rollingData,RDT,nowaKB.total))
     }
@@ -274,7 +274,7 @@ async function przerzutKM(rollingData, msg, actor, id) {
     const kKB = rollingData.rolls[0].formula.replace(/d/g, "k");
     tekstKM = game.i18n.format("chlopcy.czat.wynik_KM", { kKM:formulaKM });
     const addResult = KB + wynikRKM;
-    const subResult = Math.abs(KB-wynikRKM); 
+    const subResult = KB-wynikRKM; 
     let RDT = Math.abs(10 - addResult) <= Math.abs(10 - subResult) ? addResult : subResult;
     let osiagi;
     let iloscOsiagow;

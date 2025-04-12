@@ -1141,3 +1141,15 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-03-25T22:36:33.203Z'
+  chlopcy.opis:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: 9KfBiLqdaTYw-Uxb2MBQw
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-04-12T20:20:34.668Z'
