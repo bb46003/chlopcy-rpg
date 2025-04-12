@@ -80,7 +80,7 @@ export class zegarTykacza extends Application {
             dodaj:{                   
               label: game.i18n.localize("chlopcy.dialog.dodajDoWalki"),
               callback: async () => {
-                const wybraneDzieciaki = Array.from(document.querySelectorAll(".wybrany-dzieciak")).filter(input => input.value !== "all");
+                const wybraneDzieciaki = Array.from(document.querySelectorAll(".wybrany-dzieciak")).filter(input => input.checked);
                 let i = 1;
                 const combatants = wybraneDzieciaki.map(input => {
                     let actor = game.actors.get(input.value);
