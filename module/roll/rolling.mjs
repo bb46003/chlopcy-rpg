@@ -1,3 +1,6 @@
+import chlopcy_Utility from "../utility.mjs";
+ 
+
 export  default class rzutDoTarczy {
 
     constructor(actor, cecha) {
@@ -19,7 +22,7 @@ export  default class rzutDoTarczy {
           label: tag.opis,
           value: tag.wartosc
         }));
-        const html = await renderTemplate( "systems/chlopcy/tameplates/dialog/pytanie-o-tag.hbs", {tagi:tagiNazwy, stan:stan})
+        const html = await chlopcy_Utility.renderTemplate( "systems/chlopcy/tameplates/dialog/pytanie-o-tag.hbs", {tagi:tagiNazwy, stan:stan})
         const label = game.i18n.localize("TABLE.Roll");          
         const preroll = new Dialog({
             title: game.i18n.localize("chlopcy.wybierz_tag"),
@@ -150,7 +153,7 @@ async roll(rollingData){
     rollingData.osiagi = osiagi;
     rollingData.iloscOsiagow = liczbaOsiagow;
     const actor = rollingData.actor;
-    const template = await renderTemplate(
+    const template = await chlopcy_Utility.renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:osiagi, KB:wynikKB, RDT:wynikKB, tekstKB:tekstKB, KM:0},
       );

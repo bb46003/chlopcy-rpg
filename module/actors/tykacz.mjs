@@ -1,6 +1,8 @@
 import { zegarTykacza } from "../apps/zegary.mjs";
 
-export class tykacz extends ActorSheet {
+const BaseActorSheet = (typeof foundry?.appv1?.sheets?.ActorSheet !== "undefined") ? foundry.appv1.sheets.ActorSheet : ActorSheet;
+
+export class tykacz extends BaseActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
           classes: ["chlopcy"],

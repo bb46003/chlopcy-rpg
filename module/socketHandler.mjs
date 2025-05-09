@@ -88,7 +88,21 @@ export class SocketHandler{
           const updateData = data.updateData
           if(actorToUpdate.ownership[game.user.id] === 3){
             await actorToUpdate.update(updateData)
-            }   
+          }
+        break;
+
+        case "aktualizacjaOpisuWięzi":
+          if(!game.user.isGM){
+            const userActor = game.user.character;
+            if(userActor._id !== data.sourceActor._id){
+              if(userActor.system.wiezi[data.sourceActor._id] !== undefined)
+                await userActor.update({
+                  [`system.wiezi.${data.sourceActor._id}.img`]: data.actorImg,
+                  [`system.wiezi.${data.sourceActor._id}.name`]: data.actorName
+                })
+             }
+            }
+        break;
       }
     }) 
   }

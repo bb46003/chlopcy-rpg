@@ -1,3 +1,6 @@
+import chlopcy_Utility from "../utility.mjs";
+ 
+
 export class zegarTykacza extends Application {
   static instances = new Map();
   constructor(tykacz) {
@@ -70,7 +73,7 @@ export class zegarTykacza extends Application {
   }
   static async dodajPostacieDowalki(walka){
     const dzieciaki =  game.actors.filter(actor => actor.type === "dzieciak");
-    const template = await renderTemplate(
+    const template = await chlopcy_Utility.renderTemplate(
       "systems/chlopcy/tameplates/dialog/wybierz-dziaciaki-do-walki.hbs", {dzieciaki:dzieciaki} )
       const tytul = game.i18n.localize("chlopcy.dialog.wyborDzieciakiDoWalki")
       const d= new Dialog({

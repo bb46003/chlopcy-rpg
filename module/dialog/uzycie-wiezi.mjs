@@ -1,3 +1,6 @@
+import chlopcy_Utility from "../utility.mjs";
+ 
+
 export class uzycieWiezi extends Dialog {
 
     constructor(rollingData,msg, actor, id) {
@@ -35,7 +38,7 @@ export class uzycieWiezi extends Dialog {
             pustyTag: game.i18n.localize("chlopcy.bez_tagu")
         };
       
-        const dialogTemplate = await renderTemplate('systems/chlopcy/tameplates/dialog/uzyj-wiezi.hbs', templateData);
+        const dialogTemplate = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/uzyj-wiezi.hbs', templateData);
         new uzycieWiezi({
             data: {rollingData,msg, actor, id},
             title: game.i18n.localize("chlopcy.dialog.dostepneWiezi"),
@@ -256,7 +259,7 @@ export class uzycieWiezi extends Dialog {
       }
       let tekstKB = game.i18n.format("chlopcy.czat.wynik_KB", { kKB});
       
-      const template = await renderTemplate(
+      const template = await chlopcy_Utility.renderTemplate(
         "systems/chlopcy/tameplates/chat/rdt.hbs",
         {rollingData:rollingData, osiagi:rollingData.osiagi, KB:rollingData.KB, KM:rollingData.KM, RDT:rollingData.RDT, tekstKB:tekstKB, tekstKM:tekstKM, tekstDKM:tesktDKM, DKM:rollingData.DKM, uzytyTag:rollingData.uzytyTag, uzyteWiezi: uzyteWiezi},
       );

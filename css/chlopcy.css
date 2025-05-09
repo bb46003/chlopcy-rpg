@@ -254,11 +254,7 @@ input.sakwy-checkbo:checked {
     justify-content: center;
     align-items: flex-end;
 }
-.wiezi {
-    display: flex;
 
-    justify-content: center;
-}
 .wiezi-label {
 
     display: flex;
@@ -471,8 +467,7 @@ img.obraz-kurtki {
 }
 .nazwa-naszywki {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
+ 
 }
 input.nazwa-naszywki{
     text-align: center;
@@ -534,7 +529,7 @@ label.tykacz-label {
     margin-left: auto;
 }
 .zegar {
-    background: aqua;
+    background: #0029ff;;
     position: absolute;
     left: 1em;
     top: 35em;
@@ -548,6 +543,7 @@ input.osiagi-input, input.czas-trwania-input {
     display: grid;
     grid-template-columns: 2fr 0.1fr 0.1fr;
     align-items: center;
+    column-gap: 5px;
 }
 .nazwa-zegar h1 {
     text-align: center;
@@ -564,4 +560,15 @@ input.osiagi-input, input.czas-trwania-input {
 }
 label.ksywka-do-walki {
     justify-self: left;
+}
+
+.borderless-naszywka{
+    aspect-ratio: auto;
+    max-height: 80px;
+}
+.gorna-sekcja{
+    display: flex    ;
+    flex-direction: row;
+    column-gap: 5em;
+    justify-content: flex-start;
 }
