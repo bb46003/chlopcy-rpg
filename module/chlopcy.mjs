@@ -18,7 +18,7 @@ Hooks.once("init", async function () {
     CHLOPCYCONFIG.ItemSheet    = generation < 13 ? ItemSheet      : foundry.appv1.sheets.ItemSheet;
     registerSheets(CONFIG.CHLOPCYCONFIG);
    
-    registerHandlebarsHelpers(generation);    
+    registerHandlebarsHelpers();    
     console.log("System \"Chłopcy RPG\" został poprawnie załadowany");
    
    
@@ -28,7 +28,7 @@ Hooks.once("init", async function () {
     if (game.i18n.lang !== "pl") {
       game.i18n.lang = "pl";
   }
-    return preloadHandlebarsTemplates();
+    return preloadHandlebarsTemplates(generation);
     
   });
   
