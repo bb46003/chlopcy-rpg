@@ -7,13 +7,20 @@ import { uzycieWiezi } from "./dialog/uzycie-wiezi.mjs";
 import { chlopcyActor } from "./actors/actors.mjs";
 import { zegarTykacza } from "./apps/zegary.mjs";
 import {SocketHandler} from "./socketHandler.mjs"
+import chlopcy_Utility from "./utility.mjs"
 
 Hooks.once("init", async function () {
-    
-    registerSheets();
-    registerHandlebarsHelpers();    
-    console.log("System \"Chłopcy RPG\" został poprawnie załadowany");
     CONFIG.CHLOPCYCONFIG = CHLOPCYCONFIG;
+    const generation = game.release.generation
+    CHLOPCYCONFIG.Actors       = generation < 13 ? Actors         : foundry.documents.collections.Actors;
+    CHLOPCYCONFIG.ActorSheet   = generation < 13 ? ActorSheet     : foundry.appv1.sheets.ActorSheet;
+    CHLOPCYCONFIG.Items        = generation < 13 ? Items          : foundry.documents.collections.Items;
+    CHLOPCYCONFIG.ItemSheet    = generation < 13 ? ItemSheet      : foundry.appv1.sheets.ItemSheet;
+    registerSheets(CONFIG.CHLOPCYCONFIG);
+   
+    registerHandlebarsHelpers(generation);    
+    console.log("System \"Chłopcy RPG\" został poprawnie załadowany");
+   
    
     game.chlopcy = {uzycieWiezi, zegarTykacza}
     CONFIG.Actor.documentClass = chlopcyActor;

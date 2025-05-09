@@ -9,3 +9,4 @@ CHLOPCYCONFIG.bajker = {
     klasyk : "chlopcy.klasyk"
 
 }
+

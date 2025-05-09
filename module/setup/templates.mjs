@@ -1,5 +1,5 @@
-export const preloadHandlebarsTemplates = async function () {
-    return loadTemplates([
+export const preloadHandlebarsTemplates = async function (generation) {
+   const loadTemplates= [
         "systems/chlopcy/tameplates/actor/tab/cechy.hbs",
         "systems/chlopcy/tameplates/actor/tab/cechy-check-box.hbs",
         "systems/chlopcy/tameplates/actor/tab/tagi-check-box.hbs",
@@ -14,8 +14,9 @@ export const preloadHandlebarsTemplates = async function () {
         "systems/chlopcy/tameplates/chat/partial/tag-mod.hbs",
         "systems/chlopcy/tameplates/chat/partial/uzyte-wiezi.hbs",
         "systems/chlopcy/tameplates/actor/section/opis.hbs"
-
-
-
-    ])
+    ];
+    if (generation < 13) {
+        return loadTemplates(loadTemplates);
+    }
+    return foundry.applications.handlebars.loadTemplates(loadTemplates);
 }

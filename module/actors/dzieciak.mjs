@@ -1,6 +1,10 @@
 import rzutDoTarczy from "../roll/rolling.mjs";
+import chlopcy_Utility from "../utility.mjs";
 
-export class dzieciak extends ActorSheet {
+
+const BaseActorSheet = (typeof foundry?.appv1?.sheets?.ActorSheet !== "undefined") ? foundry.appv1.sheets.ActorSheet : ActorSheet;
+
+export class dzieciak extends BaseActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
           classes: ["chlopcy", "sheet", "actor", "character", "dialog-button"],
@@ -59,6 +63,8 @@ export class dzieciak extends ActorSheet {
     
         return context
       }
+    
+ 
 
       async activateListeners(html) {
         super.activateListeners(html);
@@ -276,7 +282,7 @@ export class dzieciak extends ActorSheet {
       async dodajWięzi(ev){
         const actor = this.actor;
         const othersActors = game.actors.filter(actorX => (actorX.type === "dzieciak")&&(actorX !== actor));
-        const dialogTemplate = await renderTemplate("systems/chlopcy/tameplates/dialog/dodaj-wiezi.hbs",{othersActors:othersActors});
+        const dialogTemplate = await chlopcy_Utility.renderTemplate("systems/chlopcy/tameplates/dialog/dodaj-wiezi.hbs",{othersActors:othersActors});
         const tytul = game.i18n.localize("chlopcy.dialog.wybierz_postac_do_wiezi")
         const d= new Dialog({
           title: tytul,
