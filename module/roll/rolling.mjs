@@ -123,7 +123,7 @@ async roll(rollingData){
         else if(wynikKB === 9 || wynikKB === 11) {
             const iloscOsiagow = String(2 + rollingData.dodatkoweOsiagi);
             liczbaOsiagow = iloscOsiagow
-            osiagi = game.i18n.localize("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow})
+            osiagi = game.i18n.format("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow})
         }
         else if (wynikKB === 8 || wynikKB === 12){
             const iloscOsiagow = String(1 + rollingData.dodatkoweOsiagi);
@@ -132,7 +132,7 @@ async roll(rollingData){
                 osiagi = game.i18n.localize("chlopcy.rzut.dwa_osiagi") 
             }
             else{
-                osiagi = game.i18n.localize("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow}) 
+                osiagi = game.i18n.format("chlopcy.rzut.wiele_osiagów",{iloscOsiagow:iloscOsiagow}) 
             }
             
         }
