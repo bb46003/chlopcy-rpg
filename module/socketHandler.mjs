@@ -54,9 +54,13 @@ export class SocketHandler{
                 tykaczActor.update({["system.pozostaleOsiagi"]:0});
               }
               else{
-  
+                const actor = data?.actor;
+                const zdjeceOsiagi = data?.zdjeteOsiagi;
                 tykaczActor.update({["system.pozostaleOsiagi"]:noweOsiagi})
                 zegar.data.osiagiZegar = noweOsiagi
+                if(tykaczActor.system.jestPrzeciwnikiem && actor !== undefined && zdjeceOsiagi !== undefined){
+                  await tykaczActor.setFlag( "chlopcy",actor, zdjeceOsiagi)
+                }
               }
               
              }

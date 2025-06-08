@@ -16,6 +16,9 @@
     {{/if}}
         <div class="osiagi">
         <label class="osiagi-label">{{localize "chlopcy.tykaczapp.osiagiTykacza"}}</label>
+        {{#if (isUserGM)}}
+            <i class="fa fa-plus osiagi" data-tooltip="{{localize "chlopcy.tykaczapp.zwiększ"}}"></i>
+        {{/if}} 
         <input class="osiagi-input" value="{{osiagiZegar}}" disabled>
         {{#if (isUserGM)}}
             <i class="fa fa-minus osiagi" data-tooltip="{{localize "chlopcy.tykaczapp.zmiejssz"}}"></i>

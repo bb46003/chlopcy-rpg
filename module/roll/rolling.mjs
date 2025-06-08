@@ -85,7 +85,8 @@ async prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsi
         KM: 0,
         DKM: 0,
         osiagi: "",
-        iloscOsiagow: 0
+        iloscOsiagow: 0,
+        wykorzystaneOsiagi: false
     }
     this.roll(rollingData)
 }

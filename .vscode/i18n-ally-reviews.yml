@@ -1153,3 +1153,15 @@ reviews:
             suggestion: ''
             type: approve
             time: '2025-04-12T20:20:34.668Z'
+  chlopcy.ui.wykorzystalesTeOsiagi:
+    locales:
+      pl:
+        comments:
+          - user:
+              name: Unknown
+              email: ''
+            id: wEIq4k9oetLv0DoH1RTvL
+            comment: ''
+            suggestion: ''
+            type: approve
+            time: '2025-06-08T08:56:07.518Z'

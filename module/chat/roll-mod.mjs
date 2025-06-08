@@ -108,7 +108,7 @@ async function dzialanieTagow(ev) {
             dodajXP(actor,rollingData);
             break;
         case 8:
-            zdejmijOsiagiTykacza(actor, rollingData, id)
+            zdejmijOsiagiTykacza(rollingData, msg)
             break;
 
 
@@ -582,13 +582,14 @@ async function dodajXP(actor, rollingData) {
     await ChatMessage.create(chatData2);
 }
 
-async function zdejmijOsiagiTykacza(actor, rollingData, id) {
+async function zdejmijOsiagiTykacza(rollingData, msg) {
     const tykaczArray = Array.from(game.chlopcy.zegarTykacza.instances.values()); 
-    if(tykaczArray.length > 1){
-       
-        const template = await chlopcy_Utility.renderTemplate(
-            "systems/chlopcy/tameplates/dialog/wybierz-tykacz.hbs",{tykaczArray: tykaczArray});
-        const tytul = game.i18n.localize("chlopcy.dialog.wybierzTykacz")
+    if(!msg.system.wykorzystaneOsiagi){
+        await msg.update({['system.wykorzystaneOsiagi']:true})
+        if(tykaczArray.length > 1){
+            const template = await chlopcy_Utility.renderTemplate(
+                "systems/chlopcy/tameplates/dialog/wybierz-tykacz.hbs",{tykaczArray: tykaczArray});
+            const tytul = game.i18n.localize("chlopcy.dialog.wybierzTykacz")
             const d= new Dialog({
                 title: tytul,
                 content: template,
@@ -602,33 +603,37 @@ async function zdejmijOsiagiTykacza(actor, rollingData, id) {
                             const tykaczActor = game.actors.get(tykaczData.data.tykacz._id)
                             const tykacze = game.chlopcy.zegarTykacza.instances;
                             const tykacz = tykacze.get(tykaczData.options.id);
-                            await modyfikacjaTykacza(tykacz,tykaczActor,rollingData)
+                            await modyfikacjaTykacza(tykacz, tykaczActor, rollingData, msg)
                         }
                     }
                 }
             });
             d.render(true)
 
-    }
-    else{
-        const tykacz = tykaczArray[0]
-        if(tykacz !== undefined){
-            const wybranyTykacz = tykacz.data.tykacz
-            const tykaczActor= game.actors.get(wybranyTykacz._id);
-            await modyfikacjaTykacza(tykacz,tykaczActor,rollingData)
         }
         else{
-            const uwaga = game.i18n.localize("chlopcy.ui.brakAktywnychTykaczy")
-            ui.notifications.warn(uwaga); 
-        }
+            const tykacz = tykaczArray[0]
+            if(tykacz !== undefined){
+                const wybranyTykacz = tykacz.data.tykacz
+                const tykaczActor= game.actors.get(wybranyTykacz._id);
+                await modyfikacjaTykacza(tykacz, tykaczActor, rollingData, msg)
+            }
+            else{
+                const uwaga = game.i18n.localize("chlopcy.ui.brakAktywnychTykaczy")
+                ui.notifications.warn(uwaga); 
+            }
         
+        }
+    }
+    else{
+        ui.notifications.warn(game.i18n.localize("chlopcy.ui.wykorzystalesTeOsiagi"));
     }
 }
-async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
-    const obecneOsiagiTykacza = tykacz.data.osiagiZegar;
+async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData, msg) {
+        const obecneOsiagiTykacza = tykacz.data.osiagiZegar;
         const pozostaleOsiagiTykacza = obecneOsiagiTykacza - rollingData.iloscOsiagow;
         const activeGMs = game.users.filter(user => user.active && user.isGM);
-   
+
         if (activeGMs.length > 0) {
             const container = tykacz.element; 
             if(pozostaleOsiagiTykacza >0){
@@ -641,10 +646,15 @@ async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
                 game.socket.emit("system.chlopcy", {
                     type: "zmniejszOsiagiZegara",
                     noweOsiagi: pozostaleOsiagiTykacza,
-                    tykacz: tykacz.data.tykacz
+                    tykacz: tykacz.data.tykacz,
+                    actor: rollingData.actor._id,
+                    zdjeteOsiagi: rollingData.iloscOsiagow
                 });
                 if(game.user.isGM){
                     await tykaczActor.update({["system.pozostaleOsiagi"]:pozostaleOsiagiTykacza})
+                    if(tykaczActor.system.jestPrzeciwnikiem){
+                        await tykaczActor.setFlag( "chlopcy",rollingData.actor._id, rollingData.iloscOsiagow)
+                    }
                 }
             }
             else{
@@ -661,6 +671,14 @@ async function modyfikacjaTykacza(tykacz,tykaczActor, rollingData) {
                     tykacz.close(); 
              
             }
+            const template =    `<strong>${rollingData.actor.name}</strong> wykorzystał/wykorzystała <strong>${rollingData.iloscOsiagow}</strong> Osiągi
+                                do zmniejszenia osiągów Tykacz <strong>${tykaczActor.name}</strong> z <strong>${obecneOsiagiTykacza}</strong> do <strong>${pozostaleOsiagiTykacza}</strong>`
+            const chatData ={
+                user: game.user?._id,
+                content: template,
+                system: rollingData
+            }
+            ChatMessage.create(chatData);
         }
         else{
             const uwaga = game.i18n.localize("chlopcy.ui.mastaMusiBycObecnyZebyZmieniacTykacz")

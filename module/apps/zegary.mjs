@@ -122,11 +122,10 @@ export class zegarTykacza extends Application {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.on("click", ".nazwa-zegar i.fas.fa-window-close", (ev) =>
-      this.closeApp(ev)
-    );
-    html.on("click",".osiagi i.fa.fa-minus.osiagi", (ev)=>this.zmiejszOsiagi(ev))
-    html.on("click",".czas-trwania i.fa.fa-minus.czas", (ev)=>this.zmiejszCzas(ev))
+    chlopcy_Utility.addHtmlEventListener(html,"click", ".nazwa-zegar i.fas.fa-window-close", (ev) => this.closeApp(ev));
+    chlopcy_Utility.addHtmlEventListener(html,"click",".osiagi i.fa.fa-minus.osiagi", (ev)=>this.zmiejszOsiagi(ev))
+    chlopcy_Utility.addHtmlEventListener(html,"click",".czas-trwania i.fa.fa-minus.czas", (ev)=>this.zmiejszCzas(ev))
+    chlopcy_Utility.addHtmlEventListener(html,"click",".osiagi i.fa.fa-plus.osiagi", (ev)=>this.zwiekszOsiagi(ev))
   }
 
   async closeApp(ev) {
@@ -190,5 +189,26 @@ export class zegarTykacza extends Application {
       tykacz: this.data?.tykacz,
     });    
   }
+  async zwiekszOsiagi(ev){
+    const obecnyTykacz = this;
+    const obecnieOsiagi = this.data.osiagiZegar;
+    const tykacz = obecnyTykacz.data.tykacz;
+    const noweOsiagi = obecnieOsiagi + 1;
+    obecnyTykacz.data.osiagiZegar = noweOsiagi;
+    tykacz.update({["system.pozostaleOsiagi"]:noweOsiagi});
+    const container = obecnyTykacz.element; 
+    if (container) {
+      container.find(".osiagi-input").val(noweOsiagi);
+    }
+    if(noweOsiagi === 0){
+      this.closeApp(ev)
+    }
+    game.socket.emit("system.chlopcy", {
+      type: "zmniejszOsiagiZegara",
+      noweOsiagi: noweOsiagi,
+      tykacz: this.data?.tykacz,
+    });    
+  }
+
 }
 

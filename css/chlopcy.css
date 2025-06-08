@@ -541,9 +541,10 @@ input.osiagi-input, input.czas-trwania-input {
 
 .osiagi, .czas-trwania {
     display: grid;
-    grid-template-columns: 2fr 0.1fr 0.1fr;
+    grid-template-columns: 2fr 0.1fr 0.1fr 0.1fr;
     align-items: center;
-    column-gap: 5px;
+    column-gap: 1px;
+
 }
 .nazwa-zegar h1 {
     text-align: center;
