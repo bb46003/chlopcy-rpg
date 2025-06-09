@@ -15,8 +15,8 @@ export class uzycieWiezi extends Dialog {
 
     async activateListeners(html) {
         super.activateListeners(html);
-        html.on("change", ".wartosc-uzytych-wiezi", (event) => this.dostosujWartoscWiezi(event));
-        html.on("change", ".typ-uzytych-wiezi", (event) => this.dostosujWartoscWieziTyp(event));
+        chlopcy_Utility.addHtmlEventListener(html,"change", ".wartosc-uzytych-wiezi", (event) => this.dostosujWartoscWiezi(event));
+         chlopcy_Utility.addHtmlEventListener(html,"change", ".typ-uzytych-wiezi", (event) => this.dostosujWartoscWieziTyp(event));
     }
 
     async pokazDostepneWiezi(rollingData,msg, actor, id) {

@@ -118,4 +118,11 @@ Handlebars.registerHelper("isUserGM", function(){
   const isGM = game.user.isGM;
   return isGM
 })
+Handlebars.registerHelper('range', function(start, end, options) {
+  let result = [];
+  for (let i = start; i <= end; i++) {
+    result.push(i);
+  }
+  return result;
+});
 }

@@ -8,6 +8,7 @@ import { chlopcyActor } from "./actors/actors.mjs";
 import { zegarTykacza } from "./apps/zegary.mjs";
 import {SocketHandler} from "./socketHandler.mjs"
 import chlopcy_Utility from "./utility.mjs"
+import { obrazeniaTykacza } from "./dialog/obrazenia-tykacza.mjs";
 
 Hooks.once("init", async function () {
     CONFIG.CHLOPCYCONFIG = CHLOPCYCONFIG;
@@ -30,8 +31,7 @@ Hooks.once("init", async function () {
   }
     return preloadHandlebarsTemplates(generation);
     
-  });
-  
+});
 Hooks.on("renderChatLog", chlopcyChat.addChatListeners);
 
 Hooks.on('preCreateScene', (scene) => {
@@ -78,10 +78,6 @@ Hooks.on("ready", async ()=>{
     }
    })
 });
-
-  
-  
-
 Hooks.on("renderzegarTykacza",async()=>{
   const zegary = document.querySelectorAll(".zegar");
   if(zegary.length >1){
@@ -95,7 +91,26 @@ Hooks.on("renderzegarTykacza",async()=>{
     newElement.style.top = `${totalOffsetInEm}em`; 
   }
 })
-
+Hooks.on("combatRound", async()=>{
+  if(game.user.isGM){
+    const tykacze = game.actors.filter(actor => actor.type === "tykacz");
+    let daneAktywnychTykaczy ={}
+    tykacze.forEach(async tykacz => {
+      if(tykacz.system?.aktywny){
+        daneAktywnychTykaczy[tykacz.id] = {
+          ["zdjeteOsiagi"]: tykacz.flags["chlopcy"],
+          ["pozostaleOsiagi"]:tykacz.system.pozostaleOsiagi,
+          ["nazwa"]: tykacz.name 
+        };
+      }
+    })
+    if (Object.keys(daneAktywnychTykaczy).length > 0){
+      const zadajObrazenia = new obrazeniaTykacza(daneAktywnychTykaczy);
+      zadajObrazenia.showDialog()
+      
+    }
+  }
+})
 
 
 
