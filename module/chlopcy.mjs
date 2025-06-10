@@ -105,8 +105,13 @@ Hooks.on("combatRound", async()=>{
       }
     })
     if (Object.keys(daneAktywnychTykaczy).length > 0){
-      const zadajObrazenia = new obrazeniaTykacza(daneAktywnychTykaczy);
-      zadajObrazenia.showDialog()
+      const combatants = game.combat?.combatants ?? [];
+      const html = await chlopcy_Utility.renderTemplate("systems/chlopcy/tameplates/dialog/obrazenia-tykacza.hbs", {
+        tykacze: Object.values(daneAktywnychTykaczy),
+        combatants: combatants
+      });
+      const dialog = new obrazeniaTykacza(daneAktywnychTykaczy, html);
+      dialog.render(true);
       
     }
   }
