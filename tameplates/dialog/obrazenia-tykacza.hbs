@@ -5,9 +5,9 @@
   <section id="manual-section" class="toggle-content hidden">
     {{#each tykacze}}
       <section>
-        <h3>{{this.nazwa}}</h3>
+        <h3>{{this.nazwa}} pozostale osiagi {{this.pozostaleOsiagi}}</h3>
         {{#each ../combatants}}
-          <div>
+          <div class="dzieciak-name" id='{{this.id}}'>
             <label for="select-{{@../index}}-{{this.id}}">{{this.name}}:</label>
             <select name="osiag-{{@../index}}-{{this.id}}" id="select-{{@../index}}-{{this.id}}">
               {{#each (range 0 (lookup ../this 'pozostaleOsiagi'))}}
@@ -25,13 +25,14 @@
   <section id="auto-section" class="toggle-content hidden">
     {{#each tykacze}}
       <section>
-        <h3>{{this.nazwa}}</h3>
+        <h3>{{this.nazwa}} pozostale osiagi {{this.pozostaleOsiagi}}</h3>
         {{#each ../combatants}}
-          <div>
+          <div class="dzieciak-name" id='{{this.id}}'>
             <label for="select-{{@../index}}-{{this.id}}">{{this.name}}:</label>
             <input type="number" id="auto-{{@index}}" name="auto-{{@index}}" min="0" max="{{this.pozostaleOsiagi}}" value="0" />
           </div>
         {{/each}}
+      </section>
     {{/each}}
   </section>
 
