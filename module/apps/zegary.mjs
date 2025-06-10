@@ -51,13 +51,7 @@ export class zegarTykacza extends Application {
         
         await this.dodajPostacieDowalki(walka)
           game.combats.apps[0].renderPopout(true)
-          let combatApp = game.combats.apps[0]._popout; 
-          const windowSize = window.innerWidth; 
-          const combatAppSize = combatApp.position.width; 
-          const sideBar = ui.sidebar.position.width; 
-          const newLeftPosition = windowSize - combatAppSize - sideBar + 10;
-          combatApp.position.top =  0;
-          combatApp.position.left =  newLeftPosition 
+          
           }
       }
           

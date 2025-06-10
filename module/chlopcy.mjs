@@ -18,7 +18,18 @@ Hooks.once("init", async function () {
     CHLOPCYCONFIG.Items        = generation < 13 ? Items          : foundry.documents.collections.Items;
     CHLOPCYCONFIG.ItemSheet    = generation < 13 ? ItemSheet      : foundry.appv1.sheets.ItemSheet;
     registerSheets(CONFIG.CHLOPCYCONFIG);
-   
+   game.settings.register("chlopcy", "combarTrackerX", {
+      name: "Selected Folders",
+      scope: "client",
+      type: Number,
+      config: false,
+    });
+    game.settings.register("chlopcy", "combarTrackerY", {
+      name: "Selected Folders",
+      scope: "client",
+      type: Number,
+      config: false,
+    });
     registerHandlebarsHelpers();    
     console.log("System \"Chłopcy RPG\" został poprawnie załadowany");
    
@@ -67,20 +78,75 @@ Hooks.on("ready", async ()=>{
         }
         
         game.combats.apps[0].renderPopout(true)
-          let combatApp = game.combats.apps[0]._popout; 
-          const windowSize = window.innerWidth; 
-          const combatAppSize = combatApp.position.width; 
-          const sideBar = ui.sidebar.position.width; 
-          const newLeftPosition = windowSize - combatAppSize - sideBar + 10;
-          combatApp.position.top =  0;
-          combatApp.position.left =  newLeftPosition 
+        
+
       }    
     }
    })
 });
+Hooks.on("renderCombatTracker", async(dialog)=>{
+let combatApp
+  if(game.release.generation <13){
+    combatApp = game.combats.apps[0]._popout;
+    if(combatApp !== undefined && dialog.isPopout){
+      const windowSize = window.innerWidth; 
+      const combatAppSize = combatApp.position.width; 
+      const sideBar = ui.sidebar.position.width; 
+      const newLeftPosition = windowSize - combatAppSize - sideBar + 10;
+      combatApp.position.top =  0;
+      combatApp.position.left =  newLeftPosition  
+    }
+  }
+  else{
+    combatApp = game.combats.apps[0].popout;
+    if(combatApp !== undefined && dialog.isPopout){
+      const windowSize = window.innerWidth; 
+      const combatAppSize = combatApp?.element?.clientWidth || 0;
+      const sideBar = ui.sidebar.element.clientWidth
+      const newLeftPosition = windowSize - combatAppSize - sideBar - 10;
+      combatApp.setPosition({top :  0, left :  newLeftPosition })
+      game.settings.set("chlopcy","combarTrackerX",newLeftPosition)
+      game.settings.set("chlopcy","combarTrackerY",0)
+      
+    }
+  }
+  if(dialog.options.id === "combat-popout" && dialog.viewed === null){
+    dialog.close()
+  }
+
+})
+
+Hooks.on("collapseSidebar", async(sidebar,colaps)=>{
+  let combatApp = game.combats.apps[0].popout;
+  const initialX = game.settings.get("chlopcy","combarTrackerX");
+  const initialY = game.settings.get("chlopcy","combarTrackerY");
+  const combatAppX = combatApp?.element?.offsetLeft;
+  const combatAppY = combatApp?.element?.offsetTop;
+  if(initialX === combatAppX && initialY === combatAppY){
+    if(combatApp !== undefined){
+      const windowSize = window.innerWidth; 
+      const combatAppSize = combatApp?.element?.clientWidth || 0;
+      let sideBarWidth = sidebar.element.clientWidth;
+      if(sideBarWidth === 48){
+        sideBarWidth = 348;
+      }
+      else{
+        sideBarWidth = 48
+      }
+      const newLeftPosition = windowSize - combatAppSize - sideBarWidth - 10;
+      combatApp.setPosition({top :  0, left :  newLeftPosition })
+      game.settings.set("chlopcy","combarTrackerX",newLeftPosition)
+      game.settings.set("chlopcy","combarTrackerY",0)
+    }
+  }
+})
+
+  
+
 Hooks.on("renderzegarTykacza",async()=>{
   const zegary = document.querySelectorAll(".zegar");
   if(zegary.length >1){
+
     const topOffset = zegary[zegary.length-2].offsetTop;
     const lasCientHeight = zegary[zegary.length-2].clientHeight;
     const h1FontSize = parseFloat(getComputedStyle(document.body).fontSize);

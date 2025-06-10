@@ -24,10 +24,14 @@
   <button type="button" class="toggle-section" data-target="#auto-section">▶ Automatyczne rozdanie</button>
   <section id="auto-section" class="toggle-content hidden">
     {{#each tykacze}}
-      <div>
-        <label for="auto-{{@index}}">Obrażenia dla {{this.nazwa}}:</label>
-        <input type="number" id="auto-{{@index}}" name="auto-{{@index}}" min="0" max="{{this.pozostaleOsiagi}}" value="0" />
-      </div>
+      <section>
+        <h3>{{this.nazwa}}</h3>
+        {{#each ../combatants}}
+          <div>
+            <label for="select-{{@../index}}-{{this.id}}">{{this.name}}:</label>
+            <input type="number" id="auto-{{@index}}" name="auto-{{@index}}" min="0" max="{{this.pozostaleOsiagi}}" value="0" />
+          </div>
+        {{/each}}
     {{/each}}
   </section>
 
