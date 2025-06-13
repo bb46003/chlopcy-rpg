@@ -166,7 +166,8 @@ Hooks.on("combatRound", async()=>{
         daneAktywnychTykaczy[tykacz.id] = {
           ["zdjeteOsiagi"]: tykacz.flags["chlopcy"],
           ["pozostaleOsiagi"]:tykacz.system.pozostaleOsiagi,
-          ["nazwa"]: tykacz.name 
+          ["nazwa"]: tykacz.name,
+          ["tykaczID"]:tykacz.id 
         };
       }
     })
@@ -176,7 +177,7 @@ Hooks.on("combatRound", async()=>{
         tykacze: Object.values(daneAktywnychTykaczy),
         combatants: combatants
       });
-      const dialog = new obrazeniaTykacza(daneAktywnychTykaczy, html);
+      const dialog = new obrazeniaTykacza(daneAktywnychTykaczy, html, combatants);
       dialog.render(true);
       
     }

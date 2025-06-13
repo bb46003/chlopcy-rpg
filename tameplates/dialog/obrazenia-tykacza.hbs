@@ -1,17 +1,19 @@
 <div class="dialog-tykaczy">
 
   <!-- NAGŁÓWEK 1 -->
-  <button type="button" class="toggle-section" data-target="#manual-section">▶ Ręczne rozdanie obrażeń</button>
-  <section id="manual-section" class="toggle-content hidden">
+  <button type="button" class="toggle-section" data-target="#auto-section">▶ Automatyczne rozdanie</button>
+  <section id="auto-section" class="toggle-content hidden">
     {{#each tykacze}}
+  
       <section>
         <h3>{{this.nazwa}} pozostale osiagi {{this.pozostaleOsiagi}}</h3>
-        {{#each ../combatants}}
-          <div class="dzieciak-name" id='{{this.id}}'>
-            <label for="select-{{@../index}}-{{this.id}}">{{this.name}}:</label>
-            <select name="osiag-{{@../index}}-{{this.id}}" id="select-{{@../index}}-{{this.id}}">
-              {{#each (range 0 (lookup ../this 'pozostaleOsiagi'))}}
-                <option value="{{this}}">{{this}}</option>
+        {{#each ../combatants as |combatant index|}}
+          {{log ../this}}
+          <div class="dzieciak-name" id="{{combatant.id}}">
+            <label for="select-{{index}}-{{combatant.id}}">{{combatant.name}}:</label>
+            <select name="osiag-{{index}}-{{combatant.id}}" id="select-{{../this.tykaczID}}-{{combatant.id}}">
+              {{#each (range 0 ../this.pozostaleOsiagi) as |num|}}
+                <option value="{{num}}">{{num}}</option>
               {{/each}}
             </select>
           </div>
@@ -21,8 +23,8 @@
   </section>
 
   <!-- NAGŁÓWEK 2 -->
-  <button type="button" class="toggle-section" data-target="#auto-section">▶ Automatyczne rozdanie</button>
-  <section id="auto-section" class="toggle-content hidden">
+  <button type="button" class="toggle-section" data-target="#manual-section">▶ Ręczne rozdanie obrażeń</button>
+  <section id="manual-section" class="toggle-content hidden">
     {{#each tykacze}}
       <section>
         <h3>{{this.nazwa}} pozostale osiagi {{this.pozostaleOsiagi}}</h3>
