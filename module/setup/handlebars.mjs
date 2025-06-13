@@ -14,7 +14,7 @@ export function registerHandlebarsHelpers() {
     },
     range: (v1, v2, v3) => checkRange(v1, v2, v3),
   });
-  Handlebars.registerHelper('lowercase', function (str) {
+  Handlebars.registerHelper("lowercase", function (str) {
     return str.toLowerCase();
   });
 
@@ -23,11 +23,11 @@ export function registerHandlebarsHelpers() {
     return ouput;
   }
 
-  Handlebars.registerHelper('localizeWithParams', function (key, options) {
+  Handlebars.registerHelper("localizeWithParams", function (key, options) {
     return game.i18n.format(key, options.hash);
   });
   Handlebars.registerHelper(
-    'getWartosc',
+    "getWartosc",
     function (actor, actorID, rollingData) {
       const wartoscWiezi = actor.system.wiezi[actorID]
         ? actor.system.wiezi[actorID].wartosc
@@ -60,9 +60,9 @@ export function registerHandlebarsHelpers() {
           return dopuszczalnaWartoscWiezi;
         }
       }
-    }
+    },
   );
-  Handlebars.registerHelper('zakres', function (start, end) {
+  Handlebars.registerHelper("zakres", function (start, end) {
     var result = [];
     const ends = Number(end);
     for (var i = start; i <= ends; i++) {
@@ -71,56 +71,56 @@ export function registerHandlebarsHelpers() {
     return result;
   });
 
-  Handlebars.registerHelper('czywiezi', function (rollingData) {
+  Handlebars.registerHelper("czywiezi", function (rollingData) {
     const KM = rollingData.KM;
     const tag = rollingData.wartoscTagu;
     if (KM === 0 || tag !== 0) {
-      const buttonTile = game.i18n.localize('chlopcy.czat.uzyjWiezi');
+      const buttonTile = game.i18n.localize("chlopcy.czat.uzyjWiezi");
       const button = ` <h3></h3><div class="rectangle" id="6">${buttonTile}</div>`;
       return button;
     }
   });
 
-  Handlebars.registerHelper('czyextraXP', function (rollingData) {
+  Handlebars.registerHelper("czyextraXP", function (rollingData) {
     const KB = rollingData.KB;
     const dodanoXP = rollingData?.dodanoXP;
     if ((KB === 20 || KB === 10) && dodanoXP === undefined) {
-      const buttonTile = game.i18n.localize('chlopcy.czat.dodajXP');
+      const buttonTile = game.i18n.localize("chlopcy.czat.dodajXP");
       const button = ` <h3></h3><div class="rectangle" id="7">${buttonTile}</div>`;
       return button;
     }
   });
 
-  Handlebars.registerHelper('wybierzObrazKurtki', function (actor) {
-    let obrazKurtki = 'systems/chlopcy/art/kurtka-pusta.png';
+  Handlebars.registerHelper("wybierzObrazKurtki", function (actor) {
+    let obrazKurtki = "systems/chlopcy/art/kurtka-pusta.png";
     const html = `<img class="obraz-kurtki" src="${obrazKurtki}" />`;
     return html;
   });
 
-  Handlebars.registerHelper('czyJestTykacz', function (rollingData) {
+  Handlebars.registerHelper("czyJestTykacz", function (rollingData) {
     const zegarTykacza = game.chlopcy.zegarTykacza?.instances.size;
     if (zegarTykacza !== 0 && rollingData.iloscOsiagow !== 0) {
       const buttonTile = game.i18n.localize(
-        'chlopcy.czat.wykorzystajOsiagiNaTykacz'
+        "chlopcy.czat.wykorzystajOsiagiNaTykacz",
       );
       const html = `<div class="rectangle" id="8">${buttonTile}</div> `;
       return html;
     }
   });
 
-  Handlebars.registerHelper('json', function (context) {
+  Handlebars.registerHelper("json", function (context) {
     return JSON.stringify(context);
   });
 
-  Handlebars.registerHelper('log', function (log) {
+  Handlebars.registerHelper("log", function (log) {
     console.log(log);
   });
 
-  Handlebars.registerHelper('isUserGM', function () {
+  Handlebars.registerHelper("isUserGM", function () {
     const isGM = game.user.isGM;
     return isGM;
   });
-  Handlebars.registerHelper('range', function (start, end, options) {
+  Handlebars.registerHelper("range", function (start, end, options) {
     let result = [];
     for (let i = start; i <= end; i++) {
       result.push(i);

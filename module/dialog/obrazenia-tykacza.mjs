@@ -1,19 +1,38 @@
 export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
   constructor(daneAktywnychTykaczy, htmlContent, combatants) {
     const options = {
-      window: { title: 'Przydziel osiągi tykaczy' },
+      window: { title: "Przydziel osiągi tykaczy" },
       content: htmlContent,
+      DEFAULT_OPTIONS: {
+        form: { closeOnSubmit: false }
+      },
       buttons: [
         {
-          action: 'ok',
-          label: 'OK',
-          callback: (html) => {
-            console.log(html);
+          action: "ok",
+          label: "OK",
+          callback: async (event) => {
+            const html = event.currentTarget;
+            const allSections = html.querySelectorAll(".toggle-content");
+            const visibleSections = Array.from(allSections).filter(
+              (section) => !section.classList.contains("hidden"),
+            );
+
+            if (visibleSections.length === 0) {
+              ui.notifications.error(
+                "Please select a section to assign achievements.",
+              );
+              
+              return;
+            }else{           
+
+            await this.rozdajWpierdol(html);
+            this.close();
+            }
           },
         },
         {
-          action: 'anuluj',
-          label: 'Anuluj',
+          action: "anuluj",
+          label: "Anuluj",
         },
       ],
     };
@@ -23,9 +42,9 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
   }
 
   _onRender() {
-    const itemQuantities = this.element.querySelectorAll('.toggle-section');
+    const itemQuantities = this.element.querySelectorAll(".toggle-section");
     for (const input of itemQuantities) {
-      input.addEventListener('click', (e) => {
+      input.addEventListener("click", (e) => {
         this.otworzSekcje(e);
       });
     }
@@ -73,9 +92,9 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
                 ? perCombatant + 1
                 : perCombatant;
           }
-          selectElement.innerHTML = '';
+          selectElement.innerHTML = "";
           for (let i = 0; i <= value; i++) {
-            const option = document.createElement('option');
+            const option = document.createElement("option");
             option.value = i.toString();
             option.textContent = i.toString();
             selectElement.appendChild(option);
@@ -84,11 +103,11 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
         }
       }
       const elements = document.querySelectorAll(
-        `[id^="auto-${tykaczId}"], [id^="manual-${tykaczId}"]`
+        `[id^="auto-${tykaczId}"], [id^="manual-${tykaczId}"]`,
       );
 
       for (const input of elements) {
-        input.addEventListener('change', (e) => {
+        input.addEventListener("change", (e) => {
           this.upateDostepnyDmg(e, tykacz, elements);
         });
       }
@@ -101,23 +120,23 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
     const button = event.currentTarget;
     const targetSelector = button.dataset.target;
     const target = this.element.querySelector(targetSelector);
-    const isHidden = target.classList.contains('hidden');
+    const isHidden = target.classList.contains("hidden");
     if (isHidden) {
-      target.classList.remove('hidden');
-      button.textContent = button.textContent.replace('▶', '▼');
-      const allButtons = this.element.querySelectorAll('button[data-target]');
+      target.classList.remove("hidden");
+      button.textContent = button.textContent.replace("▶", "▼");
+      const allButtons = this.element.querySelectorAll("button[data-target]");
       allButtons.forEach((btn) => {
         if (btn === button) return;
 
         const section = this.element.querySelector(btn.dataset.target);
-        if (!section.classList.contains('hidden')) {
-          section.classList.add('hidden');
-          btn.textContent = btn.textContent.replace('▼', '▶');
+        if (!section.classList.contains("hidden")) {
+          section.classList.add("hidden");
+          btn.textContent = btn.textContent.replace("▼", "▶");
         }
       });
     } else {
-      target.classList.add('hidden');
-      button.textContent = button.textContent.replace('▼', '▶');
+      target.classList.add("hidden");
+      button.textContent = button.textContent.replace("▼", "▶");
     }
   }
 
@@ -129,7 +148,7 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
     const elementsArray = Array.from(elements);
     const pozostaleSelektory = elementsArray.filter((el) => {
       if (el === e.currentTarget) return false;
-      const hiddenSection = el.closest('section.hidden');
+      const hiddenSection = el.closest("section.hidden");
       if (hiddenSection) return false;
       return true;
     });
@@ -139,9 +158,9 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
     }
     pozostaleSelektory.forEach((selectElement) => {
       const wybranaWartosc = selectElement.value;
-      selectElement.innerHTML = '';
+      selectElement.innerHTML = "";
       for (let i = 0; i <= dostępneOsiągi; i++) {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = i.toString();
         option.textContent = i.toString();
         selectElement.appendChild(option);
@@ -149,4 +168,10 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
       }
     });
   }
+
+  async rozdajWpierdol(html) {
+    console.log(html, this);
+  }
+
+  
 }

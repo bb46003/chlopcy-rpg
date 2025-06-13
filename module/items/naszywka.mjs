@@ -1,13 +1,13 @@
 const BaseItemSheet =
-  typeof foundry?.appv1?.sheets?.ItemSheet !== 'undefined'
+  typeof foundry?.appv1?.sheets?.ItemSheet !== "undefined"
     ? foundry.appv1.sheets.ItemSheet
     : ItemSheet;
 
 export class naszywka extends BaseItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['naszywki_przody'],
-      template: 'systems/chlopcy/tameplates/item/naszywka.hbs',
+      classes: ["naszywki_przody"],
+      template: "systems/chlopcy/tameplates/item/naszywka.hbs",
       width: 500,
       height: 400,
     });
