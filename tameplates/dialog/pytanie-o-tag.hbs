@@ -1,20 +1,21 @@
-
 {{#if (eq stan 1)}}
-    <div class="wybor-tagow" id='${{cecha}}'>
-        <label>{{localize "chlopcy.dialog.wybierz_tag"}}</label>
-        <select class="wybrany-tag">
-            <option value="">{{localize "chlopcy.bez_tagu"}}</option>
-            {{selectOptions tagi }}
-        </select>
-    </div>
+  <div class='wybor-tagow' id='${{cecha}}'>
+    <label>{{localize 'chlopcy.dialog.wybierz_tag'}}</label>
+    <select class='wybrany-tag'>
+      <option value=''>{{localize 'chlopcy.bez_tagu'}}</option>
+      {{selectOptions tagi}}
+    </select>
+  </div>
 {{/if}}
-    <div class="przedmiot">
-        <div class="nazwa">
-            <label>{{localize "chlopcy.dialog.podaj_nazwę_używanego_przedmiotu"}}</label>
-            <input type="text" class="nazwa-przedmiotu" >
-        </div>
-        <div class="dodatkowe-osiagi">
-            <label>{{localize "chlopcy.dialog.dodatkowe_osiągi_za_przedmiot"}}</label>
-            <input type="number" class="dodatkowe-osiagi-liczba">
-        </div>
-    </div>
+<div class='przedmiot'>
+  <div class='nazwa'>
+    <label>{{localize
+        'chlopcy.dialog.podaj_nazwę_używanego_przedmiotu'
+      }}</label>
+    <input type='text' class='nazwa-przedmiotu' />
+  </div>
+  <div class='dodatkowe-osiagi'>
+    <label>{{localize 'chlopcy.dialog.dodatkowe_osiągi_za_przedmiot'}}</label>
+    <input type='number' class='dodatkowe-osiagi-liczba' />
+  </div>
+</div>

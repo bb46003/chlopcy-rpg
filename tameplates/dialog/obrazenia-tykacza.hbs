@@ -8,13 +8,9 @@
       <section>
         <h3>{{this.nazwa}} pozostale osiagi {{this.pozostaleOsiagi}}</h3>
         {{#each ../combatants as |combatant index|}}
-          {{log ../this}}
           <div class="dzieciak-name" id="{{combatant.id}}">
             <label for="select-{{index}}-{{combatant.id}}">{{combatant.name}}:</label>
-            <select name="osiag-{{index}}-{{combatant.id}}" id="select-{{../this.tykaczID}}-{{combatant.id}}">
-              {{#each (range 0 ../this.pozostaleOsiagi) as |num|}}
-                <option value="{{num}}">{{num}}</option>
-              {{/each}}
+            <select name="osiag-{{index}}-{{combatant.id}}" id="auto-{{../this.tykaczID}}-{{combatant.id}}">
             </select>
           </div>
         {{/each}}
@@ -31,7 +27,11 @@
         {{#each ../combatants}}
           <div class="dzieciak-name" id='{{this.id}}'>
             <label for="select-{{@../index}}-{{this.id}}">{{this.name}}:</label>
-            <input type="number" id="auto-{{@index}}" name="auto-{{@index}}" min="0" max="{{this.pozostaleOsiagi}}" value="0" />
+                <select name="osiag-{{index}}-{{combatant.id}}" id="manual-{{../this.tykaczID}}-{{combatant.id}}">
+                  {{#each (range 0 ../this.pozostaleOsiagi) as |num|}}
+                <option value="{{num}}">{{num}}</option>
+              {{/each}}
+            </select>
           </div>
         {{/each}}
       </section>
