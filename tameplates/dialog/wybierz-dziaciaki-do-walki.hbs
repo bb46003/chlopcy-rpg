@@ -1,11 +1,11 @@
-<div class="wybierz-dziaciaki-do-walki">
-    {{localize "chlopcy.dialog.wybierzDzieciakiDoWalki"}}
+<div class='wybierz-dziaciaki-do-walki'>
+  {{localize 'chlopcy.dialog.wybierzDzieciakiDoWalki'}}
 </div>
-<div class="lista-dzieciakow">
-    {{#each dzieciaki as |dzieciak|}}
-        <input type="checkbox" class="wybrany-dzieciak" value="{{dzieciak.id}}">
-        <label class="ksywka-do-walki">{{dzieciak.name}}</label>
-    {{/each}}
-        <input type="checkbox" class="wybrany-dzieciak" value="all">
-       <label class="ksywka-do-walki">{{localize "chlopcy.dialog.dodajWszystkieDziaciaki"}}</label>
+<div class='lista-dzieciakow'>
+  {{#each dzieciaki as |dzieciak|}}
+    <input type='checkbox' class='wybrany-dzieciak' value='{{dzieciak.id}}' />
+    <label class='ksywka-do-walki'>{{dzieciak.name}}</label>
+  {{/each}}
+  <input type='checkbox' class='wybrany-dzieciak' value='all' />
+  <label class='ksywka-do-walki'>{{localize 'chlopcy.dialog.dodajWszystkieDziaciaki'}}</label>
 </div>

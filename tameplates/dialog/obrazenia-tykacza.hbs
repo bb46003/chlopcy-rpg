@@ -1,0 +1,45 @@
+<div class="dialog-tykaczy">
+
+  <button type="button" class="toggle-section" data-target="#auto-section">
+    ▶ {{localize "chlopcy.dialog.automatycznieRozdajWpierdol"}}
+  </button>
+  <section id="auto-section" class="toggle-content hidden">
+    {{#each tykacze}}
+      <section class="pojedynczy-tykacz" data-pozostaleOsiagi="{{this.pozostaleOsiagi}}" data-tykacznazwa="{{this.nazwa}}">
+        <h3>{{this.nazwa}} {{localize "chlopcy.dialog.pozostaleOsiagiTykacza"}} {{this.pozostaleOsiagi}}</h3>
+        {{#each ../combatants as |combatant index|}}
+          <div class="dzieciak-name" id="{{combatant.id}}">
+            <label for="select-{{index}}-{{combatant.id}}">{{combatant.name}}:</label>
+            <select name="osiag-{{index}}-{{combatant.id}}" id="auto-{{../this.tykaczID}}-{{combatant.id}}" data-dzieciakid="{{combatant.actorId}}"></select>
+          </div>
+        {{/each}}
+      </section>
+    {{/each}}
+  </section>
+
+  <button type="button" class="toggle-section" data-target="#manual-section">
+    ▶ {{localize "chlopcy.dialog.manualneRozdajwpierdol"}}
+  </button>
+  <section id="manual-section" class="toggle-content hidden">
+    {{#each tykacze}}
+      <section class="pojedynczy-tykacz" data-pozostaleOsiagi="{{this.pozostaleOsiagi}}" data-tykacznazwa="{{this.nazwa}}">
+        <h3>{{this.nazwa}} {{localize "chlopcy.dialog.pozostaleOsiagiTykacza"}} {{this.pozostaleOsiagi}}</h3>
+        {{#each ../combatants}}
+          <div class="dzieciak-name" id="{{this.id}}">
+            <label for="select-{{@../index}}-{{this.id}}">{{this.name}}:</label>
+            <select name="osiag-{{@../index}}-{{this.id}}" id="manual-{{../this.tykaczID}}-{{this.id}}" data-dzieciakid="{{this.actorId}}">
+              {{#each (range 0 ../this.pozostaleOsiagi) as |num|}}
+                <option value="{{num}}">{{num}}</option>
+              {{/each}}
+            </select>
+          </div>
+        {{/each}}
+      </section>
+    {{/each}}
+  </section>
+
+  <div class="actions">
+    <button type="button" class="rozdaj-wpierdol" disabled>{{localize "chlopcy.dialog.uruchomTykacz"}}</button>
+  </div>
+
+</div>

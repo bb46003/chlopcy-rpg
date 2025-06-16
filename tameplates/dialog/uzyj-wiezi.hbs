@@ -15,7 +15,7 @@
       <label>{{localize "chlopcy.dialog.wybierzDzialanieWiezi"}}</label>
       <select class="typ-uzytych-wiezi" id="{{actor.id}}">
         {{#if (eq ../rollingData/KM 0)}}
-        <option value="1">{{localize "chlopcy.dialog.typWieziCecha"}}</option>
+          <option value="1">{{localize "chlopcy.dialog.typWieziCecha"}}</option>
         {{/if}}
         {{#if (ne ../rollingData.tag ../pustyTag)}}
           <option value="2">{{localize "chlopcy.dialog.typWieziTag"}}</option>
