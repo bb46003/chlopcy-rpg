@@ -165,18 +165,7 @@ Hooks.on("combatRound", async () => {
     });
     if (Object.keys(daneAktywnychTykaczy).length > 0) {
       const combatants = game.combat?.combatants ?? [];
-      const html = await chlopcy_Utility.renderTemplate(
-        "systems/chlopcy/tameplates/dialog/obrazenia-tykacza.hbs",
-        {
-          tykacze: Object.values(daneAktywnychTykaczy),
-          combatants: combatants,
-        },
-      );
-      const dialog = new obrazeniaTykacza(
-        daneAktywnychTykaczy,
-        html,
-        combatants,
-      );
+      const dialog = new obrazeniaTykacza(daneAktywnychTykaczy, combatants);
       dialog.render(true);
     }
   }

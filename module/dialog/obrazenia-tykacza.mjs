@@ -1,48 +1,56 @@
-export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
-  constructor(daneAktywnychTykaczy, htmlContent, combatants) {
-    const options = {
-      window: { title: "Przydziel osiągi tykaczy" },
-      content: htmlContent,
-      DEFAULT_OPTIONS: {
-        form: { closeOnSubmit: false }
-      },
-      buttons: [
-        {
-          action: "ok",
-          label: "OK",
-          callback: async (event) => {
-            const html = event.currentTarget;
-            const allSections = html.querySelectorAll(".toggle-content");
-            const visibleSections = Array.from(allSections).filter(
-              (section) => !section.classList.contains("hidden"),
-            );
-
-            if (visibleSections.length === 0) {
-              ui.notifications.error(
-                "Please select a section to assign achievements.",
-              );
-              
-              return;
-            }else{           
-
-            await this.rozdajWpierdol(html);
-            this.close();
+export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
+   static DEFAULT_OPTIONS = {
+        window: { title: "Przydziel osiągi tykaczy" },
+        template: "systems/chlopcy/tameplates/dialog/obrazenia-tykacza.hbs", // ✅ fix spelling
+        buttons: [
+            {
+                action: "ok",
+                label: "OK",
+                callback: (html) => {
+                    console.log("OK clicked", html);
+                }
+            },
+            {
+                action: "anuluj",
+                label: "Anuluj"
             }
-          },
-        },
-        {
-          action: "anuluj",
-          label: "Anuluj",
-        },
-      ],
+        ]
     };
-    super(options);
-    this.daneAktywnychTykaczy = daneAktywnychTykaczy;
-    this.combatants = combatants;
-  }
 
-  _onRender() {
-    const itemQuantities = this.element.querySelectorAll(".toggle-section");
+
+    constructor(daneAktywnychTykaczy, combatants) {
+        super(daneAktywnychTykaczy,combatants);
+        this.daneAktywnychTykaczy = daneAktywnychTykaczy;
+        this.combatants = combatants;
+    }
+
+    async getData() {
+        try {
+            return {
+                daneAktywnychTykaczy: this.daneAktywnychTykaczy,
+                combatants: Array.from(this.combatants) // convert Collection to Array
+            };
+        } catch (e) {
+            console.error("getData error:", e);
+            return {};
+        }
+    }
+
+    async _renderHTML() {
+        try {
+            return await renderTemplate(this.options.template, { tykacze: Object.values(this.daneAktywnychTykaczy), combatants: this.combatants});
+        } catch (e) {
+            console.error("_renderHTML error:", e);
+            throw e;
+        }
+    }
+
+    async _replaceHTML(result, html) {
+        html.innerHTML = result;
+    }
+
+_onRender() {
+    const itemQuantities = this.element.querySelectorAll('.toggle-section')
     for (const input of itemQuantities) {
       input.addEventListener("click", (e) => {
         this.otworzSekcje(e);
@@ -106,72 +114,33 @@ export class obrazeniaTykacza extends foundry.applications.api.DialogV2 {
         `[id^="auto-${tykaczId}"], [id^="manual-${tykaczId}"]`,
       );
 
-      for (const input of elements) {
-        input.addEventListener("change", (e) => {
-          this.upateDostepnyDmg(e, tykacz, elements);
-        });
-      }
-    }
-  }
-
-  async otworzSekcje(event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    const button = event.currentTarget;
-    const targetSelector = button.dataset.target;
-    const target = this.element.querySelector(targetSelector);
-    const isHidden = target.classList.contains("hidden");
-    if (isHidden) {
-      target.classList.remove("hidden");
-      button.textContent = button.textContent.replace("▶", "▼");
-      const allButtons = this.element.querySelectorAll("button[data-target]");
-      allButtons.forEach((btn) => {
-        if (btn === button) return;
-
-        const section = this.element.querySelector(btn.dataset.target);
-        if (!section.classList.contains("hidden")) {
-          section.classList.add("hidden");
-          btn.textContent = btn.textContent.replace("▼", "▶");
+        for (const combatant of combatants) {
+            const selectId = `select-${tykaczId}-${combatant.id}`
+            const selectElement = this.element.querySelector(`#${selectId}`);
+            if (selectElement) {
+                if (isOdd && combatant === combatantWithExtra) {
+                    selectElement.value = (perCombatant + 1).toString();
+                } else {
+                    selectElement.value = perCombatant.toString();
+                }
+            }
         }
-      });
-    } else {
-      target.classList.add("hidden");
-      button.textContent = button.textContent.replace("▼", "▶");
     }
   }
 
-  async upateDostepnyDmg(e, tykacz, elements) {
-    const dostepneOsiagi = tykacz.pozostaleOsiagi;
-    const wybraneOsiagi = e.currentTarget.value;
-    const pozostałeOsiągi = dostepneOsiagi - wybraneOsiagi;
-    const isOdd = pozostałeOsiągi % 2 !== 0;
-    const elementsArray = Array.from(elements);
-    const pozostaleSelektory = elementsArray.filter((el) => {
-      if (el === e.currentTarget) return false;
-      const hiddenSection = el.closest("section.hidden");
-      if (hiddenSection) return false;
-      return true;
-    });
-    let dostępneOsiągi = pozostałeOsiągi / pozostaleSelektory.length;
-    if (isOdd) {
-      dostępneOsiągi = Math.ceil(pozostałeOsiągi / pozostaleSelektory.length);
+    async otworzSekcje(event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const button = event.currentTarget;
+        const targetSelector = button.dataset.target;
+        const target = this.element.querySelector(targetSelector);
+
+        if (!target) return;
+
+        const isHidden = target.classList.contains("hidden");
+        target.classList.toggle("hidden", !isHidden);
+        button.textContent = isHidden
+            ? button.textContent.replace("▶", "▼")
+            : button.textContent.replace("▼", "▶");
     }
-    pozostaleSelektory.forEach((selectElement) => {
-      const wybranaWartosc = selectElement.value;
-      selectElement.innerHTML = "";
-      for (let i = 0; i <= dostępneOsiągi; i++) {
-        const option = document.createElement("option");
-        option.value = i.toString();
-        option.textContent = i.toString();
-        selectElement.appendChild(option);
-        selectElement.value = wybranaWartosc;
-      }
-    });
-  }
-
-  async rozdajWpierdol(html) {
-    console.log(html, this);
-  }
-
-  
 }
