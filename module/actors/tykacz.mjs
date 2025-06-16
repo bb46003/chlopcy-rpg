@@ -1,17 +1,14 @@
-import { zegarTykacza } from "../apps/zegary.mjs";
+import { zegarTykacza } from '../apps/zegary.mjs';
 
-const BaseActorSheet =
-  typeof foundry?.appv1?.sheets?.ActorSheet !== "undefined"
-    ? foundry.appv1.sheets.ActorSheet
-    : ActorSheet;
+const BaseActorSheet = typeof foundry?.appv1?.sheets?.ActorSheet !== 'undefined' ? foundry.appv1.sheets.ActorSheet : ActorSheet;
 
 export class tykacz extends BaseActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["chlopcy"],
-      template: "systems/chlopcy/tameplates/actor/tykacz.hbs",
+      classes: ['chlopcy'],
+      template: 'systems/chlopcy/tameplates/actor/tykacz.hbs',
       width: 500,
-      height: "auto",
+      height: 'auto',
     });
   }
   async getData() {
@@ -44,21 +41,21 @@ export class tykacz extends BaseActorSheet {
 
   async activateListeners(html) {
     super.activateListeners(html);
-    html.on("click", ".uruchom-tykacz", (ev) => this.uruchomZegar(ev));
+    chlopcy_Utility.addHtmlEventListener(html, 'click', '.uruchom-tykacz', (ev) => this.uruchomZegar(ev));
   }
   async uruchomZegar(ev) {
     const target = ev.target;
     let id = target.id;
-    if (target.id === "") {
-      const closestButton = target.closest("button");
+    if (target.id === '') {
+      const closestButton = target.closest('button');
       id = closestButton.id;
     }
     const actor = await game.actors.get(id);
 
     zegarTykacza.initialise(actor);
-    await actor.update({ ["system.aktywny"]: true });
-    game.socket.emit("system.chlopcy", {
-      type: "renderZegarTykacza",
+    await actor.update({ ['system.aktywny']: true });
+    game.socket.emit('system.chlopcy', {
+      type: 'renderZegarTykacza',
       actor: actor,
     });
     actor.sheet.close();

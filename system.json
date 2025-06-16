@@ -2,7 +2,7 @@
   "id": "chlopcy",
   "title": "Chłopcy RPG",
   "description": "Stół do systemu Chłopcy RPG na podstawie serii książek Jakuba Ćwieka \"Chłopcy\"",
-  "version": "0.312",
+  "version": "0.4",
   "compatibility": {
     "minimum": "12",
     "verified": "13.345"

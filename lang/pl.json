@@ -123,7 +123,9 @@
       "przyjeciepylkuZEfektem": "<strong>{actor}</strong> przyją dawkę pyłku z efektem ubocznym <strong>{efekt}</strong>.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostek czasu.",
       "przyjeciepylkuBezEfektu": "<strong>{actor}</strong> przyją dawkę pyłku bez efektu ubocznego.<br>Pyłek bedzie działał przez <strong>{czasDzialania}</strong> jednostk czasu.",
       "pozytywnyWynikTwardziela": "Udało Ci się dalej stoisz na nogach!",
-      "negatywnyWynikTwardziela": "Padasz na ryj."
+      "negatywnyWynikTwardziela": "Padasz na ryj.",
+      "zadanyWpierdol": "<strong>{dzieciak}</strong> dostał wpierdol od <strong>{tykacz}</strong><br>Otrzymał/Otrzymała <strong>{zadanyWpierdol}</strong> punktów obrażeń<br> Zdrowie zmieniło się z <strong>{aktualneZdrowie}</strong> do <strong>{noweZdrowie}</strong>",
+      "testTwardziela": "Wykonaj test Twardziela"
     },
     "dialog": {
       "dodatkowe_osiągi_za_przedmiot": "Dodatkowe osiągi za przedmiot",
@@ -152,7 +154,12 @@
       "wybierzDzieciakiDoWalki": "Wybierz któe Dzieciaki biorą udział w rozpoczętej walce:",
       "dodajWszystkieDziaciaki": "Dodaj wszystkie Dzieciaki do walki",
       "wyborDzieciakiDoWalki": "Wybierz kto bierze udział w walce",
-      "dodajDoWalki": "Dodaj wybrne Dzieciaki do walki"
+      "dodajDoWalki": "Dodaj wybrne Dzieciaki do walki",
+      "automatycznieRozdajWpierdol": "Automatycznie podziel pozostałe Osiągi Tykacza",
+      "pozostaleOsiagiTykacza": "pozostałe Osiągi Tykacza",
+      "manualneRozdajwpierdol": "Rozdaj pozostałe Osiagi Tykacza ręcznie",
+      "uruchomTykacz": "Rozdaj Wpierdol",
+      "testTwardziela": "Nieźle dostałeś/dostałaś<br>Wykonaj Test Twardziela żeby zobaczyć czy nie padasz na glebe!"
     },
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!",

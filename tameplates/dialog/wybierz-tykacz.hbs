@@ -1,11 +1,8 @@
-<div class="naglowek-dodatkowa-km">
-  {{localize "chlopcy.dialog.wybierzTykaczDoModyfikacji"}}
+<div class='naglowek-dodatkowa-km'>
+  {{localize 'chlopcy.dialog.wybierzTykaczDoModyfikacji'}}
 </div>
-<select class="wybierz-tykacz">
+<select class='wybierz-tykacz'>
   {{#each tykaczArray as |tykacz|}}
-    <option
-      value="{{@index}}"
-      data-tykacz="{{json tykacz}}"
-    >{{tykacz.data.tykacz.name}}</option>
+    <option value='{{@index}}' data-tykacz='{{json tykacz}}'>{{tykacz.data.tykacz.name}}</option>
   {{/each}}
 </select>

@@ -149,7 +149,7 @@ a.top-section-label-twardziel {
   justify-items: start;
   align-items: center;
 }
-input[type="checkbox"].cecha-wartosc {
+input[type='checkbox'].cecha-wartosc {
   width: 30px;
   height: 30px;
   flex: 0 0 30px;
@@ -188,8 +188,8 @@ select.tag-input-bajker {
   margin-left: -5px;
 }
 
-input[type="checkbox"].kostki-pyłek,
-input[type="checkbox"].użycuie-pylku {
+input[type='checkbox'].kostki-pyłek,
+input[type='checkbox'].użycuie-pylku {
   display: none;
 }
 label.inside {
@@ -202,7 +202,7 @@ label.inside {
   padding-top: 5px;
   margin-left: 5px;
 }
-input[type="checkbox"].kostki-pyłek:checked + label.inside {
+input[type='checkbox'].kostki-pyłek:checked + label.inside {
   background-color: lightgreen; /* Change this to the color you want */
 }
 .krwawienie {
@@ -287,7 +287,8 @@ textarea.sprzet-osobisty-textarea {
   gap: 10px;
 }
 
-.rectangle {
+.rectangle,
+.test-twardziela {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   padding: 10px 15px;
@@ -355,7 +356,7 @@ img.borderless-small {
   margin: auto;
 }
 
-i.fas[class*="fa-dice-"],
+i.fas[class*='fa-dice-'],
 i.fas.fa-coin {
   cursor:
     url(http://profilki.pl/files/cur/123.png) 2 1,
@@ -434,10 +435,10 @@ i.fas.fa-coin {
 .naszywka-plecy.lokacja {
   grid-template-columns: auto auto auto;
 }
-input[type="checkbox"]#dzieciak,
-input[type="checkbox"]#herb,
-input[type="checkbox"]#lokacja,
-input[type="checkbox"]#zagubieni-chlopcy {
+input[type='checkbox']#dzieciak,
+input[type='checkbox']#herb,
+input[type='checkbox']#lokacja,
+input[type='checkbox']#zagubieni-chlopcy {
   margin-left: auto;
 }
 
@@ -446,7 +447,7 @@ input[type="checkbox"]#zagubieni-chlopcy {
   text-transform: uppercase;
 }
 
-.naszywka-plecy input[type="text"] {
+.naszywka-plecy input[type='text'] {
   display: inline-block;
   margin-left: 0;
   vertical-align: middle;
@@ -529,7 +530,7 @@ textarea.bonus-naszywki {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
-.tykacz input[type="checkbox"] {
+.tykacz input[type='checkbox'] {
   margin-left: auto;
 }
 .tykacz-label {
@@ -544,7 +545,7 @@ textarea.bonus-naszywki {
 label.tykacz-label {
   width: 350px;
 }
-.tykacz input[type="number"] {
+.tykacz input[type='number'] {
   width: 50px;
   margin-left: auto;
 }
@@ -593,4 +594,10 @@ label.ksywka-do-walki {
   flex-direction: row;
   column-gap: 5em;
   justify-content: flex-start;
+}
+button.rozdaj-wpierdol {
+  margin-top: 25px;
+}
+button.toggle-section {
+  margin-top: 10px;
 }
