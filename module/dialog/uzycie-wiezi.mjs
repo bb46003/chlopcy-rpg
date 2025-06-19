@@ -1,54 +1,68 @@
 import chlopcy_Utility from '../utility.mjs';
+export class uzycieWiezi extends foundry.applications.api.DialogV2 {
 
-export class uzycieWiezi extends Dialog {
-  constructor(rollingData, msg, actor, id) {
-    super(rollingData, msg, actor, id);
-    (this.rollingData = rollingData), (this.msg = msg), (this.actor = actor), (this.buttonID = id);
-  }
-
-  async activateListeners(html) {
-    super.activateListeners(html);
-    chlopcy_Utility.addHtmlEventListener(html, 'change', '.wartosc-uzytych-wiezi', (event) => this.dostosujWartoscWiezi(event));
-    chlopcy_Utility.addHtmlEventListener(html, 'change', '.typ-uzytych-wiezi', (event) => this.dostosujWartoscWieziTyp(event));
-  }
-
-  async pokazDostepneWiezi(rollingData, msg, actor, id) {
-    const allActors = game.actors.filter((actor) => actor.type === 'dzieciak');
-    const matchingActors = [];
-    const actorId = actor._id;
-    allActors.forEach((actor) => {
-      if (actor.system.wiezi?.[actorId]) {
-        const wartosc = actor.system.wiezi[actorId].wartosc;
-        if (wartosc !== 0) {
-          matchingActors.push(actor);
-        }
-      }
-    });
-    const templateData = {
-      actorID: actorId,
-      matchingActors: matchingActors,
-      rollingData: rollingData,
-      pustyTag: game.i18n.localize('chlopcy.bez_tagu'),
-    };
-
-    const dialogTemplate = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/uzyj-wiezi.hbs', templateData);
-    new uzycieWiezi({
-      data: { rollingData, msg, actor, id },
-      title: game.i18n.localize('chlopcy.dialog.dostepneWiezi'),
-      content: dialogTemplate,
-      buttons: {
-        use: {
+  constructor(rollingData, msg, actor, id, contentElement) {
+    const options = {
+      content: contentElement, 
+      window: { title: game.i18n.localize('chlopcy.dialog.dostepneWiezi') },
+      buttons: [{
+          action: "uzyj",
           label: game.i18n.localize('chlopcy.dialog.uzyj'),
           callback: async (html) => {
             await this.modyfikujDaneRzutu(rollingData, msg, actor, id, html);
-          },
-        },
-      },
-      default: game.i18n.localize('chlopcy.dialog.uzyj'),
-    }).render(true);
+          },      
+          default: true
+      }],
+      rejectClose: false
+    }
+
+    super(options); 
+    this.rollingData = rollingData;
+    this.msg = msg;
+    this.actor = actor;
+    this.buttonId = id
+
   }
+
+  async getData() {
+    try {
+      return {
+        rollingData: this.rollingData,
+        msg: this.msg,
+        actor: this.actor,
+        buttonID: this.buttonID
+      };
+    } catch (e) {
+      console.error('getData error:', e);
+      return {};
+    }
+  }
+
+ 
+  
+
+  
+
+ _onRender() {
+    const html = this.element;
+    const allWartości = html.querySelectorAll('.wartosc-uzytych-wiezi');
+    const allTypy = html.querySelectorAll('.typ-uzytych-wiezi');
+    for (const input of allWartości) {
+      input.addEventListener("change", (event) => {
+        this.dostosujWartoscWiezi(event)
+      });
+    }
+    for (const input of allTypy) {
+      input.addEventListener("change", (event) => {
+        this.dostosujWartoscWieziTyp(event)
+      });
+    }
+}
+
+
+  
   async dostosujWartoscWiezi(event) {
-    const rollingData = this.data.data.rollingData;
+    const rollingData = this.rollingData;
     const target = event.target.value;
     const wartoscTagu = rollingData.wartoscTagu;
     const wartoscCechy = rollingData.wartoscCechy;
@@ -121,7 +135,7 @@ export class uzycieWiezi extends Dialog {
     });
   }
   async dostosujWartoscWieziTyp(event) {
-    const rollingData = this.data.data.rollingData;
+    const rollingData = this.rollingData;
     const target = Number(event.target.value);
     let wartosc;
     if (target === 2) {

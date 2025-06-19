@@ -1,12 +1,18 @@
-import chlopcy_Utility from '../utility.mjs';
+import chlopcy_Utility from "../utility.mjs";
 
 export class zegarTykacza extends Application {
   static instances = new Map();
   constructor(tykacz) {
     super();
 
-    const osiagiZegar = tykacz?.system.pozostaleOsiagi > 0 ? tykacz?.system.pozostaleOsiagi : tykacz?.system.osiagi;
-    const czasZegar = tykacz?.system.pozostalyCzas > 0 ? tykacz?.system.pozostalyCzas : tykacz?.system.czasTrwania;
+    const osiagiZegar =
+      tykacz?.system.pozostaleOsiagi > 0
+        ? tykacz?.system.pozostaleOsiagi
+        : tykacz?.system.osiagi;
+    const czasZegar =
+      tykacz?.system.pozostalyCzas > 0
+        ? tykacz?.system.pozostalyCzas
+        : tykacz?.system.czasTrwania;
     this.data = {
       tykacz,
       osiagiZegar: osiagiZegar,
@@ -19,14 +25,14 @@ export class zegarTykacza extends Application {
   static get defaultOptions() {
     const randomId = String(foundry.utils.randomID());
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['chlopcy'],
+      classes: ["chlopcy"],
       height: 200,
-      id: 'zegar-tykacza-app-' + randomId,
+      id: "zegar-tykacza-app-" + randomId,
       popOut: false,
       resizable: false,
-      template: 'systems/chlopcy/tameplates/app/zegar-tykacza.hbs',
-      title: 'Zegar Tykacza',
-      width: 'auto',
+      template: "systems/chlopcy/tameplates/app/zegar-tykacza.hbs",
+      title: "Zegar Tykacza",
+      width: "auto",
     });
   }
 
@@ -59,17 +65,22 @@ export class zegarTykacza extends Application {
     };
   }
   static async dodajPostacieDowalki(walka) {
-    const dzieciaki = game.actors.filter((actor) => actor.type === 'dzieciak');
-    const template = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/wybierz-dziaciaki-do-walki.hbs', { dzieciaki: dzieciaki });
-    const tytul = game.i18n.localize('chlopcy.dialog.wyborDzieciakiDoWalki');
+    const dzieciaki = game.actors.filter((actor) => actor.type === "dzieciak");
+    const template = await chlopcy_Utility.renderTemplate(
+      "systems/chlopcy/tameplates/dialog/wybierz-dziaciaki-do-walki.hbs",
+      { dzieciaki: dzieciaki },
+    );
+    const tytul = game.i18n.localize("chlopcy.dialog.wyborDzieciakiDoWalki");
     const d = new Dialog({
       title: tytul,
       content: template,
       buttons: {
         dodaj: {
-          label: game.i18n.localize('chlopcy.dialog.dodajDoWalki'),
+          label: game.i18n.localize("chlopcy.dialog.dodajDoWalki"),
           callback: async () => {
-            const wybraneDzieciaki = Array.from(document.querySelectorAll('.wybrany-dzieciak')).filter((input) => input.checked);
+            const wybraneDzieciaki = Array.from(
+              document.querySelectorAll(".wybrany-dzieciak"),
+            ).filter((input) => input.checked);
             let i = 1;
             const combatants = wybraneDzieciaki
               .map((input) => {
@@ -85,20 +96,22 @@ export class zegarTykacza extends Application {
                 return combatant;
               })
               .filter((c) => c !== null);
-            await walka.createEmbeddedDocuments('Combatant', combatants);
+            await walka.createEmbeddedDocuments("Combatant", combatants);
           },
         },
       },
       render: (html) => {
-        html.on('change', '.wybrany-dzieciak', (event) => {
-          const checkboxes = html.find('.wybrany-dzieciak').not('[value="all"]');
-          if (event.target.value === 'all') {
-            checkboxes.prop('checked', event.target.checked);
+        html.on("change", ".wybrany-dzieciak", (event) => {
+          const checkboxes = html
+            .find(".wybrany-dzieciak")
+            .not('[value="all"]');
+          if (event.target.value === "all") {
+            checkboxes.prop("checked", event.target.checked);
           }
         });
       },
       style: {
-        height: 'auto',
+        height: "auto",
       },
     });
     d.render(true);
@@ -107,24 +120,46 @@ export class zegarTykacza extends Application {
   activateListeners(html) {
     super.activateListeners(html);
 
-    chlopcy_Utility.addHtmlEventListener(html, 'click', '.nazwa-zegar i.fas.fa-window-close', (ev) => this.closeApp(ev));
-    chlopcy_Utility.addHtmlEventListener(html, 'click', '.osiagi i.fa.fa-minus.osiagi', (ev) => this.zmiejszOsiagi(ev));
-    chlopcy_Utility.addHtmlEventListener(html, 'click', '.czas-trwania i.fa.fa-minus.czas', (ev) => this.zmiejszCzas(ev));
-    chlopcy_Utility.addHtmlEventListener(html, 'click', '.osiagi i.fa.fa-plus.osiagi', (ev) => this.zwiekszOsiagi(ev));
+    chlopcy_Utility.addHtmlEventListener(
+      html,
+      "click",
+      ".nazwa-zegar i.fas.fa-window-close",
+      (ev) => this.closeApp(ev),
+    );
+    chlopcy_Utility.addHtmlEventListener(
+      html,
+      "click",
+      ".osiagi i.fa.fa-minus.osiagi",
+      (ev) => this.zmiejszOsiagi(ev),
+    );
+    chlopcy_Utility.addHtmlEventListener(
+      html,
+      "click",
+      ".czas-trwania i.fa.fa-minus.czas",
+      (ev) => this.zmiejszCzas(ev),
+    );
+    chlopcy_Utility.addHtmlEventListener(
+      html,
+      "click",
+      ".osiagi i.fa.fa-plus.osiagi",
+      (ev) => this.zwiekszOsiagi(ev),
+    );
   }
 
   async closeApp(ev) {
     if (this.data?.tykacz) {
-      await this.data.tykacz.update({ ['system.aktywny']: false });
+      await this.data.tykacz.update({ ["system.aktywny"]: false });
     }
 
-    game.socket.emit('system.chlopcy', {
-      type: 'zamknijZegarTykacza',
+    game.socket.emit("system.chlopcy", {
+      type: "zamknijZegarTykacza",
       tykacz: this.data?.tykacz,
     });
     zegarTykacza.instances.delete(this.id);
     this.close();
-    const przeciwnikExists = [...zegarTykacza.instances.values()].some((instance) => instance.data?.tykacz?.system.jestPrzeciwnikiem);
+    const przeciwnikExists = [...zegarTykacza.instances.values()].some(
+      (instance) => instance.data?.tykacz?.system.jestPrzeciwnikiem,
+    );
 
     if (!przeciwnikExists) {
       await game.combat?.endCombat();
@@ -137,16 +172,16 @@ export class zegarTykacza extends Application {
     const tykacz = obecnyTykacz.data.tykacz;
     const noweOsiagi = obecnieOsiagi - 1;
     obecnyTykacz.data.osiagiZegar = noweOsiagi;
-    tykacz.update({ ['system.pozostaleOsiagi']: noweOsiagi });
+    tykacz.update({ ["system.pozostaleOsiagi"]: noweOsiagi });
     const container = obecnyTykacz.element;
     if (container) {
-      container.find('.osiagi-input').val(noweOsiagi);
+      container.find(".osiagi-input").val(noweOsiagi);
     }
     if (noweOsiagi === 0) {
       this.closeApp(ev);
     }
-    game.socket.emit('system.chlopcy', {
-      type: 'zmniejszOsiagiZegara',
+    game.socket.emit("system.chlopcy", {
+      type: "zmniejszOsiagiZegara",
       noweOsiagi: noweOsiagi,
       tykacz: this.data?.tykacz,
     });
@@ -157,16 +192,16 @@ export class zegarTykacza extends Application {
     const tykacz = obecnyTykacz.data.tykacz;
     const nowyCzas = obecnyCzas - 1;
     obecnyTykacz.data.czasZegar = nowyCzas;
-    tykacz.update({ ['system.pozostalyCzas']: nowyCzas });
+    tykacz.update({ ["system.pozostalyCzas"]: nowyCzas });
     const container = obecnyTykacz.element;
     if (container) {
-      container.find('.czas-trwania-input').val(nowyCzas);
+      container.find(".czas-trwania-input").val(nowyCzas);
     }
     if (nowyCzas === 0) {
       this.closeApp(ev);
     }
-    game.socket.emit('system.chlopcy', {
-      type: 'zmniejszCzasZegara',
+    game.socket.emit("system.chlopcy", {
+      type: "zmniejszCzasZegara",
       nowyCzas: nowyCzas,
       tykacz: this.data?.tykacz,
     });
@@ -177,16 +212,16 @@ export class zegarTykacza extends Application {
     const tykacz = obecnyTykacz.data.tykacz;
     const noweOsiagi = obecnieOsiagi + 1;
     obecnyTykacz.data.osiagiZegar = noweOsiagi;
-    tykacz.update({ ['system.pozostaleOsiagi']: noweOsiagi });
+    tykacz.update({ ["system.pozostaleOsiagi"]: noweOsiagi });
     const container = obecnyTykacz.element;
     if (container) {
-      container.find('.osiagi-input').val(noweOsiagi);
+      container.find(".osiagi-input").val(noweOsiagi);
     }
     if (noweOsiagi === 0) {
       this.closeApp(ev);
     }
-    game.socket.emit('system.chlopcy', {
-      type: 'zmniejszOsiagiZegara',
+    game.socket.emit("system.chlopcy", {
+      type: "zmniejszOsiagiZegara",
       noweOsiagi: noweOsiagi,
       tykacz: this.data?.tykacz,
     });

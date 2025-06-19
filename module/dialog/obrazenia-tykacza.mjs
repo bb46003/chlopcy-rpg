@@ -1,7 +1,9 @@
+import chlopcy_Utility from "../utility.mjs";
+
 export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
   static DEFAULT_OPTIONS = {
-    window: { title: 'Przydziel osiągi tykaczy' },
-    template: 'systems/chlopcy/tameplates/dialog/obrazenia-tykacza.hbs', // ✅ fix spelling
+    window: { title: "Przydziel osiągi tykaczy" },
+    template: "systems/chlopcy/tameplates/dialog/obrazenia-tykacza.hbs",
   };
 
   constructor(daneAktywnychTykaczy, combatants) {
@@ -14,22 +16,22 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
     try {
       return {
         daneAktywnychTykaczy: this.daneAktywnychTykaczy,
-        combatants: Array.from(this.combatants), // convert Collection to Array
+        combatants: Array.from(this.combatants),
       };
     } catch (e) {
-      console.error('getData error:', e);
+      console.error("getData error:", e);
       return {};
     }
   }
 
   async _renderHTML() {
     try {
-      return await renderTemplate(this.options.template, {
+      return await chlopcy_Utility.renderTemplate(this.options.template, {
         tykacze: Object.values(this.daneAktywnychTykaczy),
         combatants: this.combatants,
       });
     } catch (e) {
-      console.error('_renderHTML error:', e);
+      console.error("_renderHTML error:", e);
       throw e;
     }
   }
@@ -39,9 +41,9 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
   }
 
   _onRender() {
-    const itemQuantities = this.element.querySelectorAll('.toggle-section');
+    const itemQuantities = this.element.querySelectorAll(".toggle-section");
     for (const input of itemQuantities) {
-      input.addEventListener('click', (e) => {
+      input.addEventListener("click", (e) => {
         this.otworzSekcje(e);
       });
     }
@@ -78,14 +80,20 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
         let value = perCombatant;
         if (selectElement) {
           if (perCombatant * combatants.size > pozostaleOsiagi) {
-            value = combatant === combatantWithExtra ? perCombatant - 1 : perCombatant;
+            value =
+              combatant === combatantWithExtra
+                ? perCombatant - 1
+                : perCombatant;
           }
           if (perCombatant * combatants.size < pozostaleOsiagi) {
-            value = combatant === combatantWithExtra ? perCombatant + 1 : perCombatant;
+            value =
+              combatant === combatantWithExtra
+                ? perCombatant + 1
+                : perCombatant;
           }
-          selectElement.innerHTML = '';
+          selectElement.innerHTML = "";
           for (let i = 0; i <= value; i++) {
-            const option = document.createElement('option');
+            const option = document.createElement("option");
             option.value = i.toString();
             option.textContent = i.toString();
             selectElement.appendChild(option);
@@ -93,15 +101,20 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
           selectElement.value = value.toString();
         }
       }
-      const elements = document.querySelectorAll(`[id^="auto-${tykaczId}"], [id^="manual-${tykaczId}"]`);
+      const elements = document.querySelectorAll(
+        `[id^="auto-${tykaczId}"], [id^="manual-${tykaczId}"]`,
+      );
 
       for (const input of elements) {
-        input.addEventListener('change', (e) => {
+        input.addEventListener("change", (e) => {
           this.upateDostepnyDmg(e, tykacz, elements);
         });
       }
-      const przyciskWpierdolu = this.element.querySelector('.rozdaj-wpierdol');
-      przyciskWpierdolu.addEventListener('click', async () => await this.rozdajWpierdol());
+      const przyciskWpierdolu = this.element.querySelector(".rozdaj-wpierdol");
+      przyciskWpierdolu.addEventListener(
+        "click",
+        async () => await this.rozdajWpierdol(),
+      );
     }
   }
   async upateDostepnyDmg(e, tykacz, elements) {
@@ -112,7 +125,7 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
     const elementsArray = Array.from(elements);
     const pozostaleSelektory = elementsArray.filter((el) => {
       if (el === e.currentTarget) return false;
-      const hiddenSection = el.closest('section.hidden');
+      const hiddenSection = el.closest("section.hidden");
       if (hiddenSection) return false;
       return true;
     });
@@ -122,16 +135,18 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
     }
     pozostaleSelektory.forEach((selectElement) => {
       const wybranaWartosc = selectElement.value;
-      selectElement.innerHTML = '';
+      selectElement.innerHTML = "";
       for (let i = 0; i <= dostępneOsiągi; i++) {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = i.toString();
         option.textContent = i.toString();
         selectElement.appendChild(option);
         selectElement.value = wybranaWartosc;
       }
     });
-    this.aktywujPrzyciskRozdaniaWpierdolu(e.target.parentNode.parentNode.parentElement);
+    this.aktywujPrzyciskRozdaniaWpierdolu(
+      e.target.parentNode.parentNode.parentElement,
+    );
   }
 
   async otworzSekcje(event) {
@@ -140,43 +155,45 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
     const button = event.currentTarget;
     const targetSelector = button.dataset.target;
     const target = this.element.querySelector(targetSelector);
-    const isHidden = target.classList.contains('hidden');
+    const isHidden = target.classList.contains("hidden");
     if (isHidden) {
-      target.classList.remove('hidden');
-      button.textContent = button.textContent.replace('▶', '▼');
-      const allButtons = this.element.querySelectorAll('button[data-target]');
+      target.classList.remove("hidden");
+      button.textContent = button.textContent.replace("▶", "▼");
+      const allButtons = this.element.querySelectorAll("button[data-target]");
       this.aktywujPrzyciskRozdaniaWpierdolu(target);
       allButtons.forEach((btn) => {
         if (btn === button) return;
 
         const section = this.element.querySelector(btn.dataset.target);
-        if (!section.classList.contains('hidden')) {
-          section.classList.add('hidden');
-          btn.textContent = btn.textContent.replace('▼', '▶');
+        if (!section.classList.contains("hidden")) {
+          section.classList.add("hidden");
+          btn.textContent = btn.textContent.replace("▼", "▶");
         }
       });
     } else {
-      target.classList.add('hidden');
-      button.textContent = button.textContent.replace('▼', '▶');
+      target.classList.add("hidden");
+      button.textContent = button.textContent.replace("▼", "▶");
     }
-    const allSection = document.querySelectorAll('.toggle-content');
-    const disableButton = Array.from(allSection).every((section) => section.classList.contains('hidden'));
-    const przyciskWpierdolu = this.element.querySelector('.rozdaj-wpierdol');
-    const jestNieAktywny = przyciskWpierdolu.hasAttribute('disabled');
+    const allSection = document.querySelectorAll(".toggle-content");
+    const disableButton = Array.from(allSection).every((section) =>
+      section.classList.contains("hidden"),
+    );
+    const przyciskWpierdolu = this.element.querySelector(".rozdaj-wpierdol");
+    const jestNieAktywny = przyciskWpierdolu.hasAttribute("disabled");
     if (disableButton && !jestNieAktywny) {
-      przyciskWpierdolu.setAttribute('disabled', '');
+      przyciskWpierdolu.setAttribute("disabled", "");
     }
   }
 
   async aktywujPrzyciskRozdaniaWpierdolu(element) {
-    const tykacze = element.querySelectorAll('.pojedynczy-tykacz');
+    const tykacze = element.querySelectorAll(".pojedynczy-tykacz");
     let aktywujPrzycisk = false;
     tykacze.forEach((tykacz) => {
       const pozostaleOsiagi = Number(tykacz.dataset.pozostaleosiagi);
-      const combatants = tykacz.querySelectorAll('.dzieciak-name');
+      const combatants = tykacz.querySelectorAll(".dzieciak-name");
       let rozdawnyWpierdol = 0;
       combatants.forEach((dzieciak) => {
-        const select = dzieciak.querySelector('select');
+        const select = dzieciak.querySelector("select");
         rozdawnyWpierdol += Number(select.value);
       });
       if (rozdawnyWpierdol === pozostaleOsiagi) {
@@ -185,25 +202,27 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
         aktywujPrzycisk = false;
       }
     });
-    const przyciskWpierdolu = this.element.querySelector('.rozdaj-wpierdol');
-    const jestNieAktywny = przyciskWpierdolu.hasAttribute('disabled');
+    const przyciskWpierdolu = this.element.querySelector(".rozdaj-wpierdol");
+    const jestNieAktywny = przyciskWpierdolu.hasAttribute("disabled");
     if (aktywujPrzycisk && jestNieAktywny) {
-      przyciskWpierdolu.removeAttribute('disabled');
+      przyciskWpierdolu.removeAttribute("disabled");
     }
     if (!aktywujPrzycisk) {
-      przyciskWpierdolu.setAttribute('disabled', '');
+      przyciskWpierdolu.setAttribute("disabled", "");
     }
   }
 
   async rozdajWpierdol() {
-    const allSection = document.querySelectorAll('.toggle-content');
-    const visibleSections = Array.from(allSection).filter((section) => !section.classList.contains('hidden'));
-    const tykacze = visibleSections[0].querySelectorAll('.pojedynczy-tykacz');
+    const allSection = document.querySelectorAll(".toggle-content");
+    const visibleSections = Array.from(allSection).filter(
+      (section) => !section.classList.contains("hidden"),
+    );
+    const tykacze = visibleSections[0].querySelectorAll(".pojedynczy-tykacz");
     tykacze.forEach(async (tykacz) => {
       const tykazNazwa = tykacz.dataset.tykacznazwa;
-      const combatants = tykacz.querySelectorAll('.dzieciak-name');
+      const combatants = tykacz.querySelectorAll(".dzieciak-name");
       combatants.forEach(async (dzieciak) => {
-        const select = dzieciak.querySelector('select');
+        const select = dzieciak.querySelector("select");
         const zadanyWpierdol = Number(select.value);
         if (zadanyWpierdol !== 0) {
           const dzieciakID = select.dataset.dzieciakid;
@@ -214,9 +233,9 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
             noweZdrowie = 0;
           }
           await dzieciakActor.update({
-            ['system.zdrowie.aktualne']: noweZdrowie,
+            ["system.zdrowie.aktualne"]: noweZdrowie,
           });
-          let content = game.i18n.format('chlopcy.czat.zadanyWpierdol', {
+          let content = game.i18n.format("chlopcy.czat.zadanyWpierdol", {
             tykacz: tykazNazwa,
             dzieciak: dzieciakActor.name,
             zadanyWpierdol: zadanyWpierdol,
@@ -224,8 +243,9 @@ export class obrazeniaTykacza extends foundry.applications.api.ApplicationV2 {
             noweZdrowie: noweZdrowie,
           });
           if (noweZdrowie === 0) {
-            content += `<br>` + game.i18n.localize('chlopcy.dialog.testTwardziela');
-            content += `<button class="test-twardziela" data-actorid="${dzieciakID}">${game.i18n.localize('chlopcy.czat.testTwardziela')}</button>`;
+            content +=
+              `<br>` + game.i18n.localize("chlopcy.dialog.testTwardziela");
+            content += `<button class="test-twardziela" data-actorid="${dzieciakID}">${game.i18n.localize("chlopcy.czat.testTwardziela")}</button>`;
           }
           const chatData = {
             user: game.user?._id,
