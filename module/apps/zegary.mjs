@@ -1,7 +1,16 @@
 import chlopcy_Utility from "../utility.mjs";
 
-export class zegarTykacza extends Application {
+export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
   static instances = new Map();
+    static DEFAULT_OPTIONS = { classes: ["chlopcy"],
+      height: 200,
+      id: "zegar-tykacza-app-" + foundry.utils.randomID(),
+      popOut: false,
+      resizable: false,
+      template: "systems/chlopcy/tameplates/app/zegar-tykacza.hbs",
+      title: "Zegar Tykacza",
+      width: "auto",}
+
   constructor(tykacz) {
     super();
 
@@ -22,19 +31,20 @@ export class zegarTykacza extends Application {
     zegarTykacza.instances.set(this.id, this);
   }
 
-  static get defaultOptions() {
-    const randomId = String(foundry.utils.randomID());
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["chlopcy"],
-      height: 200,
-      id: "zegar-tykacza-app-" + randomId,
-      popOut: false,
-      resizable: false,
-      template: "systems/chlopcy/tameplates/app/zegar-tykacza.hbs",
-      title: "Zegar Tykacza",
-      width: "auto",
-    });
-  }
+  async _renderHTML() {
+      try {
+        const content = await chlopcy_Utility.renderTemplate(this.options.template, {tykacz: this.data.tykacz});
+        return content
+        
+      } catch (e) {
+        console.error("_renderHTML error:", e);
+        throw e;
+      }
+    }
+  
+    async _replaceHTML(result, html) {
+      html.innerHTML = result;
+    }
 
   static async initialise(tykacz) {
     const instance = new zegarTykacza(tykacz);
