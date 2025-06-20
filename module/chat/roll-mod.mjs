@@ -316,16 +316,23 @@ async function przerzutKM(rollingData, msg, actor, id) {
     const formulaDKM = rollingData.rolls[2].formula.replace(/^1d/, 'd');
     const html = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/przerzut-dla-wielu-KM.hbs', { formulaKM: formulaKM, formulaDKM: formulaDKM });
     const tutyl = game.i18n.localize('chlopcy.dialog.wybierz_KM_do_przerzutu');
-    const d = new Dialog({
-      title: tutyl,
+    const d = new foundry.applications.api.DialogV2({
+      window:{title: tutyl},
       content: html,
-      buttons: '',
-      render: (html) => {
-        // Attach the click handler properly
-        html.on('click', "[class^='fas fa-dice-'], .fa-coin", (event) => przerzutWybranejKM(rollingData, event, d, id));
-      },
+      buttons: [{}],
     });
     d.render(true);
+    setTimeout(() => {
+      const element = d.element;
+      const kostki = element.querySelectorAll("[class^='fas fa-dice-'], .fa-coin");
+      kostki.forEach(kostka =>{
+        kostka.addEventListener('click', (event) => przerzutWybranejKM(rollingData, event, d, id));
+      })
+      const button = element.querySelector('.form-footer')
+      button.remove()
+
+
+    })
   }
 }
 
@@ -333,16 +340,23 @@ async function dodatkowaKM(rollingData, msg, actor, id) {
   const html = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/dodatkowaKM.hbs', { rollingData: rollingData });
   const tutyl = game.i18n.localize('chlopcy.dialog.naglowek_dodatkowa_KM');
 
-  const d = new Dialog({
-    title: tutyl,
+  const d = new foundry.applications.api.DialogV2({
+    window:{title: tutyl},
     content: html,
-    buttons: '',
-    render: (html) => {
-      // Attach the click handler properly
-      html.on('click', "[class^='fas fa-dice-'], .fa-coin", (event) => efektDodatkowejKM(rollingData, event, d, id));
-    },
+    buttons: [{}],
   });
   d.render(true);
+      setTimeout(() => {
+      const element = d.element;
+      const kostki = element.querySelectorAll("[class^='fas fa-dice-'], .fa-coin");
+      kostki.forEach(kostka =>{
+        kostka.addEventListener('click', (event) => efektDodatkowejKM(rollingData, event, d, id));
+      })
+      const button = element.querySelector('.form-footer')
+      button.remove()
+
+
+    })
 }
 
 async function efektDodatkowejKM(rollingData, event, d, id) {

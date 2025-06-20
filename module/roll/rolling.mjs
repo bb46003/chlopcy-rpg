@@ -20,11 +20,11 @@ export default class rzutDoTarczy {
       }));
     const html = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/pytanie-o-tag.hbs', { tagi: tagiNazwy, stan: stan });
     const label = game.i18n.localize('TABLE.Roll');
-    const preroll = new Dialog({
-      title: game.i18n.localize('chlopcy.wybierz_tag'),
+    const preroll = new foundry.applications.api.DialogV2({
+      window: {title: game.i18n.localize('chlopcy.wybierz_tag')},
       content: html,
-      buttons: {
-        roll: {
+      buttons:[ {
+        action: "roll",
           label: label,
           callback: async () => {
             const tagi = document.querySelector('.wybrany-tag');
@@ -37,12 +37,13 @@ export default class rzutDoTarczy {
 
             await this.prepareRollingData(actor, cecha, stan, wybranyTag, przedmiot, dodatkoweOsiagi);
           },
+          default: true
         },
-        cancel: {
+        {
+        action: "anuluj" ,
           label: 'Anuluj',
-        },
-      },
-      default: 'roll',
+        
+      }],
     });
     preroll.render(true, { height: 230 });
   }

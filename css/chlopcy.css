@@ -130,6 +130,11 @@ a.top-section-label-twardziel {
   margin-left: 35px;
   column-gap: 7px;
 }
+p.rzut-kb {
+    min-width: 2em;
+    text-align: end;
+    margin-right: 5px;
+}
 .rzuty-label-pod-wpływem {
   height: 30%;
   margin-top: auto;
@@ -280,6 +285,7 @@ textarea.sprzet-osobisty-textarea {
   display: flex;
   align-items: center;
   column-gap: 10px;
+      justify-content: space-between;
 }
 .tag-mods {
   display: flex;
