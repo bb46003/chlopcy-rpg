@@ -2,11 +2,11 @@ import chlopcy_Utility from '../utility.mjs';
 
 export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
   static instances = new Map();
- static DEFAULT_OPTIONS = { 
-  form:{
-      preventEscapeClose: true 
-  }
-    }
+  static DEFAULT_OPTIONS = {
+    form: {
+      preventEscapeClose: true,
+    },
+  };
   constructor(tykacz) {
     super();
 
@@ -18,7 +18,6 @@ export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
       osiagiZegar,
       czasZegar,
     };
-   
 
     zegarTykacza.instances.set(this.id, this);
   }
@@ -46,7 +45,7 @@ export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
       contentSection.style.padding = '0px';
     }
     el.classList.add('zegar-tykacza-dom');
-    if(game.user.isGM){
+    if (game.user.isGM) {
       this.dodajAktywneListiery(el);
     }
     const uiLeft = document.querySelector('.main-controls.app.control-tools.flexcol');
@@ -66,7 +65,7 @@ export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
       offsetTop += 10;
     }
 
-    this.setPosition({ top: offsetTop, left: 20});
+    this.setPosition({ top: offsetTop, left: 20 });
     this.element.style.zIndex = 0;
   }
 
@@ -93,12 +92,12 @@ export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
       ...this.data,
     };
   }
-async close(options = {}) {
-  if (options.closeKey) {
-    return false;
+  async close(options = {}) {
+    if (options.closeKey) {
+      return false;
+    }
+    return super.close(options);
   }
-  return super.close(options);
-}
 
   dodajAktywneListiery(html) {
     const zamknięcie = html.querySelector('.nazwa-zegar i.fas.fa-window-close');
@@ -187,11 +186,12 @@ async close(options = {}) {
       dzieciaki,
     });
     const tytul = game.i18n.localize('chlopcy.dialog.wyborDzieciakiDoWalki');
-    new Dialog({
-      title: tytul,
+    const dodajPostacieDoWaki = new foundry.applications.api.DialogV2({
+      window: { title: tytul },
       content: template,
-      buttons: {
-        dodaj: {
+      buttons: [
+        {
+          action: 'dodaj',
           label: game.i18n.localize('chlopcy.dialog.dodajDoWalki'),
           callback: async () => {
             const wybraneDzieciaki = Array.from(document.querySelectorAll('.wybrany-dzieciak')).filter((i) => i.checked);
@@ -203,16 +203,23 @@ async close(options = {}) {
               .filter(Boolean);
             await walka.createEmbeddedDocuments('Combatant', combatants);
           },
+          default: true
         },
-      },
-      render: (html) => {
-        html.on('change', '.wybrany-dzieciak', (event) => {
-          const checkboxes = html.find('.wybrany-dzieciak').not('[value="all"]');
-          if (event.target.value === 'all') {
-            checkboxes.prop('checked', event.target.checked);
-          }
+      ],
+    });
+
+    dodajPostacieDoWaki.render(true);
+    setTimeout(() => {
+      const element = dodajPostacieDoWaki.element; 
+      const checkboxAll = element.querySelector('.wybrany-dzieciak[value="all"]');
+      if (!checkboxAll) return;
+      checkboxAll.addEventListener('change', (event) => {
+        const checkboxes = element.querySelectorAll('.wybrany-dzieciak:not([value="all"])');
+        const isChecked = event.target.checked;
+        checkboxes.forEach((cb) => {
+          cb.checked = isChecked;
         });
-      },
-    }).render(true);
+      });
+    }, 0);
   }
 }

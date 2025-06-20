@@ -694,8 +694,6 @@ async function modyfikacjaTykacza(tykacz, tykaczActor, rollingData, msg) {
         }
       }
     } else {
-
-
       if (game.user.isGM) {
         await tykaczActor.update({ ['system.aktywny']: false });
       }
@@ -703,7 +701,7 @@ async function modyfikacjaTykacza(tykacz, tykaczActor, rollingData, msg) {
         type: 'zamknijZegarTykacza',
         tykacz: tykacz.data.tykacz,
       });
-      pozostaleOsiagiTykacza = 0
+      pozostaleOsiagiTykacza = 0;
       zegarTykacza.instances.delete(tykacz.id);
       tykacz.close();
     }
