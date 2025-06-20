@@ -3,6 +3,6 @@
 </div>
 <select class='wybierz-tykacz'>
   {{#each tykaczArray as |tykacz|}}
-    <option value='{{@index}}' data-tykacz='{{json tykacz}}'>{{tykacz.data.tykacz.name}}</option>
+    <option value='{{@index}}' data-tykacz='{{tykacz.data.tykacz._id}}' data-id="{{tykacz.element.id}}">{{tykacz.data.tykacz.name}}</option>
   {{/each}}
 </select>

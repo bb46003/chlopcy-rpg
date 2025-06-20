@@ -92,7 +92,6 @@ export class dzieciak extends BaseActorSheet {
   }
   async _onDrop(event) {
     event.preventDefault();
-    console.log('Checkbox checked:', event.target.checked);
     const data = event.dataTransfer;
     if (data) {
       const droppedItem = JSON.parse(data.getData('text/plain'));
@@ -110,7 +109,6 @@ export class dzieciak extends BaseActorSheet {
   }
   async dawkiPylku(ev) {
     ev.preventDefault();
-    console.log(ev);
     const id = Number(ev.currentTarget.outerText);
     let targetId = ev.target.id;
     let val = document.querySelector(`input[type="checkbox"]#${CSS.escape(targetId)}`).checked;

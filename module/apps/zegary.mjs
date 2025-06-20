@@ -59,7 +59,6 @@ export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
     if (zegary.length !== 1) {
       for (let i = 1; i < zegary.length; i++) {
         const zegar = zegary[i - 1];
-        console.log(zegar.clientHeight);
         offsetTop += zegar.clientHeight;
       }
       offsetTop += 10;

@@ -630,23 +630,21 @@ async function zdejmijOsiagiTykacza(rollingData, msg) {
     if (tykaczArray.length > 1) {
       const template = await chlopcy_Utility.renderTemplate('systems/chlopcy/tameplates/dialog/wybierz-tykacz.hbs', { tykaczArray: tykaczArray });
       const tytul = game.i18n.localize('chlopcy.dialog.wybierzTykacz');
-      const d = new Dialog({
-        title: tytul,
+      const d = new foundry.applications.api.DialogV2({
+        windows: {title: tytul},
         content: template,
-        buttons: {
-          wybierz: {
+        buttons: [{
+            action: "wybierz", 
             label: game.i18n.localize('chlopcy.dialog.modyfikujWybranyTykacz'),
             callback: async (html) => {
-              const selectElement = html.find('.wybierz-tykacz')[0];
+              const selectElement = html.currentTarget.querySelector('.wybierz-tykacz');
               const selectedOption = selectElement.options[selectElement.selectedIndex];
-              const tykaczData = JSON.parse(selectedOption.dataset.tykacz);
-              const tykaczActor = game.actors.get(tykaczData.data.tykacz._id);
+              const tykaczActor = game.actors.get(selectedOption.dataset.tykacz);
               const tykacze = game.chlopcy.zegarTykacza.instances;
-              const tykacz = tykacze.get(tykaczData.options.id);
+              const tykacz = tykacze.get(selectedOption.dataset.id);
               await modyfikacjaTykacza(tykacz, tykaczActor, rollingData, msg);
             },
-          },
-        },
+          }],
       });
       d.render(true);
     } else {
