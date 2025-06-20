@@ -1,27 +1,27 @@
 import chlopcy_Utility from '../utility.mjs';
 export class uzycieWiezi extends foundry.applications.api.DialogV2 {
-
   constructor(rollingData, msg, actor, id, contentElement) {
     const options = {
-      content: contentElement, 
+      content: contentElement,
       window: { title: game.i18n.localize('chlopcy.dialog.dostepneWiezi') },
-      buttons: [{
-          action: "uzyj",
+      buttons: [
+        {
+          action: 'uzyj',
           label: game.i18n.localize('chlopcy.dialog.uzyj'),
           callback: async (html) => {
             await this.modyfikujDaneRzutu(rollingData, msg, actor, id, html);
-          },      
-          default: true
-      }],
-      rejectClose: false
-    }
+          },
+          default: true,
+        },
+      ],
+      rejectClose: false,
+    };
 
-    super(options); 
+    super(options);
     this.rollingData = rollingData;
     this.msg = msg;
     this.actor = actor;
-    this.buttonId = id
-
+    this.buttonId = id;
   }
 
   async getData() {
@@ -30,7 +30,7 @@ export class uzycieWiezi extends foundry.applications.api.DialogV2 {
         rollingData: this.rollingData,
         msg: this.msg,
         actor: this.actor,
-        buttonID: this.buttonID
+        buttonID: this.buttonID,
       };
     } catch (e) {
       console.error('getData error:', e);
@@ -38,29 +38,22 @@ export class uzycieWiezi extends foundry.applications.api.DialogV2 {
     }
   }
 
- 
-  
-
-  
-
- _onRender() {
+  _onRender() {
     const html = this.element;
     const allWartości = html.querySelectorAll('.wartosc-uzytych-wiezi');
     const allTypy = html.querySelectorAll('.typ-uzytych-wiezi');
     for (const input of allWartości) {
-      input.addEventListener("change", (event) => {
-        this.dostosujWartoscWiezi(event)
+      input.addEventListener('change', (event) => {
+        this.dostosujWartoscWiezi(event);
       });
     }
     for (const input of allTypy) {
-      input.addEventListener("change", (event) => {
-        this.dostosujWartoscWieziTyp(event)
+      input.addEventListener('change', (event) => {
+        this.dostosujWartoscWieziTyp(event);
       });
     }
-}
+  }
 
-
-  
   async dostosujWartoscWiezi(event) {
     const rollingData = this.rollingData;
     const target = event.target.value;
