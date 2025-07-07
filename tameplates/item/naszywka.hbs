@@ -1,23 +1,38 @@
-<form class='{{cssClass}}' autocomplete='off'>
-  <div class='gorna-sekcja'>
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="gorna-sekcja">
 
-    <div class='nazwa-naszywki'>
-      <label class='top-section-label-center'>{{localize 'chlopcy.nazwaNaszywki'}}</label>
-      <input class='nazwa-naszywki' type='text' name='name' value='{{item.name}}' />
+    <div class="nazwa-naszywki">
+      <label class="top-section-label-center">{{localize
+          "chlopcy.nazwaNaszywki"
+        }}</label>
+      <input
+        class="nazwa-naszywki"
+        type="text"
+        name="name"
+        value="{{item.name}}"
+      />
     </div>
-    <div class='obrazek-naszywka'>
-      <label class='top-section-label-center'>{{localize 'chlopcy.wygladNaszywki'}}</label>
-      <img class='borderless-naszywka' src='{{item.img}}' data-edit='img' />
+    <div class="obrazek-naszywka">
+      <label class="top-section-label-center">{{localize
+          "chlopcy.wygladNaszywki"
+        }}</label>
+      <img class="borderless-naszywka" src="{{item.img}}" data-edit="img" />
     </div>
   </div>
-  <div class='glowna'>
-    <div class='wymagania'>
-      <label>{{localize 'chlopcy.wymaganiaNaszywki'}}</label>
-      <textarea name='system.wymagania' value='system.wymagania'>{{system.wymagania}}</textarea>
+  <div class="glowna">
+    <div class="wymagania">
+      <label>{{localize "chlopcy.wymaganiaNaszywki"}}</label>
+      <textarea
+        name="system.wymagania"
+        value="system.wymagania"
+      >{{system.wymagania}}</textarea>
     </div>
-    <div class='bonus'>
-      <label>{{localize 'chlopcy.bonusNaszywki'}}</label>
-      <textarea name='system.bonus' value='system.bonus'>{{system.wymagania}}</textarea>
+    <div class="bonus">
+      <label>{{localize "chlopcy.bonusNaszywki"}}</label>
+      <textarea
+        name="system.bonus"
+        value="system.bonus"
+      >{{system.wymagania}}</textarea>
     </div>
   </div>
 </form>

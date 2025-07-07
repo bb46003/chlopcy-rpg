@@ -130,6 +130,11 @@ a.top-section-label-twardziel {
   margin-left: 35px;
   column-gap: 7px;
 }
+p.rzut-kb {
+  min-width: 2em;
+  text-align: end;
+  margin-right: 5px;
+}
 .rzuty-label-pod-wpływem {
   height: 30%;
   margin-top: auto;
@@ -149,7 +154,7 @@ a.top-section-label-twardziel {
   justify-items: start;
   align-items: center;
 }
-input[type='checkbox'].cecha-wartosc {
+input[type="checkbox"].cecha-wartosc {
   width: 30px;
   height: 30px;
   flex: 0 0 30px;
@@ -188,8 +193,8 @@ select.tag-input-bajker {
   margin-left: -5px;
 }
 
-input[type='checkbox'].kostki-pyłek,
-input[type='checkbox'].użycuie-pylku {
+input[type="checkbox"].kostki-pyłek,
+input[type="checkbox"].użycuie-pylku {
   display: none;
 }
 label.inside {
@@ -202,7 +207,7 @@ label.inside {
   padding-top: 5px;
   margin-left: 5px;
 }
-input[type='checkbox'].kostki-pyłek:checked + label.inside {
+input[type="checkbox"].kostki-pyłek:checked + label.inside {
   background-color: lightgreen; /* Change this to the color you want */
 }
 .krwawienie {
@@ -280,6 +285,7 @@ textarea.sprzet-osobisty-textarea {
   display: flex;
   align-items: center;
   column-gap: 10px;
+  justify-content: space-between;
 }
 .tag-mods {
   display: flex;
@@ -356,7 +362,7 @@ img.borderless-small {
   margin: auto;
 }
 
-i.fas[class*='fa-dice-'],
+i.fas[class*="fa-dice-"],
 i.fas.fa-coin {
   cursor:
     url(http://profilki.pl/files/cur/123.png) 2 1,
@@ -435,10 +441,10 @@ i.fas.fa-coin {
 .naszywka-plecy.lokacja {
   grid-template-columns: auto auto auto;
 }
-input[type='checkbox']#dzieciak,
-input[type='checkbox']#herb,
-input[type='checkbox']#lokacja,
-input[type='checkbox']#zagubieni-chlopcy {
+input[type="checkbox"]#dzieciak,
+input[type="checkbox"]#herb,
+input[type="checkbox"]#lokacja,
+input[type="checkbox"]#zagubieni-chlopcy {
   margin-left: auto;
 }
 
@@ -447,7 +453,7 @@ input[type='checkbox']#zagubieni-chlopcy {
   text-transform: uppercase;
 }
 
-.naszywka-plecy input[type='text'] {
+.naszywka-plecy input[type="text"] {
   display: inline-block;
   margin-left: 0;
   vertical-align: middle;
@@ -530,7 +536,7 @@ textarea.bonus-naszywki {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
-.tykacz input[type='checkbox'] {
+.tykacz input[type="checkbox"] {
   margin-left: auto;
 }
 .tykacz-label {
@@ -545,15 +551,12 @@ textarea.bonus-naszywki {
 label.tykacz-label {
   width: 350px;
 }
-.tykacz input[type='number'] {
+.tykacz input[type="number"] {
   width: 50px;
   margin-left: auto;
 }
 .zegar {
   background: #0029ff;
-  position: absolute;
-  left: 1em;
-  top: 35em;
 }
 
 input.osiagi-input,
@@ -600,4 +603,13 @@ button.rozdaj-wpierdol {
 }
 button.toggle-section {
   margin-top: 10px;
+}
+.zegar-tykacza-dom {
+  background: transparent;
+  border-radius: 8px;
+  color: white;
+  width: fit-content;
+  height: auto;
+  border: none;
+  box-shadow: none;
 }
