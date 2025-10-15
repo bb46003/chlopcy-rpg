@@ -159,7 +159,18 @@
       "pozostaleOsiagiTykacza": "pozostałe Osiągi Tykacza",
       "manualneRozdajwpierdol": "Rozdaj pozostałe Osiagi Tykacza ręcznie",
       "uruchomTykacz": "Rozdaj Wpierdol",
-      "testTwardziela": "Nieźle dostałeś/dostałaś<br>Wykonaj Test Twardziela żeby zobaczyć czy nie padasz na glebe!"
+      "testTwardziela": "Nieźle dostałeś/dostałaś<br>Wykonaj Test Twardziela żeby zobaczyć czy nie padasz na glebe!",
+      "koniex_sesji": "Poniżej są pytania na koniec sesji, za każde zaznaczone pytanie otrzymasz punkt rozwoju, za 4 takie punkty możesz rozwiąć Atut lub Wprawkę bąźd wykupić nową wprawkę.",
+      "pytanie1": "Czy udało Ci się zrobić Bangarang z punktów Brawury, Dowcipu, Finezji? ",
+      "pytanie2": "Czy udało Ci się wykazać Brawurą, Finezją lub Dowcipem? ",
+      "pytanie3": "Czy zrobiłeś coś dobrego dla Klubu?",
+      "pytanie4": "Czy brałeś/brałas udział w sesji? ",
+      "przypominajka": "Zastanów się czy na sesji nie odwaliłeś/odwaliłaś akcji zasługującej na punkty BANGARANG, wiadomo czasem podczas akcji można o tym zapomnieć. Podobnie jak jest z Naszywkami, zastanów się czy jakaś z akcji na sesji nie zasługuje na nagrodzenie Naszywką.",
+      "zyskaj_xp": "Zyskaj doświadczenie",
+      ":pytania_konca_sesji": "Pytania na koniec sesji",
+      "wybierz_dzieciaka": "Wybieram Dzieciaka",
+      "wybierz_aktor": "Wybierz swojego Dzieciaka",
+      "wybierz_swojego_dzieciaka": "Nie masz przypisanego Dzieciaka do ktojego konta gracza, więc wybierz swojego z listy poniżej."
     },
     "ui": {
       "najpierw_użyjKM": "Najoier użyj dowolnej KM zanim ją przerzucisz!",
@@ -199,6 +210,9 @@
     },
     "pozostaleOsiagiTykacza": "Pozostałe osiągi Tykacza",
     "pozostalyCzasTykacza": "Pozostały czas Tykacza",
-    "opis": "Pierdolety o Tobie"
+    "opis": "Pierdolety o Tobie",
+    "chat": {
+      "zyskaneXP": "Dzieciak <stron>{name}</strong> zyskał/zyskała {gainxp}. Jego/Jej punkty doświadczenia zmieniły się z {oldxp} do {newxp}"
+    }
   }
 }

@@ -1,0 +1,10 @@
+<div>
+    <span>{{localize "chlopcy.dialog.wybierz_swojego_dzieciaka"}}</span>
+    <div>
+        <select class="wybranyDzieciak">
+             {{#each avaliableActors as |actor|}}
+                <option value = "{{actor.id}}">{{actor.name}}</option>
+             {{/each}}
+        </select>            
+    </div>
+</div>

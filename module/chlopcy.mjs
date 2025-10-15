@@ -9,6 +9,7 @@ import { zegarTykacza } from "./apps/zegary.mjs";
 import { SocketHandler } from "./socketHandler.mjs";
 import chlopcy_Utility from "./utility.mjs";
 import { obrazeniaTykacza } from "./dialog/obrazenia-tykacza.mjs";
+import { KoniecSesji } from "./dialog/koniec-sesji.mjs";
 
 Hooks.once("init", async function () {
   CONFIG.CHLOPCYCONFIG = CHLOPCYCONFIG;
@@ -37,7 +38,7 @@ Hooks.once("init", async function () {
   registerHandlebarsHelpers();
   console.log('System "Chłopcy RPG" został poprawnie załadowany');
 
-  game.chlopcy = { uzycieWiezi, zegarTykacza };
+  game.chlopcy = { uzycieWiezi, zegarTykacza, KoniecSesji };
   CONFIG.Actor.documentClass = chlopcyActor;
   game.chlopcy.zegarTykacza.socketHandler = new SocketHandler();
   if (game.i18n.lang !== "pl") {
