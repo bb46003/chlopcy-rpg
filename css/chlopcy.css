@@ -613,3 +613,26 @@ button.toggle-section {
   border: none;
   box-shadow: none;
 }
+.koniec-sesji-pytania{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+    gap: 5px;
+    justify-content: center;
+}
+.pytanie{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn{
+  width: 100%;
+    margin-top: 30px;
+}
+.naszywki-dialog{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-direction: column;
+}

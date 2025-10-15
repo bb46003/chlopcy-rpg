@@ -69,7 +69,7 @@ export class zegarTykacza extends foundry.applications.api.ApplicationV2 {
       const children = Array.from(uiLeft.children);
       const visibleChildren = children.filter((el) => el.offsetParent !== null);
       const lastElement = visibleChildren[0].lastElementChild;
-       rect = lastElement;
+      rect = lastElement;
     }
 
     let offsetTop;

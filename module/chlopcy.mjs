@@ -9,6 +9,7 @@ import { zegarTykacza } from "./apps/zegary.mjs";
 import { SocketHandler } from "./socketHandler.mjs";
 import chlopcy_Utility from "./utility.mjs";
 import { obrazeniaTykacza } from "./dialog/obrazenia-tykacza.mjs";
+import { KoniecSesji } from "./dialog/koniec-sesji.mjs";
 
 Hooks.once("init", async function () {
   CONFIG.CHLOPCYCONFIG = CHLOPCYCONFIG;
@@ -37,7 +38,7 @@ Hooks.once("init", async function () {
   registerHandlebarsHelpers();
   console.log('System "Chłopcy RPG" został poprawnie załadowany');
 
-  game.chlopcy = { uzycieWiezi, zegarTykacza };
+  game.chlopcy = { uzycieWiezi, zegarTykacza, KoniecSesji };
   CONFIG.Actor.documentClass = chlopcyActor;
   game.chlopcy.zegarTykacza.socketHandler = new SocketHandler();
   if (game.i18n.lang !== "pl") {
@@ -82,6 +83,72 @@ Hooks.on("ready", async () => {
       }
     }
   });
+  if (game.user.isGM) {
+    const macroKey = "chlopcy.koniec_sesji";
+    const localizedNames = [];
+
+    // cache translations so we don't re-fetch next time
+    if (!game.chlopcyLangCache) game.chlopcyLangCache = {};
+
+    for (const langDef of game.system.languages) {
+      if (!langDef?.path) continue;
+
+      try {
+        if (!game.chlopcyLangCache[langDef.lang]) {
+          const response = await fetch(langDef.path);
+          game.chlopcyLangCache[langDef.lang] = await response.json();
+        }
+
+        const translationSet = await game.chlopcyLangCache[langDef.lang];
+        const localized = await foundry.utils.getProperty(
+          translationSet,
+          macroKey,
+        );
+        if (localized) localizedNames.push(localized);
+      } catch (err) {
+        console.warn(`Failed to load translations for ${langDef.lang}:`, err);
+      }
+    }
+    console.log(localizedNames)
+    // find GM users
+    const gmUsers = game.users.filter((u) => u.isGM);
+    const gmMacros = game.macros.filter((m) =>
+      gmUsers.some((u) => m.ownership[u.id] === 3 || m.ownership.default === 3),
+    );
+
+    // find any GM macro whose name matches any localized name
+    let macro = gmMacros.find((m) => localizedNames.includes(m.name));
+
+    if (!macro) {
+      // fallback name in current language
+      const macroName = game.i18n.localize(macroKey);
+      macro = await Macro.create({
+        name: macroName,
+        type: "script",
+        img: "icons/svg/door-open-outline.svg",
+        command: `
+          const activeUsers = game.users.filter((u) => u.active && !u.isGM);
+          activeUsers.forEach(user =>{
+          game.socket.emit("system.chlopcy", {
+                type: "rozdajXp",
+                user: user._id})
+            })
+          ui.notifications.info(
+            game.i18n.localize("chlopcy.ui.wysłanoZapytanieOXP"),
+          );`,
+      });
+
+      // assign to first empty slot
+      const hotbarMacros = game.user.getHotbarMacros();
+      const emptySlot = hotbarMacros.findIndex((h) => !h.macro);
+
+      if (emptySlot === -1) {
+        console.warn("No empty hotbar slot available for End Session macro!");
+      } else {
+        await game.user.assignHotbarMacro(macro, emptySlot + 1);
+      }
+    }
+  }
 });
 Hooks.on("renderCombatTracker", async (dialog) => {
   let combatApp;

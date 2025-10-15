@@ -2,10 +2,10 @@
   "id": "chlopcy",
   "title": "Chłopcy RPG",
   "description": "Stół do systemu Chłopcy RPG na podstawie serii książek Jakuba Ćwieka \"Chłopcy\"",
-  "version": "0.41",
+  "version": "0.5",
   "compatibility": {
     "minimum": "12",
-    "verified": "13.345"
+    "verified": "13.350"
   },
   "authors": [
     {
@@ -22,9 +22,9 @@
       "path": "lang/pl.json",
       "default": true
     }
+    
   ],
-
-  "primaryLanguage": "pl",
+  "language": "pl",
   "socket": true,
   "manifest": "https://raw.githubusercontent.com/bb46003/chlopcy-rpg/refs/heads/main/system.json",
   "download": "https://github.com/bb46003/chlopcy-rpg/archive/refs/heads/main.zip"
