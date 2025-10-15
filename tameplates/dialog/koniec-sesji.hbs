@@ -2,14 +2,22 @@
     <div>
         <span>{{localize "chlopcy.dialog.koniex_sesji" }}</span>
     </div>
-    <div>
-        <input type="checkbox" name="pytanie1">{{localize "chlopcy.dialog.pytanie1"}}</input>
-        <input type="checkbox" name="pytanie2">{{localize "chlopcy.dialog.pytanie2"}}</input>
-        <input type="checkbox" name="pytanie3">{{localize "chlopcy.dialog.pytanie3"}}</input>
-        <input type="checkbox" name="pytanie4">{{localize "chlopcy.dialog.pytanie4"}}</input>
+    <div class="koniec-sesji-pytania">
+        <div class="pytanie">
+            <input type="checkbox" name="pytanie1">{{localize "chlopcy.dialog.pytanie1"}}</input>
+        </div>
+        <div class="pytanie">        
+            <input type="checkbox" name="pytanie2">{{localize "chlopcy.dialog.pytanie2"}}</input>
+        </div>
+        <div class="pytanie">
+            <input type="checkbox" name="pytanie3">{{localize "chlopcy.dialog.pytanie3"}}</input>
+        </div>
+        <div class="pytanie">
+            <input type="checkbox" name="pytanie4">{{localize "chlopcy.dialog.pytanie4"}}</input>
+        </div>
     </div>
     <span>{{localize "chlopcy.dialog.przypominajka"}}</span>
 </div>
 <div>
-    <button data-action="xp">{{localize "chlopcy.dialog.zyskaj_xp"}}</button>
+    <button class="btn" data-action="xp">{{localize "chlopcy.dialog.zyskaj_xp"}}</button>
 </div>

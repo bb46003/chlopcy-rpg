@@ -1,4 +1,5 @@
 import { zegarTykacza } from "./apps/zegary.mjs";
+import { KoniecSesji } from "./dialog/koniec-sesji.mjs";
 
 export class SocketHandler {
   constructor() {
@@ -114,6 +115,13 @@ export class SocketHandler {
                   [`system.wiezi.${data.sourceActor._id}.name`]: data.actorName,
                 });
             }
+          }
+          break;
+
+        case "rozdajXp":
+          const user = game.user._id;
+          if (data.user === user) {
+            new KoniecSesji().render(true);
           }
           break;
       }

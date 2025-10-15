@@ -18,4 +18,12 @@
     <label>{{localize "chlopcy.dialog.dodatkowe_osiągi_za_przedmiot"}}</label>
     <input type="number" class="dodatkowe-osiagi-liczba" />
   </div>
+  <div class="naszywki-dialog">
+    {{localize "chlopcy.dialog.przypomnineie_o_naszywkach"}}
+    {{#each naszywki as |naszywka|}}
+      <div>
+        <span>{{naszywka.nazwa}}: {{naszywka.bonus}}</span>
+      </div>
+    {{/each}}
+  </div>
 </div>

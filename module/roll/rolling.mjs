@@ -18,9 +18,13 @@ export default class rzutDoTarczy {
         label: tag.opis,
         value: tag.wartosc,
       }));
+    const naszywki = actor.items
+      .filter((item) => item.type === "naszywki_przody")
+      .map((naszywka) => ({nazwa: naszywka.name, bonus:naszywka.system.bonus}))
+      console.log(naszywki)
     const html = await chlopcy_Utility.renderTemplate(
       "systems/chlopcy/tameplates/dialog/pytanie-o-tag.hbs",
-      { tagi: tagiNazwy, stan: stan },
+      { tagi: tagiNazwy, stan: stan, naszywki: naszywki },
     );
     const label = game.i18n.localize("TABLE.Roll");
     const preroll = new foundry.applications.api.DialogV2({
