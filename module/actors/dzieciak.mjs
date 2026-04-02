@@ -406,8 +406,8 @@ export class dzieciak extends BaseActorSheet {
     await actor.update(updateData);
   }
   async uzyjPunktowBANGARANG(ev) {
-    const typ = ev.currentTarget.innerText.toLowerCase();
-    const typOrignial = ev.currentTarget.innerText;
+    const typ = ev.target.innerText.toLowerCase();
+    const typOrignial = ev.target.innerText;
     const actor = this.actor;
 
     const obecnaWartsc = actor.system.bangarang[typ];
